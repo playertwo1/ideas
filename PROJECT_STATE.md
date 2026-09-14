@@ -22,7 +22,7 @@
 
 F00.01–F00.08 foram materializadas e verificadas no nível de contrato/documentação. Findings anteriores de preparação foram corrigidos; a saída da F00 ainda depende de nova auditoria independente do Codex e do registro explícito de G00 pela Product Authority.
 
-A otimização de contexto do próprio repositório está sendo materializada em `M0_CONTEXT_EFFICIENCY.md`, `CONTEXT_POLICY.md`, `AI_CONTEXT_INDEX.md` e `context-manifest.json`. Isso não implementa F15 nem altera o gate atual.
+A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONTEXT_EFFICIENCY.md`, `CONTEXT_POLICY.md`, `AI_CONTEXT_INDEX.md` e `context-manifest.json`. Isso não implementa F15 nem altera o gate atual.
 
 ## Evidência
 
