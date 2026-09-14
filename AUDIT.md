@@ -182,6 +182,10 @@ Se FAIL, informe:
 - impacto;
 - correção recomendada.
 
+`AUDIT RESULT: PASS` significa que a auditoria independente não encontrou finding bloqueante após as verificações aplicáveis. Ele **não autoriza sozinho a troca de fase** nem registra um gate de desenvolvimento `Gxx`.
+
+Fluxo: Builder produz evidências → Auditor emite PASS/FAIL → Product Authority registra o gate de desenvolvimento quando os critérios objetivos estiverem satisfeitos.
+
 Não aprove apenas porque build ou testes passaram.
 
 Testes são evidência, não prova absoluta.
