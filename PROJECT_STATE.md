@@ -1,6 +1,6 @@
 # IDEA — PROJECT STATE
 
-> Estado operacional curto. `ROADMAP.md` v0.6 é o contrato canônico; `PHASE_CURRENT.md` autoriza o trabalho atual.
+> Única fonte de status operacional dinâmico. Para regras canônicas use `ROADMAP.md`; para autorização da fase use `PHASE_CURRENT.md`; para evidência use o artefato de evidência correspondente.
 
 - **Projeto:** Idea
 - **Roadmap vigente:** v0.6
@@ -18,52 +18,33 @@
 - **Auditor:** Codex
 - **Product Authority:** usuário
 
-## Estado de F00
+## Estado atual
 
-F00.01–F00.08 foram materializadas e verificadas no nível de contrato/documentação. Nenhuma D01–D09 foi reaberta.
+F00.01–F00.08 foram materializadas e verificadas no nível de contrato/documentação. Findings anteriores de preparação foram corrigidos; a saída da F00 ainda depende de nova auditoria independente do Codex e do registro explícito de G00 pela Product Authority.
 
-Principais artefatos:
+A otimização de contexto do próprio repositório está sendo materializada em `M0_CONTEXT_EFFICIENCY.md`, `CONTEXT_POLICY.md`, `AI_CONTEXT_INDEX.md` e `context-manifest.json`. Isso não implementa F15 nem altera o gate atual.
 
-- `M0_PRODUCT_CONTRACT.md`
-- `PROJECT_STANDARD.md`
-- `schemas/`
-- `VALIDATION_CONTRACT.md`
-- `ARTIFACT_CATALOG.md`
-- `fixtures/`
-- `M0_DECISION_BASELINE.md`
-- `M0_GOVERNANCE.md`
-- `M0_VALIDATION_EVIDENCE.md`
-- `G00_AUDIT_PACKET.md`
+## Evidência
 
-## Validação registrada
-
-- três schemas em Draft 2020-12 verificados;
-- fixtures LIGHT/STANDARD/DEEP passam nas etapas de parse, estrutural e semântica;
-- todas as fixtures negativas passam estruturalmente e falham semanticamente com comparação exata;
-- IDs duplicados em todas as coleções materiais cobertas são rejeitados por `VAL-001`;
-- referências ausentes/autorreferência de roadmap são rejeitadas por `VAL-002`;
-- manifest e envelope de resposta IA válidos passam;
-- decisão AI + LOCKED é rejeitada por `VAL-003`;
-- namespace incompatível é reservado a `VAL-004`;
-- `NOT_APPLICABLE` sem rationale não vazio é rejeitado por `VAL-005`;
-- `NOT_RUN` permanece distinto de `PASS`.
-
-A evidência detalhada está em `M0_VALIDATION_EVIDENCE.md`; o procedimento reproduzível está em `scripts/validate_contract.py` e não substitui auditoria independente.
+- Evidência F00: `M0_VALIDATION_EVIDENCE.md`
+- Pacote de auditoria: `G00_AUDIT_PACKET.md`
+- Validador reproduzível: `scripts/validate_contract.py`
+- Política de contexto: `CONTEXT_POLICY.md`
 
 ## Bloqueios
 
-Nenhum bloqueio de fundação conhecido antes da auditoria. O bloqueio de avanço é procedimental e intencional: Codex ainda não emitiu o resultado de auditoria e a Product Authority ainda não registrou G00.
+Nenhum bloqueio técnico de fundação conhecido antes da auditoria.
+
+Bloqueio de avanço intencional: G00 ainda não recebeu `AUDIT RESULT: PASS` independente nem registro explícito da Product Authority.
 
 ## Próxima ação
 
-Codex/Auditor deve executar `G00_AUDIT_PACKET.md` conforme `AUDIT.md` e emitir `AUDIT RESULT: PASS|FAIL`.
+Codex/Auditor deve executar `G00_AUDIT_PACKET.md` conforme `AUDIT.md`, usando contexto progressivo conforme `AI_CONTEXT_INDEX.md`, e emitir `AUDIT RESULT: PASS|FAIL`.
 
-Se houver finding corrigível dentro de F00, retornar ao Builder sem reabrir decisões humanas. Se houver nova decisão material, risco novo ou conflito canônico real, escalar à Product Authority.
+Finding corrigível dentro de F00 retorna ao Builder. Nova decisão material, risco novo ou conflito canônico real escala à Product Authority.
 
-## Gates
+## Regra de avanço
 
-Builder produz evidências → Auditor emite `AUDIT RESULT: PASS|FAIL` → Product Authority registra o gate de desenvolvimento. Sem registro explícito, `NOT_RUN != PASS` e a fase não muda.
+Não iniciar F01 nem Android antes de G00 PASS explícito.
 
-## Regra de atualização
-
-Não iniciar F01 nem Android antes de G00 PASS explícito. Ao concluir a auditoria, registrar findings/resultado e então aguardar decisão da Product Authority sobre o gate.
+Builder produz evidências → Auditor emite PASS/FAIL → Product Authority registra o gate.
