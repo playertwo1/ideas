@@ -1,12 +1,12 @@
 # IDEA — EXECUTION PLAN
 
-> **Papel deste arquivo:** checklist operacional derivado do `ROADMAP.md`. Ele não cria regras novas. Em caso de conflito, o `ROADMAP.md` vence.
+> **Papel deste arquivo:** checklist operacional derivado do `ROADMAP.md` v0.6. Ele não cria regras novas. Em caso de conflito, o `ROADMAP.md` vence.
 
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
 ## Regras rápidas
 
-- Não pular fases/gates sem autorização explícita do documento canônico.
+- Não pular fases. Builder reúne evidências; Auditor emite PASS/FAIL da auditoria; Product Authority registra o gate de desenvolvimento que autoriza a troca de fase.
 - `PASS` exige a verificação indicada; `NOT_RUN` nunca equivale a `PASS`.
 - Antigravity = Builder; Codex = Auditor; usuário = Product Authority.
 - Autonomia proporcional: executar o já autorizado e escalar apenas decisão nova, risco novo ou mudança material de escopo.
@@ -21,7 +21,7 @@
 
 **Resultado:** contrato que permite identificar objetivamente o que falta em um pacote.
 
-- [ ] **F00.01 — Aprovar problema, público inicial, hipótese e fronteira Idea/Vivo**
+- [ ] **F00.01 — Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo**
   - Verificar: Um exemplo real percorre o fluxo; non-goals escritos
 - [ ] **F00.02 — Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade**
   - Verificar: LIGHT não exige capacidades DEEP; casos ambíguos têm regra
@@ -31,7 +31,7 @@
   - Verificar: Matriz sem artefato obrigatório impossível na versão
 - [ ] **F00.05 — Preparar três fixtures: utilitário simples, app médio e projeto sensível**
   - Verificar: Faltas conhecidas são detectadas, não preenchidas como fatos
-- [ ] **F00.06 — Registrar ADRs propostos e decisões D01–D08; congelar corte 0.1**
+- [ ] **F00.06 — Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1**
   - Verificar: Usuário identifica exatamente o que entra e o que fica fora
 - [ ] **F00.07 — Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor**
   - Verificar: Contratos impedem F11+ sem G10 PASS e distinguem autoridade de produto, execução e auditoria
@@ -42,7 +42,8 @@
 - [ ] Todas as subetapas acima concluídas
 - [ ] Verificações executadas
 - [ ] Auditoria proporcional concluída
-- [ ] `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
+- [ ] Codex/Auditor emitiu `AUDIT RESULT: PASS`
+- [ ] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
 
 ### [ ] F01 — Experiência e arquitetura da primeira versão
 
