@@ -20,16 +20,11 @@ Não carregue o ROADMAP inteiro como contexto operacional quando a fase atual j�
 
 ## 3. Autoridade e autorização
 
-Em conflito, prevalece:
+Use a única precedência definida no `ROADMAP.md`:
 
-1. pedido explícito atual da Product Authority;
-2. segurança e decisões humanas `LOCKED`;
-3. `ROADMAP.md`;
-4. `PHASE_CURRENT.md` para autorização operacional;
-5. `EXECUTION_PLAN.md`;
-6. `PROJECT_STATE.md`;
-7. `AGENTS.md` → `WATCHDOG.md` → `AUDIT.md`;
-8. padrões existentes e julgamento técnico.
+**invariantes de segurança → pedido vigente da Product Authority → decisões `LOCKED` → ROADMAP → PHASE_CURRENT → EXECUTION_PLAN → PROJECT_STATE → julgamento técnico.**
+
+`AGENTS.md`, `WATCHDOG.md` e `AUDIT.md` aplicam essa regra; não competem com ela. O DOCX original é histórico, não autoridade operacional.
 
 **Descoberta não é autorização.** Uma tarefa existir no ROADMAP/EXECUTION_PLAN não autoriza executá-la. Trabalhe somente no escopo da fase/subetapa ativa.
 
@@ -79,9 +74,9 @@ Antes de declarar uma subetapa concluída:
 4. corrija findings bloqueantes;
 5. registre evidências;
 6. atualize `EXECUTION_PLAN.md` e `PROJECT_STATE.md` no mesmo ciclo;
-7. só avance de fase com o gate correspondente explicitamente `PASS` e atualize/substitua `PHASE_CURRENT.md`.
+7. em gate de desenvolvimento, Builder reúne evidências, Auditor emite `AUDIT RESULT: PASS|FAIL` e Product Authority registra o gate; só então, se `PASS`, atualize/substitua `PHASE_CURRENT.md`.
 
-`NOT_RUN != PASS`. PASS técnico não substitui decisão humana exigida; aprovação humana não inventa check técnico não executado.
+`NOT_RUN != PASS`. Builder/Auditor não autoautorizam troca de fase. PASS de auditoria não substitui o registro do gate pela Product Authority; aprovação humana não inventa check técnico não executado.
 
 ## 8. Portabilidade e G10
 
