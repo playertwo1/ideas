@@ -21,26 +21,26 @@
 
 **Resultado:** contrato que permite identificar objetivamente o que falta em um pacote.
 
-- [ ] **F00.01 — Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo**
+- [x] **F00.01 — Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo**
   - Verificar: Um exemplo real percorre o fluxo; non-goals escritos
-- [ ] **F00.02 — Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade**
+- [x] **F00.02 — Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade**
   - Verificar: LIGHT não exige capacidades DEEP; casos ambíguos têm regra
-- [ ] **F00.03 — Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA**
+- [x] **F00.03 — Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA**
   - Verificar: Exemplo válido passa; ID duplicado e referência ausente falham
-- [ ] **F00.04 — Fixar artefatos por versão/modo e catálogo de gates**
+- [x] **F00.04 — Fixar artefatos por versão/modo e catálogo de gates**
   - Verificar: Matriz sem artefato obrigatório impossível na versão
-- [ ] **F00.05 — Preparar três fixtures: utilitário simples, app médio e projeto sensível**
+- [x] **F00.05 — Preparar três fixtures: utilitário simples, app médio e projeto sensível**
   - Verificar: Faltas conhecidas são detectadas, não preenchidas como fatos
-- [ ] **F00.06 — Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1**
+- [x] **F00.06 — Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1**
   - Verificar: Usuário identifica exatamente o que entra e o que fica fora
-- [ ] **F00.07 — Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor**
+- [x] **F00.07 — Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor**
   - Verificar: Contratos impedem F11+ sem G10 PASS e distinguem autoridade de produto, execução e auditoria
-- [ ] **F00.08 — Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP**
+- [x] **F00.08 — Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP**
   - Verificar: PROJECT_STANDARD separa Core de adapters e proíbe abstração multiplataforma prematura
 
 **G00**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
 - [ ] Auditoria proporcional concluída
 - [ ] Codex/Auditor emitiu `AUDIT RESULT: PASS`
 - [ ] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
