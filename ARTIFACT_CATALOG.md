@@ -29,9 +29,29 @@ Este catálogo materializa F00.04. `ROADMAP.md` continua canônico. O catálogo 
 | Histórico/rastreabilidade | proporcional | REQUIRED | REQUIRED | Core | autoria distinguível |
 | Segurança aplicável | REQUIRED | REQUIRED | REQUIRED | Security | LIGHT não desliga segurança |
 
+## Artefatos de governança do desenvolvimento
+
+Estes artefatos organizam como agentes trabalham **no repositório do Idea**. Não são capacidades do produto exportado e não contam como implementação da futura Factory.
+
+| Artefato | Estado | Função |
+|---|---|---|
+| `AGENTS.md` | REQUIRED | contrato universal mínimo para agentes |
+| `PROJECT_STATE.md` | REQUIRED | única fonte de status operacional dinâmico |
+| `PHASE_CURRENT.md` | REQUIRED quando executar/avaliar fase | autorização e limites da fase ativa |
+| `CONTEXT_POLICY.md` | REQUIRED para política de contexto | orçamento, leitura progressiva, delta/fingerprint e métricas |
+| `AI_CONTEXT_INDEX.md` | REQUIRED para roteamento de contexto | seleciona contexto por tipo de tarefa |
+| `context-manifest.json` | REQUIRED para roteamento estruturado | versão machine-readable das rotas e gatilhos |
+| `M0_CONTEXT_EFFICIENCY.md` | REQUIRED em F00/G00 | baseline e rationale da eficiência de contexto |
+| `WATCHDOG.md` | CONDITIONAL | segurança/anti-drift em gatilhos de risco |
+| `AUDIT.md` | CONDITIONAL | auditoria independente/gates/revisão material |
+
+A existência desses arquivos não aprova G00 e não altera D01–D09.
+
 ## Idea Factory — não implementável antes de G10
 
 Pesquisa automática, Validator completo, UX/Architecture Blueprint gerado, Task DAG, Context Compiler, Guardrail Generator, Independent Review completo, análise de impacto completa, Repository Bootstrap e Agent Handoff avançado são `FUTURE` para o MVP 0.1. Selecionar DEEP pode registrar que serão necessários futuramente, mas não os transforma em capacidades presentes.
+
+A baseline de eficiência de contexto usada para construir o próprio Idea é dogfooding documental e **não equivale à implementação de F15 Context Compiler**.
 
 ## Pacote mínimo 0.1
 
@@ -47,7 +67,8 @@ G00 só pode ser registrado como PASS quando, no mínimo:
 4. modos e artefatos não prometerem Factory no 0.1;
 5. Core/Factory e G10 estiverem formalizados;
 6. portabilidade Android-first sem overengineering estiver formalizada;
-7. Auditor tiver emitido `AUDIT RESULT: PASS` sem finding bloqueante;
-8. Product Authority registrar explicitamente o resultado final de G00.
+7. baseline de contexto não omitir silenciosamente regra crítica nem se apresentar como F15 implementada;
+8. Auditor tiver emitido `AUDIT RESULT: PASS` sem finding bloqueante;
+9. Product Authority registrar explicitamente o resultado final de G00.
 
 A aprovação humana não converte check técnico não executado em PASS; `AUDIT RESULT: PASS` sozinho também não troca a fase.
