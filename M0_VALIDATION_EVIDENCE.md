@@ -1,6 +1,6 @@
 # M0 — Validation Evidence
 
-Esta evidência registra somente execuções realizadas em 13/09/2026. Não
+Esta evidência registra somente execuções realizadas em 13 e 14/09/2026. Não
 substitui auditoria independente do Codex, não registra `G00 = PASS` e não
 autoriza F01.
 
@@ -99,6 +99,22 @@ Os testes comprovaram:
 
 `NOT_RUN` permanece diferente de `PASS`. `NOT_APPLICABLE` é o valor executável
 único; `N_A` não é aceito por schema.
+
+## Correção após auditoria G00 — 14/09/2026
+
+A auditoria do commit `b4248e268c8e68d96f73309565b15921a260efc4`
+resultou em `FAIL` porque `ROADMAP.md` ainda descrevia F00 como não iniciada.
+O parágrafo foi sincronizado com o estado operacional, sem alterar fases,
+critérios, arquitetura ou D01–D09. Também foram adicionadas exclusivamente as
+regras `__pycache__/` e `*.py[cod]` ao `.gitignore`.
+
+```text
+python scripts/validate_contract.py — exit 0
+python scripts/test_validate_contract.py — exit 0; 6 testes; OK
+git diff --check — exit 0
+git status --short --branch — somente ROADMAP.md, M0_VALIDATION_EVIDENCE.md e .gitignore
+scripts/__pycache__/ — ignorado; nenhum artefato Python aparece no status normal
+```
 
 ## Limites e estado
 
