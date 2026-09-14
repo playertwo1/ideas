@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-STANDARD-001",
+  "exportRevision": 1,
+  "files": [
+    {
+      "path": "project.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "capabilities": ["CORE"],
+  "gateResults": [
+    {"id": "GATE-CORE", "status": "NOT_RUN", "rationale": "Contract fixture."}
+  ],
+  "knownLimitations": []
+}
