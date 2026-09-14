@@ -38,11 +38,14 @@ Principais artefatos:
 ## Validação registrada
 
 - três schemas em Draft 2020-12 verificados;
-- fixtures LIGHT/STANDARD/DEEP passam na validação estrutural e semântica aplicável;
-- caso de ID duplicado é rejeitado por `VAL-001`;
-- caso de referência ausente é rejeitado por `VAL-002`;
+- fixtures LIGHT/STANDARD/DEEP passam nas etapas de parse, estrutural e semântica;
+- todas as fixtures negativas passam estruturalmente e falham semanticamente com comparação exata;
+- IDs duplicados em todas as coleções materiais cobertas são rejeitados por `VAL-001`;
+- referências ausentes/autorreferência de roadmap são rejeitadas por `VAL-002`;
 - manifest e envelope de resposta IA válidos passam;
 - decisão AI + LOCKED é rejeitada por `VAL-003`;
+- namespace incompatível é reservado a `VAL-004`;
+- `NOT_APPLICABLE` sem rationale não vazio é rejeitado por `VAL-005`;
 - `NOT_RUN` permanece distinto de `PASS`.
 
 A evidência detalhada está em `M0_VALIDATION_EVIDENCE.md`; o procedimento reproduzível está em `scripts/validate_contract.py` e não substitui auditoria independente.

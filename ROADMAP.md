@@ -329,7 +329,7 @@ IDs internos usam UUID; IDs legíveis usam namespace e sequência por projeto (`
 - Decisão: `PROPOSED → REFINING → LOCKED`; revisão substituída torna-se `SUPERSEDED` e aponta para a nova.
 - Artefato: `DRAFT → REVIEWED → APPROVED`; mudança de entrada adiciona `STALE`, exigindo nova revisão.
 - Geração: `QUEUED → RUNNING → SUCCEEDED | FAILED | CANCELLED | INTERRUPTED`. Sucesso significa resposta validada estruturalmente, não aprovação de produto.
-- Gate: `PASS | FAIL | NOT_RUN | NOT_APPLICABLE`; o último exige justificativa. Ausência de execução nunca é PASS.
+- Gate: `PASS | FAIL | NOT_RUN | NOT_APPLICABLE`; `NOT_APPLICABLE` exige rationale não vazio. Ausência de execução nunca é PASS.
 - Validação: `BUILD | PIVOT | PARK | REJECT`, com evidência separada em `NOT_TESTED | IN_PROGRESS | SUPPORTED | REFUTED`.
 - Prontidão: `DRAFT`, `READY_FOR_REVIEW`, `READY_FOR_HANDOFF`, sempre com versão do conjunto de gates e capacidades disponíveis.
 
@@ -766,7 +766,7 @@ Estrutura proposta para a capacidade completa; cada versão exporta apenas os ar
 | DECISIONS, PROJECT_STATE, CHANGELOG, TRACEABILITY | Obrigatório; pode declarar ausência de decisões | Obrigatório | Obrigatório |
 | VALIDATION | Ficha mínima de hipótese/teste | Ficha mínima de hipótese/teste | Completo em STANDARD/DEEP; ficha suficiente no LIGHT baixo risco |
 | RESEARCH | Sem geração automática; links manuais podem compor IDEA | Idem | Obrigatório quando uma escolha material usa fonte externa |
-| UX | Jornada/estados na spec | Jornada/estados na spec | Arquivo quando há interface; justificativa N/A quando não há |
+| UX | Jornada/estados na spec | Jornada/estados na spec | Arquivo quando há interface; `NOT_APPLICABLE` com rationale quando não há |
 | ARCHITECTURE/DATA/INTEGRATIONS/SECURITY | Restrições essenciais na spec | Restrições essenciais na spec | Arquivos/contratos conforme aplicabilidade e risco |
 | TASKS, DAG e contextos | Não suportado como compilador completo | Não suportado como compilador completo | Obrigatório no pacote destinado a agente |
 | Pacote /ai e entrada AGENTS raiz | Não suportado | Não suportado | Obrigatório no handoff para agente |
@@ -800,7 +800,7 @@ O painel exibe dimensões e checks pendentes: intenção, decisões, escopo, req
 | PKG-11 Revisão | Relatório da revisão candidata; zero HIGH/CRITICAL aberto | 0.4 |
 | PKG-12 Aprovação | Pessoa aprovou o snapshot/hash e o destino da entrega | 0.4 para handoff completo |
 
-Qualquer versão pode exportar rascunho, com pendências visíveis. Em 0.1, passar PKG-01–06 significa “núcleo revisado pronto para exportação”, não “pacote 1.0 pronto para agentes”. Após 0.4, READY_FOR_HANDOFF exige todos os gates aplicáveis. N/A precisa justificativa; validações de segurança aplicáveis não somem ao selecionar LIGHT.
+Qualquer versão pode exportar rascunho, com pendências visíveis. Em 0.1, passar PKG-01–06 significa “núcleo revisado pronto para exportação”, não “pacote 1.0 pronto para agentes”. Após 0.4, READY_FOR_HANDOFF exige todos os gates aplicáveis. `NOT_APPLICABLE` precisa rationale não vazio; validações de segurança aplicáveis não somem ao selecionar LIGHT.
 
 ## 8. Matriz inicial de requisitos do aplicativo
 

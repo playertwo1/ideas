@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-INVALID-DUPLICATE-ROADMAP",
+  "title": "Fixture inválida — roadmap duplicado",
+  "mode": "LIGHT",
+  "originalIdea": "Fixture negativa para duplicidade no roadmap.",
+  "problem": "Itens do roadmap precisam ter IDs únicos.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"IDs de roadmap repetidos são rejeitados.","minimumTest":"Executar a suíte negativa.","metric":"Duplicidades encontradas.","threshold":"100% dos casos.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar roadmap"],"outOfScope":["Implementação Android"]},
+  "decisions": [],
+  "requirements": [],
+  "roadmap": [
+    {"id":"PHASE-001","text":"Primeira ocorrência.","verify":"Inspecionar o item.","gateStatus":"NOT_RUN"},
+    {"id":"PHASE-001","text":"Segunda ocorrência.","verify":"Inspecionar a duplicidade.","gateStatus":"NOT_RUN"}
+  ],
+  "gaps": [],
+  "gates": [],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-duplicate-roadmap","hashAlgorithm":"SHA-256"},
+  "knownLimitations": ["Documento propositalmente inválido por ID duplicado no roadmap."]
+}

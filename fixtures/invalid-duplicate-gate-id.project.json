@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-INVALID-DUPLICATE-GATE",
+  "title": "Fixture inválida — gate duplicado",
+  "mode": "LIGHT",
+  "originalIdea": "Fixture negativa para duplicidade de gate.",
+  "problem": "Gates precisam ter IDs únicos.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"IDs de gate repetidos são rejeitados.","minimumTest":"Executar a suíte negativa.","metric":"Duplicidades encontradas.","threshold":"100% dos casos.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar gates"],"outOfScope":["Implementação Android"]},
+  "decisions": [],
+  "requirements": [],
+  "roadmap": [],
+  "gaps": [],
+  "gates": [
+    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Primeira ocorrência."},
+    {"id":"GATE-CORE","status":"FAIL","rationale":"Segunda ocorrência proposital."}
+  ],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-duplicate-gate","hashAlgorithm":"SHA-256"},
+  "knownLimitations": ["Documento propositalmente inválido por ID duplicado em gate."]
+}

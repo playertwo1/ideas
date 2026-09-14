@@ -55,7 +55,7 @@
     },
     "hypothesis": {"type":"object","additionalProperties":false,"required":["statement","minimumTest","metric","threshold","evidenceStatus"],"properties":{"statement":{"type":"string","minLength":1},"minimumTest":{"type":"string","minLength":1},"metric":{"type":"string","minLength":1},"threshold":{"type":"string","minLength":1},"evidenceStatus":{"enum":["NOT_TESTED","IN_PROGRESS","SUPPORTED","REFUTED"]}}},
     "scope": {"type":"object","additionalProperties":false,"required":["mvp","outOfScope"],"properties":{"mvp":{"type":"array","items":{"type":"string","minLength":1}},"outOfScope":{"type":"array","items":{"type":"string","minLength":1}}}},
-    "roadmapItem": {"type":"object","additionalProperties":false,"required":["id","text","verify","gateStatus"],"properties":{"id":{"type":"string","pattern":"^(PHASE|TASK)-[A-Z0-9_-]+$"},"text":{"type":"string","minLength":1},"verify":{"type":"string","minLength":1},"gateStatus":{"enum":["NOT_RUN","PASS","FAIL","NOT_APPLICABLE"]},"dependsOn":{"type":"array","uniqueItems":true,"items":{"type":"string"}}}},
+    "roadmapItem": {"type":"object","additionalProperties":false,"required":["id","text","verify","gateStatus"],"properties":{"id":{"type":"string","pattern":"^(PHASE|TASK)-[A-Z0-9_-]+$"},"text":{"type":"string","minLength":1},"verify":{"type":"string","minLength":1},"gateStatus":{"enum":["NOT_RUN","PASS","FAIL","NOT_APPLICABLE"]},"dependsOn":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"rationale":{"type":"string"}},"allOf":[{"if":{"properties":{"gateStatus":{"const":"NOT_APPLICABLE"}}},"then":{"required":["rationale"]}}]},
     "gap": {"type":"object","additionalProperties":false,"required":["id","text","severity","status"],"properties":{"id":{"type":"string","pattern":"^GAP-[A-Z0-9_-]+$"},"text":{"type":"string","minLength":1},"severity":{"enum":["LOW","MEDIUM","HIGH","CRITICAL"]},"status":{"enum":["OPEN","CLOSED","UNKNOWN"]}}},
     "reference": {"type":"object","additionalProperties":false,"required":["id","label","kind"],"properties":{"id":{"type":"string","pattern":"^REF-[A-Z0-9_-]+$"},"label":{"type":"string","minLength":1},"kind":{"enum":["SOURCE","DECISION","REQUIREMENT","ROADMAP"]},"uri":{"type":"string"}}},
     "integrity": {"type":"object","additionalProperties":false,"required":["contentHash","hashAlgorithm"],"properties":{"contentHash":{"type":"string","minLength":1},"hashAlgorithm":{"const":"SHA-256"}}},
@@ -66,7 +66,8 @@
         "id": {"type": "string", "pattern": "^GATE-[A-Z0-9_-]+$"},
         "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "NOT_APPLICABLE"]},
         "rationale": {"type": "string"}
-      }
+      },
+      "allOf": [{"if": {"properties": {"status": {"const": "NOT_APPLICABLE"}}}, "then": {"required": ["rationale"]}}]
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-INVALID-ROADMAP-REF",
+  "title": "Fixture inválida — dependência ausente",
+  "mode": "STANDARD",
+  "originalIdea": "Fixture negativa para dependência inexistente.",
+  "problem": "Dependências do roadmap precisam existir.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"Dependências inexistentes são rejeitadas.","minimumTest":"Executar a suíte negativa.","metric":"Dependências inválidas rejeitadas.","threshold":"100% dos casos.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar dependências"],"outOfScope":["Implementação Android"]},
+  "decisions": [],
+  "requirements": [],
+  "roadmap": [
+    {"id":"PHASE-001","text":"Item com dependência inexistente.","verify":"Verificar dependência.","gateStatus":"NOT_RUN","dependsOn":["PHASE-404"]}
+  ],
+  "gaps": [],
+  "gates": [],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-roadmap-ref","hashAlgorithm":"SHA-256"},
+  "knownLimitations": ["Documento propositalmente inválido por VAL-002."]
+}

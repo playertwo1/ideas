@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-INVALID-NA-RATIONALE",
+  "title": "Fixture inválida — NOT_APPLICABLE sem rationale",
+  "mode": "LIGHT",
+  "originalIdea": "Fixture negativa para rationale obrigatório.",
+  "problem": "NOT_APPLICABLE precisa explicar sua aplicação.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"Gates NOT_APPLICABLE sem rationale são rejeitados.","minimumTest":"Executar a suíte negativa.","metric":"Gates inválidos rejeitados.","threshold":"100% dos casos.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar rationale"],"outOfScope":["Implementação Android"]},
+  "decisions": [],
+  "requirements": [],
+  "roadmap": [],
+  "gaps": [],
+  "gates": [{"id":"GATE-CORE","status":"NOT_APPLICABLE","rationale":""}],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-na-rationale","hashAlgorithm":"SHA-256"},
+  "knownLimitations": ["Documento propositalmente inválido por VAL-005."]
+}

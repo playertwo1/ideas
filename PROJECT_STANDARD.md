@@ -72,7 +72,7 @@ Semântica obrigatória:
 
 `IMPLEMENTATION_RELEVANT` descreve relevância, não autoridade superior a LOCKED. O schema pode representar relevância separadamente do estado de compromisso para evitar uma máquina de estados artificialmente linear.
 
-Decisões também têm ciclo de revisão próprio, separado do compromisso: `PROPOSED → REFINING → LOCKED`; revisão substituída é `SUPERSEDED`. Assim, `state` não é sinônimo de `commitment`. No contrato executável, `NOT_APPLICABLE` materializa o nome textual `N_A` do ROADMAP e exige rationale.
+Decisões também têm ciclo de revisão próprio, separado do compromisso: `PROPOSED → REFINING → LOCKED`; revisão substituída é `SUPERSEDED`. Assim, `state` não é sinônimo de `commitment`. No contrato executável, o único valor é `NOT_APPLICABLE`; ele exige rationale não vazio. `N_A` pode aparecer somente como abreviação humana em texto documental, nunca como valor executável.
 
 ## 6. Estados de verificação
 
@@ -81,9 +81,12 @@ Checks e gates usam explicitamente:
 - `NOT_RUN` — não executado;
 - `PASS` — critério executado e satisfeito;
 - `FAIL` — critério executado e não satisfeito;
-- `N_A` — não aplicável, sempre com rationale.
+- `NOT_APPLICABLE` — não aplicável, sempre com rationale não vazio.
 
 Ausência de resultado é `NOT_RUN`, nunca PASS.
+
+`N_A` não é aceito pelos schemas nem pela validação executável. `NOT_RUN`
+permanece diferente de `PASS`.
 
 ## 7. Autoridade
 

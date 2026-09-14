@@ -31,12 +31,13 @@
       "items": {
         "type": "object", "additionalProperties": false,
         "required": ["id", "status"],
-        "properties": {
-          "id": {"type": "string", "pattern": "^GATE-[A-Z0-9_-]+$"},
-          "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "NOT_APPLICABLE"]},
-          "rationale": {"type": "string"}
+          "properties": {
+            "id": {"type": "string", "pattern": "^GATE-[A-Z0-9_-]+$"},
+            "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "NOT_APPLICABLE"]},
+            "rationale": {"type": "string"}
+          },
+          "allOf": [{"if": {"properties": {"status": {"const": "NOT_APPLICABLE"}}}, "then": {"required": ["rationale"]}}]
         }
-      }
     },
     "knownLimitations": {"type": "array", "items": {"type": "string"}}
   }

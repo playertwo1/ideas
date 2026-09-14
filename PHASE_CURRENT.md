@@ -39,7 +39,7 @@ Contrato versionado que permita identificar objetivamente o que falta em um paco
 ### [x] F00.03
 **Fazer:** Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA  
 **Artefatos:** `schemas/` + `VALIDATION_CONTRACT.md` + `M0_VALIDATION_EVIDENCE.md`  
-**Verificado:** fixtures válidas passam; ID duplicado e referência ausente falham na camada semântica determinística
+**Verificado:** parse, estrutura Draft 2020-12, semântica e expectativa são etapas separadas; fixtures válidas passam; todas as negativas passam estruturalmente e falham com códigos exatos
 
 ### [x] F00.04
 **Fazer:** Fixar artefatos por versão/modo e catálogo de gates  
@@ -101,6 +101,7 @@ Checklist de saída:
 - [x] F00.01–F00.08 concluídas e verificadas pelo trabalho de preparação
 - [x] `PROJECT_STANDARD.md` coerente com o roadmap
 - [x] Schemas + validação semântica aceitam fixtures corretas e rejeitam casos inválidos previstos
+- [x] Testes adversariais cobrem IDs materiais, roadmap, rationale, autoridade LOCKED e falsos PASS
 - [x] Catálogo de artefatos/gates sem capacidade impossível obrigatória no 0.1
 - [x] D01–D09 materializadas no estado LOCKED correto
 - [x] Core/Factory e G10 formalizados

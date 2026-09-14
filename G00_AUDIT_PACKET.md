@@ -35,6 +35,11 @@ Artefatos produzidos por F00:
 - `fixtures/deep.project.json`
 - `fixtures/invalid-duplicate-id.project.json`
 - `fixtures/invalid-missing-ref.project.json`
+- `fixtures/invalid-ai-locked.project.json`
+- `fixtures/invalid-duplicate-gate-id.project.json`
+- `fixtures/invalid-duplicate-roadmap-id.project.json`
+- `fixtures/invalid-missing-roadmap-ref.project.json`
+- `fixtures/invalid-not-applicable-rationale.project.json`
 - `fixtures/valid.manifest.json`
 - `fixtures/valid.ai-response.json`
 
@@ -55,14 +60,19 @@ Artefatos produzidos por F00:
 - autoria e autoridade não confundidas;
 - estados não promovem conteúdo de IA a LOCKED;
 - `NOT_RUN != PASS`;
+- `NOT_APPLICABLE` exige rationale não vazio e `N_A` não é valor executável;
 - ausência/conflito não vira fato inventado.
 
 ### F00.03 — Schemas e integridade
 
 - schemas são válidos em Draft 2020-12;
 - fixture válida passa;
-- duplicidade de ID falha pela regra determinística `VAL-001`;
-- referência ausente falha pela regra `VAL-002`;
+- o pipeline separa parse, estrutura, semântica e comparação exata;
+- duplicidades em decisions, requirements, roadmap, gaps, gates e references falham por `VAL-001`;
+- referências ausentes e autorreferência de roadmap falham por `VAL-002`;
+- LOCKED sem autoridade humana explícita falha por `VAL-003`;
+- namespace incompatível usa `VAL-004`, sem conflitar com LOCKED;
+- `NOT_APPLICABLE` sem rationale não vazio falha por `VAL-005`;
 - diferença entre validação estrutural e semântica está explícita, sem falsa promessa do JSON Schema.
 
 ### F00.04–F00.05 — Artefatos e fixtures
@@ -94,8 +104,8 @@ Artefatos produzidos por F00:
 - LIGHT/STANDARD/DEEP: schema PASS + semantic PASS;
 - manifest válido: PASS;
 - resposta IA válida: PASS;
-- fixture com ID duplicado: rejeitada por VAL-001;
-- fixture com referência ausente: rejeitada por VAL-002.
+- todas as fixtures negativas: parse PASS, estrutural PASS e conjunto exato de códigos semânticos conforme `VALIDATION_CONTRACT.md`;
+- testes adversariais cobrem gate duplicado, dependência inexistente/autorreferência, `NOT_APPLICABLE`, AI/non-human + LOCKED, `N_A` e falsos PASS.
 
 O Auditor pode e deve repetir checks relevantes quando possível.
 

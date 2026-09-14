@@ -7,7 +7,7 @@ Este catálogo materializa F00.04. `ROADMAP.md` continua canônico. O catálogo 
 - `REQUIRED`: obrigatório para o gate/versão aplicável.
 - `CONDITIONAL`: obrigatório quando risco/capacidade indicada se aplica.
 - `FUTURE`: pertence a versão posterior; não pode bloquear 0.1 enquanto não aplicável.
-- `N_A`: somente com rationale explícito.
+- `NOT_APPLICABLE`: somente com rationale não vazio explícito. `N_A` é, no máximo, rótulo humano e não valor executável.
 
 `NOT_RUN != PASS`. Um artefato existir não significa que seu gate passou.
 

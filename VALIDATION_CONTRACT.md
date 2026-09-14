@@ -1,81 +1,102 @@
 # VALIDATION_CONTRACT — M0
 
-Este documento materializa a parte semântica de F00.03 que não pode ser expressa de forma confiável apenas com JSON Schema.
+Este documento materializa a validação semântica de F00.03 que não pode ser
+expressa apenas com JSON Schema. `ROADMAP.md` continua canônico.
 
-`ROADMAP.md` continua canônico. JSON Schema valida forma/tipos/padrões; este contrato valida integridade entre entidades.
+## Pipeline obrigatório
 
-## Pipeline de validação
+Cada documento é processado nesta ordem, sem misturar resultados:
 
-A ordem mínima é:
-
-1. parse JSON;
-2. validar o documento contra o schema 2020-12 correspondente;
-3. executar validações semânticas determinísticas;
-4. somente depois permitir que o documento seja tratado como estruturalmente válido.
+1. **Parse:** ler o arquivo e decodificar JSON;
+2. **Estrutural:** validar contra o schema Draft 2020-12 correspondente;
+3. **Semântico:** executar regras determinísticas somente se o parse e a
+   validação estrutural passarem;
+4. **Expectativa:** para fixtures negativas, comparar exatamente o conjunto de
+   códigos semânticos esperado. Uma substring coincidente não é suficiente.
 
 Falha em qualquer etapa produz `FAIL`; ausência de execução produz `NOT_RUN`.
 
 ## Regras semânticas mínimas do `project.json`
 
-### VAL-001 — IDs únicos
+### VAL-001 — IDs materiais únicos
 
-Todos os IDs materiais do projeto devem ser únicos dentro do namespace global do documento.
+Todos os IDs materiais são únicos no namespace global do snapshot. As coleções
+F00 cobertas são:
 
-Coleções inicialmente cobertas em 0.1:
+- `decisions[].id` (`DEC-*`);
+- `requirements[].id` (`REQ-*` e `NFR-*`);
+- `roadmap[].id` (`PHASE-*` e `TASK-*`);
+- `gaps[].id` (`GAP-*`);
+- `gates[].id` (`GATE-*`);
+- `references[].id` (`REF-*`).
 
-- `decisions[].id`;
-- `requirements[].id`;
-- `gates[].id`.
+A regra detecta repetição dentro de uma coleção e colisão entre coleções,
+mesmo que os objetos tenham conteúdo diferente. Entidades exclusivas da
+Idea Factory não fazem parte desta lista.
 
-Dois objetos diferentes não podem compartilhar o mesmo ID, ainda que o restante do conteúdo seja diferente.
+### VAL-002 — referências internas existentes
 
-### VAL-002 — referências devem existir
+Toda referência interna coberta pelo schema deve apontar para entidade
+existente no mesmo snapshot:
 
-Toda referência interna obrigatória deve apontar para entidade existente no mesmo snapshot.
+- `requirements[].decisionRefs[]` deve existir em `decisions[].id`;
+- `roadmap[].dependsOn[]` deve existir em `roadmap[].id`;
+- um item do roadmap não pode depender de si mesmo.
 
-No schema 0.1 atual:
+Detecção completa de ciclos do roadmap permanece fora deste contrato F00.
 
-- cada valor de `requirements[].decisionRefs[]` deve existir em `decisions[].id`.
+### VAL-003 — decisão LOCKED exige autoridade humana explícita
 
-Quando novas relações forem adicionadas ao schema, entram nesta regra antes de serem consideradas prontas.
+Uma decisão `LOCKED` somente é válida quando `author=USER`, `authority=USER`
+e `lockAction=HUMAN_EXPLICIT`. IA ou autoridade não humana não pode fechar a
+decisão.
 
-### VAL-003 — namespace coerente
+### VAL-004 — namespace incompatível
 
-O prefixo do ID precisa ser compatível com a entidade:
+O prefixo do ID deve ser compatível com sua coleção, conforme a lista de
+`VAL-001`. O schema fornece a primeira barreira; este código mantém a regra
+explícita na camada semântica para valores avaliados fora do parser de schema.
 
-- decisão: `DEC-*`;
-- requisito funcional/não funcional: `REQ-*` ou `NFR-*`;
-- gate: `GATE-*`.
+### VAL-005 — NOT_APPLICABLE exige rationale
 
-O JSON Schema faz a primeira barreira; o validador semântico pode emitir erro mais explicável.
+`NOT_APPLICABLE` exige rationale presente, textual e não vazio após remover
+espaços. A regra vale para `gates[].status`, `roadmap[].gateStatus` e para
+`manifest.gateResults[].status`. O schema exige a presença do campo; a camada
+semântica exige conteúdo não vazio.
 
-### VAL-004 — integridade não é inventada
+`NOT_RUN` continua sendo um estado distinto: não executado nunca equivale a
+`PASS`.
 
-Se uma referência necessária está ausente, o validador não cria automaticamente a entidade faltante, não remove a referência e não converte o problema em warning silencioso. O documento permanece inválido até correção explícita.
+### Integridade não é inventada
 
-## Fixtures obrigatórias de F00.03
+Se uma referência necessária está ausente, o validador não cria entidade,
+remove referência ou transforma o problema em warning silencioso.
 
-Casos positivos:
+## Fixtures negativas
 
-- `fixtures/light-simple.project.json`;
-- `fixtures/standard-medium.project.json`;
-- `fixtures/deep.project.json`.
+Cada fixture negativa deve ser JSON parseável, passar estruturalmente, falhar
+semanticamente e apresentar exatamente os códigos listados:
 
-Casos negativos:
+- `invalid-duplicate-id.project.json` → `VAL-001`;
+- `invalid-missing-ref.project.json` → `VAL-002`;
+- `invalid-ai-locked.project.json` → `VAL-003`;
+- `invalid-duplicate-gate-id.project.json` → `VAL-001`;
+- `invalid-duplicate-roadmap-id.project.json` → `VAL-001`;
+- `invalid-missing-roadmap-ref.project.json` → `VAL-002`;
+- `invalid-not-applicable-rationale.project.json` → `VAL-005`.
 
-- `fixtures/invalid-duplicate-id.project.json` deve falhar por `VAL-001`;
-- `fixtures/invalid-missing-ref.project.json` deve falhar por `VAL-002`.
+O script também verifica que remover o defeito esperado ou introduzir um erro
+adicional faz a expectativa exata falhar com código de saída diferente de zero.
 
 ## Critério de aceite de F00.03
 
-F00.03 só pode ser marcada como verificada quando:
-
-- os três schemas existem;
-- pelo menos uma fixture válida passa no schema e na camada semântica;
-- o caso de ID duplicado falha;
-- o caso de referência ausente falha;
-- a evidência registra separadamente o que foi validado por schema e o que foi validado semanticamente.
+F00.03 só pode ser considerada verificada quando os três schemas existem,
+todos os exemplos válidos passam as três primeiras etapas, cada fixture
+negativa passa estruturalmente e falha semanticamente com o conjunto exato
+esperado, e os testes adversariais passam.
 
 ## Implementação futura
 
-A implementação Android deve portar estas regras para uma camada de domínio testável, sem dependência de UI, Room ou provider de IA. O comportamento do validador é parte do contrato portátil do Core.
+A implementação Android deve portar estas regras para uma camada de domínio
+testável, sem dependência de UI, Room ou provider de IA. O comportamento do
+validador é parte do contrato portátil do Core.

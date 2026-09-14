@@ -4,8 +4,12 @@
   "title": "Reference integrity fixture",
   "mode": "STANDARD",
   "originalIdea": "Contract fixture for reference validation.",
+  "problem": "A referência deve apontar para uma decisão existente.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"Referências inválidas são rejeitadas.","minimumTest":"Executar a suíte negativa.","metric":"Referências inexistentes rejeitadas.","threshold":"100% dos casos.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar referências"],"outOfScope":["Implementação Android"]},
   "decisions": [
-    {"id":"DEC-001","text":"Known decision.","author":"USER","state":"LOCKED","rationale":"Fixture baseline."}
+    {"id":"DEC-001","text":"Known decision.","author":"USER","authority":"USER","state":"LOCKED","commitment":"LOCKED","lockAction":"HUMAN_EXPLICIT","rationale":"Fixture baseline."}
   ],
   "requirements": [
     {"id":"REQ-001","text":"Requirement used to test reference integrity.","acceptance":["Validation reports the unresolved reference."],"rationale":"Exercise VAL-002.","decisionRefs":["DEC-404"]}
@@ -13,5 +17,9 @@
   "gates": [
     {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Contract fixture."}
   ],
+  "roadmap": [],
+  "gaps": [],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-missing-ref","hashAlgorithm":"SHA-256"},
   "knownLimitations": ["This fixture is intentionally not valid under semantic rule VAL-002."]
 }

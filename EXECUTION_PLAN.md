@@ -26,7 +26,7 @@
 - [x] **F00.02 — Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade**
   - Verificar: LIGHT não exige capacidades DEEP; casos ambíguos têm regra
 - [x] **F00.03 — Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA**
-  - Verificar: Exemplo válido passa; ID duplicado e referência ausente falham
+  - Verificar: pipeline separado; válidos passam; negativas passam estruturalmente e falham semanticamente por códigos exatos
 - [x] **F00.04 — Fixar artefatos por versão/modo e catálogo de gates**
   - Verificar: Matriz sem artefato obrigatório impossível na versão
 - [x] **F00.05 — Preparar três fixtures: utilitário simples, app médio e projeto sensível**

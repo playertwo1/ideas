@@ -4,8 +4,12 @@
   "title": "Fixture inválida — ID duplicado",
   "mode": "STANDARD",
   "originalIdea": "Fixture negativa para testar integridade.",
+  "problem": "IDs repetidos devem ser rejeitados.",
+  "audience": "Auditor do contrato.",
+  "hypothesis": {"statement":"A validação detecta IDs repetidos.","minimumTest":"Executar a suíte negativa.","metric":"IDs rejeitados.","threshold":"100% dos duplicados.","evidenceStatus":"NOT_TESTED"},
+  "scope": {"mvp":["Validar IDs"],"outOfScope":["Implementação Android"]},
   "decisions": [
-    {"id":"DEC-001","text":"Decisão válida.","author":"USER","state":"LOCKED","rationale":"Base da fixture."}
+    {"id":"DEC-001","text":"Decisão válida.","author":"USER","authority":"USER","state":"LOCKED","commitment":"LOCKED","lockAction":"HUMAN_EXPLICIT","rationale":"Base da fixture."}
   ],
   "requirements": [
     {"id":"REQ-001","text":"Primeiro requisito.","acceptance":["Critério A."],"rationale":"Teste.","decisionRefs":["DEC-001"]},
@@ -14,5 +18,9 @@
   "gates": [
     {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture negativa."}
   ],
+  "roadmap": [],
+  "gaps": [],
+  "references": [],
+  "integrity": {"contentHash":"fixture-invalid-duplicate","hashAlgorithm":"SHA-256"},
   "knownLimitations": ["Documento propositalmente inválido por ID duplicado."]
 }
