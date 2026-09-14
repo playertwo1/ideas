@@ -59,7 +59,8 @@
 - [x] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
   - Artefato: `F01_03_NAVIGATION_AND_DRAFTS.md`
   - Verificar: Navegar não descarta entrada sem aviso
-- [ ] **F01.04 — Registrar arquitetura, módulos propostos e portas de IA/export/persistência**
+- [x] **F01.04 — Registrar arquitetura, módulos propostos e portas de IA/export/persistência**
+  - Artefato: `F01_04_ARCHITECTURE.md`
   - Verificar: Domínio não depende de Android nem SDK remoto
 - [ ] **F01.05 — Fixar aparelhos de teste, minSdk e toolchain compatível pela documentação vigente**
   - Verificar: Build de exemplo verificável no ambiente escolhido
