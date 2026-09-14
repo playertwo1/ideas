@@ -6,6 +6,8 @@
 
 **F00 — Padrão de projeto e congelamento do MVP**
 
+**Subestado:** trabalho de F00.01–F00.08 materializado e verificado; G00 aguardando auditoria independente e registro final da Product Authority.
+
 **Objetivo:** fechar o contrato do produto e da fundação antes de iniciar implementação Android.
 
 **Builder:** Antigravity  
@@ -18,51 +20,60 @@ Contrato versionado que permita identificar objetivamente o que falta em um paco
 
 ## Trabalho autorizado
 
-### Estado das decisões para F00.01
+### Estado das decisões
 
 - `LOCKED`: D01–D09, incluindo público inicial e distribuição.
-- A formalizar/verificar: problema, hipótese de valor, exemplo ponta a ponta e non-goals.
-- A decidir: somente material novo descoberto durante a formalização; não repetir perguntas já resolvidas por D01–D09.
+- Nenhuma D01–D09 foi reaberta durante F00.
+- Nova decisão humana material: nenhuma identificada.
+- O baseline materializado está em `M0_DECISION_BASELINE.md`; `ROADMAP.md` permanece canônico.
 
-
-### [ ] F00.01
+### [x] F00.01
 **Fazer:** Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo  
-**Concluir quando:** Um exemplo real percorre o fluxo; non-goals escritos; D01–D09 não foram reabertos
+**Artefato:** `M0_PRODUCT_CONTRACT.md`  
+**Verificado:** exemplo ponta a ponta e non-goals explícitos; D01–D09 preservadas
 
-### [ ] F00.02
+### [x] F00.02
 **Fazer:** Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade  
-**Concluir quando:** LIGHT não exige capacidades DEEP; casos ambíguos têm regra
+**Verificado:** LIGHT não exige capacidades DEEP; casos ambíguos têm regra
 
-### [ ] F00.03
+### [x] F00.03
 **Fazer:** Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA  
-**Concluir quando:** Exemplo válido passa; ID duplicado e referência ausente falham
+**Artefatos:** `schemas/` + `VALIDATION_CONTRACT.md` + `M0_VALIDATION_EVIDENCE.md`  
+**Verificado:** fixtures válidas passam; ID duplicado e referência ausente falham na camada semântica determinística
 
-### [ ] F00.04
+### [x] F00.04
 **Fazer:** Fixar artefatos por versão/modo e catálogo de gates  
-**Concluir quando:** Matriz sem artefato obrigatório impossível na versão
+**Artefato:** `ARTIFACT_CATALOG.md`  
+**Verificado:** matriz não obriga capacidade Factory impossível no MVP 0.1
 
-### [ ] F00.05
+### [x] F00.05
 **Fazer:** Preparar três fixtures: utilitário simples, app médio e projeto sensível  
-**Concluir quando:** Faltas conhecidas são detectadas, não preenchidas como fatos
+**Artefatos:** `fixtures/light-simple.project.json`, `fixtures/standard-medium.project.json`, `fixtures/deep.project.json`  
+**Verificado:** faltas conhecidas permanecem explícitas; DEEP não inventa capacidades futuras
 
-### [ ] F00.06
+### [x] F00.06
 **Fazer:** Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1  
-**Concluir quando:** Usuário identifica exatamente o que entra e o que fica fora
+**Artefato:** `M0_DECISION_BASELINE.md`  
+**Verificado:** entradas e exclusões do MVP 0.1 estão explícitas sem alterar D01–D09
 
-### [ ] F00.07
+### [x] F00.07
 **Fazer:** Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor  
-**Concluir quando:** Contratos impedem F11+ sem G10 PASS e distinguem autoridade de produto, execução e auditoria
+**Artefatos:** `M0_GOVERNANCE.md` + `PROJECT_STANDARD.md`  
+**Verificado:** F11+ permanece bloqueada sem G10 PASS; autoridade de produto, execução e auditoria estão separadas
 
-### [ ] F00.08
+### [x] F00.08
 **Fazer:** Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP  
-**Concluir quando:** PROJECT_STANDARD separa Core de adapters e proíbe abstração multiplataforma prematura
+**Artefatos:** `M0_GOVERNANCE.md` + `PROJECT_STANDARD.md`  
+**Verificado:** Core conceitualmente independente de Android; nenhum segundo target/framework multiplataforma foi adicionado
 
 ## Pode fazer sem nova autorização
 
-- Criar/editar documentação, schemas, fixtures e ADRs necessários exclusivamente à F00.
-- Corrigir inconsistências objetivas encontradas dentro da F00.
-- Executar validações locais e preparar evidências para auditoria.
-- Refinar estrutura/clareza sem alterar decisões de produto já aprovadas.
+- Corrigir finding objetivo da auditoria que esteja dentro do contrato F00.
+- Refinar documentação, schemas e fixtures de F00 sem alterar decisões LOCKED.
+- Reexecutar validações afetadas e atualizar evidências.
+- Preparar material de auditoria e sincronizar estado/checklists operacionais.
+
+A autorização acima **não** permite alterar semântica canônica do `ROADMAP.md` por preferência editorial. Mudança de produto, decisão LOCKED, escopo ou regra canônica exige a autoridade prevista na hierarquia documental.
 
 ## Não está autorizado nesta fase
 
@@ -82,28 +93,30 @@ Contrato versionado que permita identificar objetivamente o que falta em um paco
 
 ## Gate G00
 
+**Estado:** `NOT_RUN` — aguardando Codex/Auditor.
+
 **Critério canônico:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
 
 Checklist de saída:
-- [ ] F00.01–F00.08 concluídas e verificadas
-- [ ] `PROJECT_STANDARD.md` coerente com o roadmap
-- [ ] Schemas validam fixture correta e rejeitam casos inválidos previstos
-- [ ] Catálogo de artefatos/gates sem impossibilidades
-- [ ] D01–D09 registradas no estado correto
-- [ ] Core/Factory e G10 formalizados
-- [ ] Portabilidade preservada sem novo target
+- [x] F00.01–F00.08 concluídas e verificadas pelo trabalho de preparação
+- [x] `PROJECT_STANDARD.md` coerente com o roadmap
+- [x] Schemas + validação semântica aceitam fixtures corretas e rejeitam casos inválidos previstos
+- [x] Catálogo de artefatos/gates sem capacidade impossível obrigatória no 0.1
+- [x] D01–D09 materializadas no estado LOCKED correto
+- [x] Core/Factory e G10 formalizados
+- [x] Portabilidade preservada sem novo target
 - [ ] Codex realizou auditoria proporcional
-- [ ] Findings bloqueantes resolvidos
+- [ ] Findings bloqueantes da auditoria resolvidos
 - [ ] Auditor emitiu `AUDIT RESULT: PASS`
 - [ ] Product Authority registrou explicitamente `G00 = PASS`
 
 ## Retorno seguro
 
-Se G00 falhar, permanecer em F00 e revisar contratos/fixtures/decisões. Não há necessidade de migrar dados de usuário porque a implementação do produto ainda não deve ter começado.
+Se G00 falhar, permanecer em F00 e revisar apenas contratos/fixtures/decisões afetados. Não há necessidade de migrar dados de usuário porque a implementação do produto ainda não começou.
 
-## Ao terminar
+## Próxima ação
 
-1. Atualizar `PROJECT_STATE.md`.
-2. Marcar os itens correspondentes em `EXECUTION_PLAN.md`.
-3. Entregar evidências ao Codex para auditoria.
-4. Builder não registra o próprio gate. Somente após `AUDIT RESULT: PASS`, checks objetivos satisfeitos e Product Authority registrar explicitamente `G00 = PASS`, gerar/substituir `PHASE_CURRENT.md` para F01.
+1. Entregar `G00_AUDIT_PACKET.md` e os artefatos referenciados ao Codex.
+2. Codex executar auditoria proporcional conforme `AUDIT.md`.
+3. Findings corrigíveis dentro de F00 retornam ao Builder sem nova decisão humana.
+4. Somente após `AUDIT RESULT: PASS`, checks objetivos satisfeitos e Product Authority registrar explicitamente `G00 = PASS`, substituir `PHASE_CURRENT.md` pela F01.
