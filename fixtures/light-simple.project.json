@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-LIGHT-001",
+  "title": "Lista offline simples",
+  "mode": "LIGHT",
+  "originalIdea": "Quero uma lista simples para anotar coisas sem internet.",
+  "decisions": [
+    {"id":"DEC-001","text":"O fluxo principal deve funcionar offline.","author":"USER","state":"LOCKED","rationale":"Offline faz parte da intenção original."}
+  ],
+  "requirements": [
+    {"id":"REQ-001","text":"Permitir criar e consultar itens sem rede.","acceptance":["Criar um item em modo avião e reencontrá-lo após reabrir o app."],"rationale":"Testa diretamente a utilidade central.","decisionRefs":["DEC-001"]}
+  ],
+  "gates": [
+    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture de contrato; verificação ainda não executada."}
+  ],
+  "knownLimitations": ["Fixture não representa implementação nem resultado de teste."]
+}
