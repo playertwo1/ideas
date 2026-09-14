@@ -62,8 +62,9 @@
 - [x] **F01.04 — Registrar arquitetura, módulos propostos e portas de IA/export/persistência**
   - Artefato: `F01_04_ARCHITECTURE.md`
   - Verificar: Domínio não depende de Android nem SDK remoto
-- [ ] **F01.05 — Fixar aparelhos de teste, minSdk e toolchain compatível pela documentação vigente**
-  - Verificar: Build de exemplo verificável no ambiente escolhido
+- [x] **F01.05 — Fixar aparelhos de teste, minSdk e toolchain compatível pela documentação vigente**
+  - Artefato: `F01_05_TARGET_ENVIRONMENT.md`
+  - Verificar: Ambiente e comandos do build de exemplo são reproduzíveis; execução aguarda fase que autorize Android
 - [ ] **F01.06 — Desenhar autorização de LOCK e troca de decisão com impacto**
   - Verificar: Protótipo distingue sugestão, hipótese aceita e decisão fechada
 - [ ] **F01.07 — Registrar ADR de portabilidade: Core independente de Android; interfaces para persistência, arquivos, IA e segurança**
