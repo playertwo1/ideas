@@ -41,6 +41,7 @@
 **G00**
 - [x] Todas as subetapas acima concluídas
 - [x] Verificações executadas
+- [x] Findings do G00 corrigidos e evidência reproduzível atualizada
 - [ ] Auditoria proporcional concluída
 - [ ] Codex/Auditor emitiu `AUDIT RESULT: PASS`
 - [ ] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.

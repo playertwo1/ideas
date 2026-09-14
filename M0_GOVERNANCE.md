@@ -16,7 +16,7 @@ G10 é a fronteira constitucional de expansão. Antes de G10 PASS, capacidades F
 
 ## Progressive Commitment
 
-CAPTURED → SUGGESTED → ACCEPTED → LOCKED, com relevância de implementação registrada separadamente quando necessário. A IA não promove conteúdo para LOCKED. Mudança LOCKED gera revisão e impacto.
+CAPTURED → SUGGESTED → ACCEPTED → LOCKED, com relevância de implementação registrada separadamente quando necessário. A IA não promove conteúdo para LOCKED: o contrato exige `authority=USER` e `lockAction=HUMAN_EXPLICIT`, mantendo autoria e autoridade distintas. Mudança LOCKED gera revisão e impacto.
 
 ## Builder → Auditor → Product Authority
 

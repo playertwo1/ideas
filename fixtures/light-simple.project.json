@@ -1,17 +1,1 @@
-{
-  "schemaVersion": "0.1",
-  "projectId": "PRJ-LIGHT-001",
-  "title": "Lista offline simples",
-  "mode": "LIGHT",
-  "originalIdea": "Quero uma lista simples para anotar coisas sem internet.",
-  "decisions": [
-    {"id":"DEC-001","text":"O fluxo principal deve funcionar offline.","author":"USER","state":"LOCKED","rationale":"Offline faz parte da intenção original."}
-  ],
-  "requirements": [
-    {"id":"REQ-001","text":"Permitir criar e consultar itens sem rede.","acceptance":["Criar um item em modo avião e reencontrá-lo após reabrir o app."],"rationale":"Testa diretamente a utilidade central.","decisionRefs":["DEC-001"]}
-  ],
-  "gates": [
-    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture de contrato; verificação ainda não executada."}
-  ],
-  "knownLimitations": ["Fixture não representa implementação nem resultado de teste."]
-}
+{"schemaVersion":"0.1","projectId":"PRJ-LIGHT-001","title":"Lista offline simples","mode":"LIGHT","originalIdea":"Quero uma lista simples para anotar coisas sem internet.","problem":"Perder anotações quando estou sem rede.","audience":"Pessoa que precisa registrar itens rapidamente.","hypothesis":{"statement":"Uma lista offline reduz o abandono de anotações simples.","minimumTest":"Usar a lista por três dias em modo avião.","metric":"Itens recuperados após reabrir.","threshold":"Pelo menos 8 de 10 itens recuperados.","evidenceStatus":"NOT_TESTED"},"scope":{"mvp":["Criar e consultar itens offline"],"outOfScope":["Sincronização","Colaboração"]},"decisions":[{"id":"DEC-001","text":"O fluxo principal deve funcionar offline.","author":"USER","authority":"USER","state":"LOCKED","commitment":"LOCKED","lockAction":"HUMAN_EXPLICIT","rationale":"Offline faz parte da intenção original."}],"requirements":[{"id":"REQ-001","text":"Permitir criar e consultar itens sem rede.","acceptance":["Criar um item em modo avião e reencontrá-lo após reabrir o app."],"rationale":"Testa diretamente a utilidade central.","decisionRefs":["DEC-001"]}],"roadmap":[{"id":"PHASE-001","text":"Validar lista offline mínima.","verify":"Executar o teste mínimo da hipótese.","gateStatus":"NOT_RUN"}],"gaps":[{"id":"GAP-001","text":"Persistência ainda não foi testada.","severity":"MEDIUM","status":"OPEN"}],"gates":[{"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture de contrato."}],"references":[],"integrity":{"contentHash":"fixture-light","hashAlgorithm":"SHA-256"},"knownLimitations":["Fixture não representa implementação nem resultado de teste."]}

@@ -4,29 +4,41 @@
   "title": "Idea Project",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "projectId", "title", "mode", "originalIdea", "decisions", "requirements", "gates"],
+  "required": ["schemaVersion", "projectId", "title", "mode", "originalIdea", "problem", "audience", "hypothesis", "scope", "decisions", "requirements", "roadmap", "gaps", "gates", "references", "integrity"],
   "properties": {
     "schemaVersion": {"type": "string", "const": "0.1"},
     "projectId": {"type": "string", "pattern": "^PRJ-[A-Z0-9][A-Z0-9_-]*$"},
     "title": {"type": "string", "minLength": 1},
     "mode": {"enum": ["LIGHT", "STANDARD", "DEEP"]},
     "originalIdea": {"type": "string", "minLength": 1},
+    "problem": {"type": "string", "minLength": 1},
+    "audience": {"type": "string", "minLength": 1},
+    "hypothesis": {"$ref": "#/$defs/hypothesis"},
+    "scope": {"$ref": "#/$defs/scope"},
     "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
     "requirements": {"type": "array", "items": {"$ref": "#/$defs/requirement"}},
+    "roadmap": {"type": "array", "items": {"$ref": "#/$defs/roadmapItem"}},
+    "gaps": {"type": "array", "items": {"$ref": "#/$defs/gap"}},
     "gates": {"type": "array", "items": {"$ref": "#/$defs/gate"}},
+    "references": {"type": "array", "items": {"$ref": "#/$defs/reference"}},
+    "integrity": {"$ref": "#/$defs/integrity"},
     "knownLimitations": {"type": "array", "items": {"type": "string"}}
   },
   "$defs": {
     "authority": {"enum": ["USER", "AI", "SYSTEM", "EXTERNAL", "IMPORTED"]},
+    "decisionState": {"enum": ["PROPOSED", "REFINING", "LOCKED", "SUPERSEDED"]},
     "commitment": {"enum": ["CAPTURED", "SUGGESTED", "ACCEPTED", "LOCKED"]},
     "decision": {
       "type": "object", "additionalProperties": false,
-      "required": ["id", "text", "author", "state", "rationale"],
+      "required": ["id", "text", "author", "authority", "state", "commitment", "lockAction", "rationale"],
       "properties": {
         "id": {"type": "string", "pattern": "^DEC-[A-Z0-9_-]+$"},
         "text": {"type": "string", "minLength": 1},
         "author": {"$ref": "#/$defs/authority"},
-        "state": {"$ref": "#/$defs/commitment"},
+        "authority": {"$ref": "#/$defs/authority"},
+        "state": {"$ref": "#/$defs/decisionState"},
+        "commitment": {"$ref": "#/$defs/commitment"},
+        "lockAction": {"enum": ["NONE", "HUMAN_EXPLICIT"]},
         "rationale": {"type": "string", "minLength": 1}
       }
     },
@@ -41,12 +53,18 @@
         "decisionRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^DEC-[A-Z0-9_-]+$"}}
       }
     },
+    "hypothesis": {"type":"object","additionalProperties":false,"required":["statement","minimumTest","metric","threshold","evidenceStatus"],"properties":{"statement":{"type":"string","minLength":1},"minimumTest":{"type":"string","minLength":1},"metric":{"type":"string","minLength":1},"threshold":{"type":"string","minLength":1},"evidenceStatus":{"enum":["NOT_TESTED","IN_PROGRESS","SUPPORTED","REFUTED"]}}},
+    "scope": {"type":"object","additionalProperties":false,"required":["mvp","outOfScope"],"properties":{"mvp":{"type":"array","items":{"type":"string","minLength":1}},"outOfScope":{"type":"array","items":{"type":"string","minLength":1}}}},
+    "roadmapItem": {"type":"object","additionalProperties":false,"required":["id","text","verify","gateStatus"],"properties":{"id":{"type":"string","pattern":"^(PHASE|TASK)-[A-Z0-9_-]+$"},"text":{"type":"string","minLength":1},"verify":{"type":"string","minLength":1},"gateStatus":{"enum":["NOT_RUN","PASS","FAIL","NOT_APPLICABLE"]},"dependsOn":{"type":"array","uniqueItems":true,"items":{"type":"string"}}}},
+    "gap": {"type":"object","additionalProperties":false,"required":["id","text","severity","status"],"properties":{"id":{"type":"string","pattern":"^GAP-[A-Z0-9_-]+$"},"text":{"type":"string","minLength":1},"severity":{"enum":["LOW","MEDIUM","HIGH","CRITICAL"]},"status":{"enum":["OPEN","CLOSED","UNKNOWN"]}}},
+    "reference": {"type":"object","additionalProperties":false,"required":["id","label","kind"],"properties":{"id":{"type":"string","pattern":"^REF-[A-Z0-9_-]+$"},"label":{"type":"string","minLength":1},"kind":{"enum":["SOURCE","DECISION","REQUIREMENT","ROADMAP"]},"uri":{"type":"string"}}},
+    "integrity": {"type":"object","additionalProperties":false,"required":["contentHash","hashAlgorithm"],"properties":{"contentHash":{"type":"string","minLength":1},"hashAlgorithm":{"const":"SHA-256"}}},
     "gate": {
       "type": "object", "additionalProperties": false,
       "required": ["id", "status"],
       "properties": {
         "id": {"type": "string", "pattern": "^GATE-[A-Z0-9_-]+$"},
-        "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "N_A"]},
+        "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "NOT_APPLICABLE"]},
         "rationale": {"type": "string"}
       }
     }

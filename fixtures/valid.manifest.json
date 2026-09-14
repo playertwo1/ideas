@@ -1,7 +1,12 @@
 {
   "schemaVersion": "0.1",
+  "generatorVersion": "0.1.0",
+  "templateVersion": "0.1",
   "projectId": "PRJ-STANDARD-001",
-  "exportRevision": 1,
+  "projectRevision": 1,
+  "modeRequested": "STANDARD",
+  "packageStatus": "DRAFT",
+  "createdAt": "2026-09-14T00:00:00Z",
   "files": [
     {
       "path": "project.json",

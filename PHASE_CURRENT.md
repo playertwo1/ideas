@@ -6,7 +6,7 @@
 
 **F00 — Padrão de projeto e congelamento do MVP**
 
-**Subestado:** trabalho de F00.01–F00.08 materializado e verificado; G00 aguardando auditoria independente e registro final da Product Authority.
+**Subestado:** findings do G00 corrigidos dentro de F00; validação reproduzível executada; G00 continua aguardando nova auditoria independente e registro final da Product Authority.
 
 **Objetivo:** fechar o contrato do produto e da fundação antes de iniciar implementação Android.
 
@@ -106,7 +106,7 @@ Checklist de saída:
 - [x] Core/Factory e G10 formalizados
 - [x] Portabilidade preservada sem novo target
 - [ ] Codex realizou auditoria proporcional
-- [ ] Findings bloqueantes da auditoria resolvidos
+- [x] Findings bloqueantes da auditoria resolvidos pelo Builder; aguardando confirmação independente
 - [ ] Auditor emitiu `AUDIT RESULT: PASS`
 - [ ] Product Authority registrou explicitamente `G00 = PASS`
 

@@ -42,9 +42,10 @@ Principais artefatos:
 - caso de ID duplicado é rejeitado por `VAL-001`;
 - caso de referência ausente é rejeitado por `VAL-002`;
 - manifest e envelope de resposta IA válidos passam;
+- decisão AI + LOCKED é rejeitada por `VAL-003`;
 - `NOT_RUN` permanece distinto de `PASS`.
 
-A evidência detalhada está em `M0_VALIDATION_EVIDENCE.md` e não substitui auditoria independente.
+A evidência detalhada está em `M0_VALIDATION_EVIDENCE.md`; o procedimento reproduzível está em `scripts/validate_contract.py` e não substitui auditoria independente.
 
 ## Bloqueios
 
