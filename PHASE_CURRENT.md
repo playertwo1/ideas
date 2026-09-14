@@ -6,7 +6,7 @@
 
 **F01 — Experiência e arquitetura da primeira versão**
 
-**Subetapa atual:** F01.01 — mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação.
+**Subetapa atual:** F01.02 — wireframes, aguardando início.
 
 **Objetivo:** produzir um fluxo navegável revisável e definir as fronteiras técnicas do próprio app antes de criar o skeleton Android.
 
@@ -46,7 +46,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F01.01 — Mapa de telas:** cada tela possui objetivo e ação principal.
+1. **F01.01 — Mapa de telas:** concluída e verificada em `F01_01_SCREEN_MAP.md`; cada tela possui objetivo, entradas, saídas, ação principal e transições.
 2. **F01.02 — Wireframes:** fluxo principal e estados vazio, erro, offline e interrompido são revisáveis.
 3. **F01.03 — Navegação e rascunho:** salvar, voltar e recuperar não descartam entrada silenciosamente.
 4. **F01.04 — Arquitetura:** módulos e portas de IA, exportação e persistência mantêm domínio independente de Android/provider.
@@ -67,4 +67,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Executar F01.01 e produzir o mapa revisável das telas e ações principais. Não iniciar Android.
+F01.01 concluída e verificada. A próxima ação autorizada é planejar F01.02; não iniciar Android.

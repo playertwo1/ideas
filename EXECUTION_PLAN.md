@@ -50,8 +50,9 @@
 
 **Resultado:** fluxo navegável revisável e fronteiras técnicas do próprio app.
 
-- [ ] **F01.01 — Mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação**
-  - Verificar: Cada tela tem objetivo e ação principal
+- [x] **F01.01 — Mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação**
+  - Artefato: `F01_01_SCREEN_MAP.md`
+  - Verificar: Cada tela tem objetivo, entradas, saídas, ação principal e transições
 - [ ] **F01.02 — Desenhar wireframes do fluxo principal e estados vazio/erro/offline/interrompido**
   - Verificar: Usuário encontra retomar, editar e exportar sem explicação técnica
 - [ ] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
