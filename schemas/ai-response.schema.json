@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://idea.local/schemas/ai-response.schema.json",
+  "title": "Idea AI Response Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "operation", "inputRevision", "suggestions", "unknowns"],
+  "properties": {
+    "schemaVersion": {"type": "string", "const": "0.1"},
+    "operation": {"type": "string", "minLength": 1},
+    "inputRevision": {"type": "integer", "minimum": 0},
+    "suggestions": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["kind", "text", "rationale"],
+        "properties": {
+          "kind": {"enum": ["INTERPRETATION", "QUESTION", "DECISION", "REQUIREMENT", "SCOPE", "ROADMAP"]},
+          "text": {"type": "string", "minLength": 1},
+          "rationale": {"type": "string", "minLength": 1},
+          "sourceRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "warnings": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}
