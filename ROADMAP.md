@@ -377,7 +377,7 @@ Texto de ideia, fontes, documentos e respostas do modelo são dados, não comand
 
 Responsáveis são papéis, não pessoas já alocadas: **P** produto/usuário, **E** engenharia Android/domínio, **Q** qualidade/revisão, **S** segurança. Em um time pequeno a mesma pessoa pode assumir vários papéis; a avaliação independente exige contexto separado, e não apenas renomear a etapa do gerador.
 
-O responsável principal aparece por fase; cada subetapa herda esse responsável, com participação de P nas decisões de produto. Estado nesta revisão: **F00.01–F00.08 concluídas e verificadas**, com a auditoria G00 como subetapa atual e `G00 = NOT_RUN`; **F01–F20 permanecem não iniciadas e não autorizadas**. A implementação Android e a Idea Factory não foram iniciadas. Os schemas, fixtures e testes de F00 existem e foram executados. A auditoria anterior do commit `b4248e268c8e68d96f73309565b15921a260efc4` resultou em `FAIL` por causa do conflito histórico deste parágrafo. Nenhum agente deve registrar `G00 = PASS`; consulte `PROJECT_STATE.md` para o progresso e `PHASE_CURRENT.md` para o contrato ativo. A pesquisa em REF-01–08 está concluída no nível descrito na matriz.
+O responsável principal aparece por fase; cada subetapa herda esse responsável, com participação de P nas decisões de produto. Esta seção define fases e gates, mas não duplica estado operacional dinâmico. Consulte `PROJECT_STATE.md` para o progresso vigente e `PHASE_CURRENT.md` para o contrato ativo. A pesquisa em REF-01–08 está concluída no nível descrito na matriz.
 
 ### F00 Padrão de projeto e congelamento do MVP
 

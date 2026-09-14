@@ -4,67 +4,67 @@
 
 ## Fase ativa
 
-**F00 — Padrão de projeto e congelamento do MVP**
+**F01 — Experiência e arquitetura da primeira versão**
 
-**Subestado:** F00.01–F00.08 materializadas; findings de preparação corrigidos; G00 aguarda nova auditoria independente e registro da Product Authority.
+**Subetapa atual:** F01.01 — mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação.
 
-**Objetivo:** fechar contrato, governança, schemas, fixtures, validação e fronteiras do MVP antes de iniciar Android.
+**Objetivo:** produzir um fluxo navegável revisável e definir as fronteiras técnicas do próprio app antes de criar o skeleton Android.
 
 ## Resultado esperado
 
-Contrato versionado que permita identificar objetivamente o que falta em um pacote e impeça avanço para implementação sem os gates corretos.
+Fluxo, estados e arquitetura documentados de forma verificável, com domínio independente de Android e contratos portáteis preservados.
 
 ## Trabalho autorizado agora
 
-- corrigir finding objetivo de F00;
-- refinar documentação, schemas, fixtures e validação de F00 sem alterar decisões `LOCKED`;
-- reexecutar validações afetadas e atualizar evidências;
-- preparar material para G00;
-- reduzir duplicação/contexto operacional sem alterar semântica canônica;
-- sincronizar `PROJECT_STATE.md`/`EXECUTION_PLAN.md` quando o estado realmente mudar.
+- mapear cada tela de F01.01, seu objetivo, entrada, saída e ação principal;
+- criar ou atualizar artefatos documentais e wireframes de F01;
+- avançar pelas subetapas F01.01–F01.08 somente quando dependências e critérios do `EXECUTION_PLAN.md` estiverem satisfeitos;
+- definir navegação, recuperação de rascunho, fronteiras arquiteturais, portas e ADRs previstos em F01;
+- fixar aparelhos, minSdk e toolchain somente após consultar documentação oficial vigente;
+- executar verificações documentais e arquiteturais proporcionais;
+- atualizar `PROJECT_STATE.md` e `EXECUTION_PLAN.md` quando o estado realmente mudar.
 
 ## Não autorizado
 
-- iniciar Android, Compose, Room ou provider real;
-- avançar para F01 antes de G00 = PASS;
-- implementar F11–F20 / Idea Factory;
-- alterar materialmente MVP 0.1 sem Product Authority;
-- reabrir D01–D09 por preferência técnica;
-- criar segundo target ou abstração multiplataforma prematura;
-- executar ação externa/destrutiva não necessária à F00.
+- criar projeto Android, código Compose, Room, Gradle ou integração real com provider;
+- iniciar F02 antes de `G01 = PASS` registrado pela Product Authority;
+- implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
+- tratar a baseline de contexto como implementação de F15;
+- alterar D01–D09 sem decisão explícita da Product Authority;
+- criar segundo target, backend, sincronização ou abstração multiplataforma prematura;
+- executar ação externa/destrutiva não necessária à fase.
 
-## Decisões vigentes
+## Decisões e gates vigentes
 
-- D01–D09: **LOCKED** desde 13/09/2026.
-- Builder não promove sugestão/hipótese para decisão humana.
-- Mudança material exige Product Authority e análise de impacto.
-- F11–F20 permanecem bloqueadas até `G10 = PASS`.
+- D01–D09: `LOCKED` desde 13/09/2026;
+- G00: `PASS` registrado em 14/09/2026 após auditoria independente;
+- G01: `NOT_RUN`;
+- G10: `NOT_RUN`;
+- Idea Factory/F11–F20: bloqueada.
 
-Detalhes e redação canônica: `M0_DECISION_BASELINE.md`, `M0_GOVERNANCE.md` e seções correspondentes do `ROADMAP.md`.
+`NOT_RUN != PASS`. O Builder não registra o próprio gate.
 
-## Contexto operacional
+## Subetapas e critérios
 
-Use `AGENTS.md` + `PROJECT_STATE.md` como bootstrap. Para arquivos adicionais, use `AI_CONTEXT_INDEX.md` e `context-manifest.json`.
+1. **F01.01 — Mapa de telas:** cada tela possui objetivo e ação principal.
+2. **F01.02 — Wireframes:** fluxo principal e estados vazio, erro, offline e interrompido são revisáveis.
+3. **F01.03 — Navegação e rascunho:** salvar, voltar e recuperar não descartam entrada silenciosamente.
+4. **F01.04 — Arquitetura:** módulos e portas de IA, exportação e persistência mantêm domínio independente de Android/provider.
+5. **F01.05 — Ambiente alvo:** aparelhos, minSdk e toolchain são definidos com documentação vigente e build de exemplo verificável somente na fase autorizada.
+6. **F01.06 — Autoridade de LOCK:** protótipo distingue sugestão, hipótese aceita e decisão humana fechada.
+7. **F01.07 — Portabilidade:** ADR preserva interfaces para persistência, arquivos, IA e segurança.
+8. **F01.08 — Contrato portátil:** `project.json`/`manifest.json` e compatibilidade de schema não dependem de UI/Room.
 
-`WATCHDOG.md` e `AUDIT.md` entram por gatilho/tarefa conforme `CONTEXT_POLICY.md`; o ROADMAP inteiro não é leitura operacional padrão.
-
-## Gate G00
+## Gate G01
 
 **Estado:** `NOT_RUN`.
 
-Critério canônico: três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
-
-Pendências de saída:
-- Codex executar auditoria proporcional independente;
-- emitir `AUDIT RESULT: PASS` ou `FAIL`;
-- se PASS e critérios objetivos estiverem satisfeitos, Product Authority registrar explicitamente `G00 = PASS`.
-
-O Builder não registra o próprio gate.
+Critério: fluxo aprovado para implementação; modelo de custódia de credenciais e armazenamento resolvido, com provider específico homologado somente em F04.
 
 ## Retorno seguro
 
-Se G00 falhar, permanecer em F00 e corrigir somente contratos/fixtures/regras afetados. Não avançar por inércia.
+Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementação nem dados de usuário a migrar nesta fase.
 
 ## Próxima ação
 
-Executar `G00_AUDIT_PACKET.md` com contexto progressivo, corrigir findings bloqueantes se houver e manter F01 bloqueada até registro explícito de G00.
+Executar F01.01 e produzir o mapa revisável das telas e ações principais. Não iniciar Android.

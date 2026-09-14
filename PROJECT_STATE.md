@@ -6,11 +6,11 @@
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M0 — Contrato do produto
-- **Fase:** F00 — Padrão de projeto e congelamento do MVP
-- **Subetapa atual:** G00 — auditoria de saída de F00
-- **Última concluída:** F00.08
-- **Próxima após a atual:** F01, somente se G00 = PASS for registrado pela Product Authority
-- **G00:** NOT_RUN
+- **Fase:** F01 — Experiência e arquitetura da primeira versão
+- **Subetapa atual:** F01.01 — mapear as telas e ações principais
+- **Última concluída:** G00 — saída de F00
+- **Próxima após a atual:** F01.02, somente após F01.01 concluída e verificada
+- **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -20,7 +20,7 @@
 
 ## Estado atual
 
-F00.01–F00.08 foram materializadas e verificadas no nível de contrato/documentação. Findings anteriores de preparação foram corrigidos; a saída da F00 ainda depende de nova auditoria independente do Codex e do registro explícito de G00 pela Product Authority.
+F00.01–F00.08 foram concluídas e verificadas. A auditoria independente da branch `docs/context-efficiency-f00`, incluindo a correção de paridade entre `AI_CONTEXT_INDEX.md` e `context-manifest.json`, resultou em `AUDIT RESULT: PASS`. A Product Authority autorizou e registrou `G00 = PASS` neste ciclo.
 
 A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONTEXT_EFFICIENCY.md`, `CONTEXT_POLICY.md`, `AI_CONTEXT_INDEX.md` e `context-manifest.json`. Isso não implementa F15 nem altera o gate atual.
 
@@ -33,18 +33,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-Nenhum bloqueio técnico de fundação conhecido antes da auditoria.
-
-Bloqueio de avanço intencional: G00 ainda não recebeu `AUDIT RESULT: PASS` independente nem registro explícito da Product Authority.
+Nenhum bloqueio técnico conhecido para iniciar o trabalho documental de F01.
 
 ## Próxima ação
 
-Codex/Auditor deve executar `G00_AUDIT_PACKET.md` conforme `AUDIT.md`, usando contexto progressivo conforme `AI_CONTEXT_INDEX.md`, e emitir `AUDIT RESULT: PASS|FAIL`.
-
-Finding corrigível dentro de F00 retorna ao Builder. Nova decisão material, risco novo ou conflito canônico real escala à Product Authority.
+Executar F01.01 conforme `PHASE_CURRENT.md`: mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação, sem iniciar implementação Android.
 
 ## Regra de avanço
 
-Não iniciar F01 nem Android antes de G00 PASS explícito.
-
-Builder produz evidências → Auditor emite PASS/FAIL → Product Authority registra o gate.
+F01 está autorizada. Android permanece não iniciado; implementação do skeleton pertence a F02 e depende de G01. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
