@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-REF-CHECK",
+  "title": "Reference integrity fixture",
+  "mode": "STANDARD",
+  "originalIdea": "Contract fixture for reference validation.",
+  "decisions": [
+    {"id":"DEC-001","text":"Known decision.","author":"USER","state":"LOCKED","rationale":"Fixture baseline."}
+  ],
+  "requirements": [
+    {"id":"REQ-001","text":"Requirement used to test reference integrity.","acceptance":["Validation reports the unresolved reference."],"rationale":"Exercise VAL-002.","decisionRefs":["DEC-404"]}
+  ],
+  "gates": [
+    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Contract fixture."}
+  ],
+  "knownLimitations": ["This fixture is intentionally not valid under semantic rule VAL-002."]
+}
