@@ -16,30 +16,56 @@ A fronteira do produto é clara: **o Idea termina no handoff**. Execução cont�
 
 `Capture → Clarify → Decide → Cut → Specify → Plan → Export`
 
-O Core corresponde ao caminho F00–F10 do [ROADMAP](ROADMAP.md). O objetivo do MVP 0.1 é provar que um pacote exportado permite entender o que construir, o que ficou fora e como verificar o resultado sem reconstruir uma conversa.
+O Core corresponde ao caminho F00–F10 do [ROADMAP](ROADMAP.md). O objetivo do MVP 0.1 é provar que um pacote exportado permite entender o que construir, o que ficou fora e como verificar o resultado sem reconstruir o contexto da conversa.
 
-### Idea Factory — somente depois de provar o Core
+### Idea Factory — ampliar um núcleo já útil
 
-`Research → Validate → Blueprint → Task DAG → Context → Guardrails → Review → Bootstrap`
+`Research → Validate → Blueprint → Task DAG → Context Compiler → Guardrails → Independent Review → Bootstrap → Agent Handoff`
 
-A Factory corresponde a F11–F20. **G10 é um Go/No-Go obrigatório:** F11+ não deve ser implementado enquanto o piloto do Core não demonstrar confiabilidade e redução útil de ambiguidade. Se G10 falhar, o trabalho retorna principalmente a F06–F08.
+A Factory corresponde a F11–F20. **Ela não deve ser implementada enquanto G10 não passar.** G10 é o Go/No-Go que comprova que o Core já reduz ambiguidade e gera valor.
 
-## Como desenvolver este projeto
+## Modos de profundidade
 
-A documentação deve permitir que uma IA nova entenda o projeto sem depender do histórico das conversas.
+- **LIGHT:** utilitário, experimento ou alteração pequena; processo curto e proporcional.
+- **STANDARD:** aplicativos e features normais; entrevista, validação, spec, MVP e roadmap.
+- **DEEP:** sistemas amplos, sensíveis, multiagente ou com integrações relevantes; usa as capacidades avançadas quando disponíveis.
 
-- **README.md** — entrada e visão rápida.
-- **ROADMAP.md** — mapa mestre, fases, gates, requisitos, referências e critérios.
-- **NORTH_STAR.md** — visão curta e princípios imutáveis, quando criado.
-- **PHASE_CURRENT.md** — contrato operacional da fase ativa, quando criado.
+Selecionar LIGHT nunca remove validações de segurança aplicáveis. DEEP não pode ser anunciado como concluído antes de seus gates existirem.
 
-### Papéis de execução
+## Princípios
 
-- **Antigravity = Builder:** implementa autonomamente tudo que estiver explicitamente autorizado pela fase ativa.
-- **Codex = Auditor:** verifica diff, testes, acceptance, escopo, regressões e evidências; não refaz o trabalho do Builder por padrão.
-- **Usuário = Product Authority:** decide mudanças de produto, novos riscos materiais, mudanças de escopo, ações externas/destrutivas não autorizadas e conflitos não resolvidos.
+- Intenção original e interpretação da IA são entidades separadas.
+- Decisões humanas, sugestões da IA, hipóteses e evidências externas permanecem distinguíveis.
+- IDs, locks, dependências, integridade e gates usam regras determinísticas.
+- `NOT_RUN` nunca significa `PASS`.
+- Readiness é baseado em checks, não em percentuais cosméticos de confiança.
+- Profundidade cresce com risco/complexidade.
+- Regeneração da IA não sobrescreve edição humana aceita.
+- Mudanças em decisão `LOCKED` criam revisão e análise de impacto.
+- Cada requisito/tarefa relevante registra `rationale`: por que existe.
+- Documentação deve reduzir ambiguidade, não aumentar burocracia.
 
-**Autonomia proporcional:** não pedir nova autorização para executar algo que já esteja explicitamente autorizado. Escalar somente decisão nova, risco novo ou mudança material de escopo.
+## Progressive Commitment
+
+Informações evoluem proporcionalmente à autoridade necessária:
+
+`CAPTURED → SUGGESTED → ACCEPTED → LOCKED → IMPLEMENTATION_RELEVANT`
+
+A IA pode propor; somente autoridade humana apropriada fecha decisões que mudam produto ou escopo.
+
+## Como estamos construindo o Idea
+
+- **Product Authority:** usuário — decide produto, escopo e novos riscos/decisões materiais.
+- **Builder:** Antigravity — executa autonomamente o que a fase ativa já autorizou.
+- **Auditor:** Codex — verifica diff, testes, acceptance, regressões, escopo, segurança e evidências com contexto separado.
+
+**Autonomia proporcional:** não pedir nova autorização para executar algo já autorizado. Escalar apenas decisão nova, risco novo, mudança material de escopo, ação externa/destrutiva não autorizada ou conflito não resolvido pelos contratos.
+
+Documentação de execução recomendada:
+
+- `NORTH_STAR.md` — visão e fronteiras.
+- `ROADMAP.md` — mapa mestre F00–F20.
+- `PHASE_CURRENT.md` — contexto curto da fase ativa para Builder/Auditor.
 
 ## Referências GitHub que influenciaram o projeto
 
@@ -58,7 +84,16 @@ As referências abaixo foram estudadas para extrair padrões, formatos e fluxos.
 
 ### Como essas ideias se combinam
 
-O Idea não é uma cópia de nenhum desses projetos. A combinação desejada é: intake e funil de especificação do AI App Idea Generator; decisões Propose/Refine/Lock do Vibe Architect; capacidades modulares inspiradas no BuilderOS; rastreabilidade e constituição comum do Spec-Driven Development; contexto compilado e consistência do SpecD; clarificação e revisão estruturada do AI PRD Generator; specs locais e limites explícitos do SpecDD; e Plan/Build/Verify, DAG e separação Builder/Auditor do pb-spec.
+O Idea não é uma cópia de nenhum desses projetos. A combinação desejada é:
+
+1. **Intake e funil de especificação** do AI App Idea Generator.
+2. **Decisões Propose/Refine/Lock** do Vibe Architect.
+3. **Capacidades modulares** inspiradas no BuilderOS.
+4. **Rastreabilidade e constituição comum** inspiradas no Spec-Driven Development.
+5. **Contexto compilado e consistência** inspirados no SpecD.
+6. **Clarificação e revisão estruturada** inspiradas no AI PRD Generator.
+7. **Specs locais e limites explícitos** inspirados no SpecDD.
+8. **Plan/Build/Verify, DAG e separação Builder/Auditor** inspirados no pb-spec.
 
 A decisão final de design sempre pertence ao Idea e deve privilegiar Android-first, local-first, simplicidade proporcional e independência de provedor.
 
