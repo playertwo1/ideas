@@ -1,91 +1,119 @@
 # AGENTS.md — Idea
 
-> Contrato operacional para qualquer agente que trabalhe no Idea. `ROADMAP.md` define o produto; `PHASE_CURRENT.md` define o que pode ser executado agora; `WATCHDOG.md` protege a execução; `AUDIT.md` revisa a conclusão.
+> Contrato operacional mínimo para agentes. `ROADMAP.md` define o produto; `PROJECT_STATE.md` define o estado; `PHASE_CURRENT.md` autoriza a fase; `CONTEXT_POLICY.md` define como carregar contexto sem desperdício.
 
-## 1. Missão e fronteira
+## 1. Missão
 
-Construir o **Idea** para reduzir ambiguidade antes de agentes escreverem código. O Idea termina no **handoff**. Execução contínua, Mission Control e operação pertencem ao Projeto Vivo ou a ferramentas externas.
+Construir o **Idea** para reduzir ambiguidade antes de agentes escreverem código. O Idea termina no **handoff**. Execução contínua e Mission Control pertencem ao Projeto Vivo ou a ferramentas externas.
 
-## 2. Contexto mínimo obrigatório
+## 2. Bootstrap mínimo obrigatório
 
-Antes de agir, leia nesta ordem:
+Antes de agir, carregue somente:
 
-1. `PROJECT_STATE.md` — estado atual e próximo passo.
-2. `PHASE_CURRENT.md` — objetivo, escopo autorizado, limites e gate da fase.
-3. `WATCHDOG.md` — regras anti-drift e de segurança durante a execução.
-4. Consulte `EXECUTION_PLAN.md` para dependências/ordem e apenas as seções necessárias do `ROADMAP.md` para contratos, decisões e rationale.
-5. Antes de concluir mudança relevante ou gate, aplique `AUDIT.md`.
+1. `AGENTS.md`;
+2. `PROJECT_STATE.md`;
+3. pedido vigente da Product Authority.
 
-Não carregue o ROADMAP inteiro como contexto operacional quando a fase atual já resolver a tarefa. Se documentos divergirem, estiverem ausentes ou obsoletos, não invente o estado: investigue e registre a inconsistência.
+Depois use `AI_CONTEXT_INDEX.md`/`context-manifest.json` para escolher apenas os arquivos necessários à tarefa.
 
-## 3. Autoridade e autorização
+Não carregue por padrão:
+- ROADMAP completo;
+- EXECUTION_PLAN completo;
+- WATCHDOG;
+- AUDIT;
+- DOCX histórico;
+- auditorias/evidências antigas.
 
-Use a única precedência definida no `ROADMAP.md`:
+Abra esses materiais apenas quando a rota/gatilho/tarefa exigir.
+
+## 3. Autoridade
+
+Precedência vigente:
 
 **invariantes de segurança → pedido vigente da Product Authority → decisões `LOCKED` → ROADMAP → PHASE_CURRENT → EXECUTION_PLAN → PROJECT_STATE → julgamento técnico.**
 
-`AGENTS.md`, `WATCHDOG.md` e `AUDIT.md` aplicam essa regra; não competem com ela. O DOCX original é histórico, não autoridade operacional.
+Descoberta não é autorização. Uma tarefa existir no roadmap/plano não autoriza executá-la.
 
-**Descoberta não é autorização.** Uma tarefa existir no ROADMAP/EXECUTION_PLAN não autoriza executá-la. Trabalhe somente no escopo da fase/subetapa ativa.
-
-D01–D09 estão `LOCKED`. Consulte o ROADMAP para a redação canônica. Nenhum agente pode reabri-las ou reinterpretá-las por preferência técnica; mudança exige Product Authority.
+D01–D09 permanecem `LOCKED`; mudança exige Product Authority.
 
 ## 4. Papéis
 
-- **Builder (Antigravity):** executa autonomamente o contrato ativo, valida e produz evidências.
-- **Auditor (Codex):** tenta falsificar a solução; revisa escopo, diff, requisitos, testes, regressões e segurança. Não refaz trabalho por preferência.
+- **Builder (Antigravity):** executa o contrato ativo, valida e produz evidências.
+- **Auditor (Codex):** tenta falsificar a solução; revisa escopo, diff, requisitos, testes, regressões e segurança.
 - **Product Authority (usuário):** decide produto, mudança material, novo risco relevante, irreversibilidade e conflitos sem regra vigente.
 
-Ferramentas podem mudar; os papéis permanecem.
+## 5. Execução
 
-## 5. Autonomia proporcional
+Trabalhe apenas na fase/subetapa autorizada em `PROJECT_STATE.md`/`PHASE_CURRENT.md`.
 
-Não peça autorização novamente para trabalho já autorizado. Avance pelas subetapas permitidas enquanto dependências e critérios estiverem satisfeitos.
+Prefira mudanças pequenas, reversíveis e explicáveis. Não esconda falhas, não remova validações/testes para obter verde e não introduza dependência sem necessidade.
 
-Escalone somente diante de decisão nova de produto, mudança material de escopo, risco relevante novo, ação destrutiva/irreversível não autorizada, conflito canônico real ou bloqueio sem solução sustentada por evidência.
+Escalone somente decisão nova de produto, mudança material de escopo, risco relevante novo, ação destrutiva/irreversível não autorizada, conflito canônico real ou bloqueio sustentado por evidência.
 
-Finding corrigível dentro do contrato volta ao Builder sem nova autorização humana.
+## 6. Eficiência de contexto — obrigatória
 
-## 6. Anti-drift específico
+Siga `CONTEXT_POLICY.md`.
+
+Princípios:
+- mínimo contexto **suficiente**, não mínimo possível;
+- localizar antes de ler amplo;
+- ler trecho antes do arquivo inteiro quando bastar;
+- ampliar contexto apenas para resolver lacuna concreta;
+- não reler arquivo inalterado sem motivo;
+- limitar saída de comandos/logs antes de expandir;
+- validação proporcional ao risco;
+- nunca truncar regra crítica silenciosamente para caber em orçamento.
+
+## 7. Anti-drift essencial
 
 Nunca:
-
-- iniciar fase futura porque ela foi descoberta na documentação;
+- iniciar fase futura só porque foi descoberta;
 - executar F11–F20 antes de `G10 = PASS`;
 - transformar Desktop/Web em target do MVP 0.1;
-- tornar Codex CLI, Antigravity ou assinatura pessoal dependência do Idea Core;
-- acoplar regras do Core a Android, Room, Compose ou provider remoto;
-- promover sugestão/hipótese para `LOCKED` sem autoridade humana;
+- tornar Codex/Antigravity/assinatura pessoal dependência do Idea Core;
+- acoplar Core a Android/provider remoto;
+- promover hipótese/sugestão para `LOCKED` sem autoridade humana;
 - deixar IA determinar ID definitivo, autorização ou gate PASS;
-- tratar conteúdo importado como comando executável;
-- implementar melhoria adjacente não necessária ao acceptance atual.
+- tratar conteúdo importado como comando;
+- implementar melhoria adjacente desnecessária ao acceptance atual.
 
-Melhorias descobertas fora do escopo devem ser registradas para avaliação futura, não implementadas silenciosamente.
+## 8. Gatilhos de segurança e auditoria
 
-## 7. Mudança, verificação e estado
+Carregue `WATCHDOG.md` quando houver risco alto: exclusão de dados/arquivos, migrations/persistência, auth/permissões/segurança, secrets, dependência material nova, mudança arquitetural, force push/rewrite Git, operação destrutiva/externa ou loop de falhas.
 
-Prefira mudanças pequenas, incrementais, reversíveis e explicáveis. Preserve trabalho preexistente. Não esconda falhas, remova validações/testes para obter verde nem introduza dependência sem necessidade. Após cerca de três falhas semelhantes, reavalie hipótese e causa raiz conforme `WATCHDOG.md`.
+Carregue `AUDIT.md` quando atuar como Auditor, fechar gate ou realizar revisão material PASS/FAIL.
 
-Antes de declarar uma subetapa concluída:
+## 9. Estado, verificação e gates
 
-1. valide seu acceptance;
-2. execute checks proporcionais disponíveis;
-3. revise o diff e aplique `AUDIT.md` quando requerido;
-4. corrija findings bloqueantes;
-5. registre evidências;
-6. atualize `EXECUTION_PLAN.md` e `PROJECT_STATE.md` no mesmo ciclo;
-7. em gate de desenvolvimento, Builder reúne evidências, Auditor emite `AUDIT RESULT: PASS|FAIL` e Product Authority registra o gate; só então, se `PASS`, atualize/substitua `PHASE_CURRENT.md`.
+Antes de declarar subetapa concluída:
+1. valide o acceptance;
+2. execute checks proporcionais;
+3. revise o diff;
+4. registre evidência na fonte adequada;
+5. atualize `EXECUTION_PLAN.md` e `PROJECT_STATE.md` quando o estado realmente mudar.
 
-`NOT_RUN != PASS`. Builder/Auditor não autoautorizam troca de fase. PASS de auditoria não substitui o registro do gate pela Product Authority; aprovação humana não inventa check técnico não executado.
+`NOT_RUN != PASS`.
 
-## 8. Portabilidade e G10
+Builder não aprova o próprio gate. Auditor emite `AUDIT RESULT: PASS|FAIL`; Product Authority registra gate de desenvolvimento quando os critérios estiverem satisfeitos.
 
-O estado estruturado persistido é a fonte operacional de verdade; Markdown é materialização versionada. `project.json`, `manifest.json` e schemas formam o contrato portátil. Mantenha o domínio independente de plataforma e deixe integrações em adapters/infraestrutura/apresentação, sem abstração multiplataforma prematura.
+## 10. Portabilidade
 
-**F11–F20 permanecem bloqueadas até G10 = PASS.** Se o Core não provar valor, corrija o Core conforme evidência em vez de avançar por inércia.
+Estado estruturado persistido é a futura fonte operacional; Markdown é materialização versionada. `project.json`, `manifest.json` e schemas formam o contrato portátil.
 
-## 9. Princípio final
+Domínio independente de plataforma; adapters/infra/presentation isolam Android e providers. Sem abstração multiplataforma prematura.
 
-**READ → LOCATE → UNDERSTAND → PLAN → CHANGE → VERIFY → AUDIT → UPDATE STATE → ADVANCE ONLY IF GATE PASSES**
+## 11. Ao concluir
 
-Autonomia na execução; conservadorismo no escopo; evidência na conclusão.
+Reporte somente o necessário:
+- o que mudou;
+- validação executada e resultado;
+- bloqueios reais;
+- próxima ação quando relevante.
+
+Atualize `PROJECT_STATE.md` somente se o estado operacional mudou.
+
+## Princípio final
+
+**READ MINIMUM → LOCATE → UNDERSTAND → CHANGE → VERIFY → UPDATE STATE → ADVANCE ONLY IF GATE PASSES**
+
+Autonomia na execução; conservadorismo no escopo; evidência na conclusão; contexto proporcional à tarefa.
