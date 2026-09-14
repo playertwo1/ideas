@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-STANDARD-001",
+  "title": "Organizador de projetos",
+  "mode": "STANDARD",
+  "originalIdea": "Quero organizar meus projetos e saber sempre o próximo passo.",
+  "decisions": [
+    {"id":"DEC-001","text":"A primeira versão é de uso individual.","author":"USER","state":"LOCKED","rationale":"Evita antecipar colaboração e sincronização."},
+    {"id":"DEC-002","text":"O próximo passo precisa derivar do estado e das dependências do projeto.","author":"USER","state":"ACCEPTED","rationale":"Evita uma sugestão genérica sem relação com o plano."}
+  ],
+  "requirements": [
+    {"id":"REQ-001","text":"Permitir criar projetos e registrar etapas com estado.","acceptance":["Um projeto criado mantém suas etapas após reabertura."],"rationale":"Base para calcular o próximo passo.","decisionRefs":["DEC-001"]},
+    {"id":"REQ-002","text":"Mostrar uma próxima ação explicável a partir das etapas e dependências conhecidas.","acceptance":["A tela informa a próxima ação e o motivo da escolha."],"rationale":"Materializa a promessa central da ideia.","decisionRefs":["DEC-002"]}
+  ],
+  "gates": [
+    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture de contrato; verificação ainda não executada."}
+  ],
+  "knownLimitations": ["Colaboração multiusuário não faz parte deste recorte."]
+}
