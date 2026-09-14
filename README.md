@@ -61,11 +61,17 @@ A IA pode propor; somente autoridade humana apropriada fecha decisões que mudam
 
 **Autonomia proporcional:** não pedir nova autorização para executar algo já autorizado. Escalar apenas decisão nova, risco novo, mudança material de escopo, ação externa/destrutiva não autorizada ou conflito não resolvido pelos contratos.
 
-Documentação de execução recomendada:
+Documentação operacional:
 
-- `NORTH_STAR.md` — visão e fronteiras.
-- `ROADMAP.md` — mapa mestre F00–F20.
-- `PHASE_CURRENT.md` — contexto curto da fase ativa para Builder/Auditor.
+- `ROADMAP.md` v0.6 — contrato canônico e decisões.
+- `PHASE_CURRENT.md` — autorização operacional da fase ativa.
+- `EXECUTION_PLAN.md` — sequência/checklist.
+- `PROJECT_STATE.md` — estado curto para retomada.
+- `AGENTS.md` + `WATCHDOG.md` — comportamento, segurança e anti-drift.
+- `AUDIT.md` — revisão independente.
+- `REFERENCE_MATRIX.md` — consolidação das referências estudadas.
+
+O DOCX original é fonte histórica de pesquisa, não autoridade operacional.
 
 ## Referências GitHub que influenciaram o projeto
 
@@ -117,4 +123,4 @@ O estado estruturado local será a fonte operacional. Markdown é materializaç�
 
 ## Status
 
-Projeto em fase de especificação/validação do roadmap. A implementação Android ainda não deve assumir decisões de produto que permaneçam abertas no roadmap.
+Roadmap canônico v0.6. Fase ativa F00/F00.01; G00 e G10 `NOT_RUN`; D01–D09 `LOCKED`. A implementação Android ainda não está autorizada.
