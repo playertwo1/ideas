@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.1",
+  "operation": "clarify",
+  "inputRevision": 1,
+  "suggestions": [
+    {
+      "kind": "QUESTION",
+      "text": "Quem usará este projeto?",
+      "rationale": "O público ainda não foi confirmado.",
+      "sourceRefs": ["originalIdea"]
+    }
+  ],
+  "unknowns": ["Público ainda não confirmado."],
+  "warnings": []
+}
