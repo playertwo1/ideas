@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "project.json",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "sha256": "ac1794c959d1ec6169cebc786d3800a1e56d37364e1de757f93d43cd9dafd3f4"
     }
   ],
   "capabilities": ["CORE"],

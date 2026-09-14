@@ -71,7 +71,8 @@
 - [x] **F01.07 — Registrar ADR de portabilidade: Core independente de Android; interfaces para persistência, arquivos, IA e segurança**
   - Artefato: `F01_07_PORTABILITY_ADR.md`
   - Verificar: Teste/inspeção arquitetural confirma que regras centrais não importam APIs Android
-- [ ] **F01.08 — Definir `project.json`/`manifest.json` como contrato portátil e política de compatibilidade de schema**
+- [x] **F01.08 — Definir `project.json`/`manifest.json` como contrato portátil e política de compatibilidade de schema**
+  - Artefato: `F01_08_PORTABLE_CONTRACT.md`
   - Verificar: Fixture exportada pode ser interpretada sem depender de classes de UI/Room
 
 **G01**
