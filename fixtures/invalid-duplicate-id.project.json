@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-INVALID-DUPLICATE",
+  "title": "Fixture inválida — ID duplicado",
+  "mode": "STANDARD",
+  "originalIdea": "Fixture negativa para testar integridade.",
+  "decisions": [
+    {"id":"DEC-001","text":"Decisão válida.","author":"USER","state":"LOCKED","rationale":"Base da fixture."}
+  ],
+  "requirements": [
+    {"id":"REQ-001","text":"Primeiro requisito.","acceptance":["Critério A."],"rationale":"Teste.","decisionRefs":["DEC-001"]},
+    {"id":"REQ-001","text":"Segundo requisito com ID repetido.","acceptance":["Critério B."],"rationale":"Deve falhar em VAL-001.","decisionRefs":["DEC-001"]}
+  ],
+  "gates": [
+    {"id":"GATE-CORE","status":"NOT_RUN","rationale":"Fixture negativa."}
+  ],
+  "knownLimitations": ["Documento propositalmente inválido por ID duplicado."]
+}
