@@ -150,7 +150,7 @@ O `ROADMAP.md` é a autoridade canônica, mas não deve ser usado como única in
 
 ### Governança dos gates de desenvolvimento
 
-Gates `G00–G20` controlam avanço do **desenvolvimento do Idea**. O Builder reúne evidências; o Auditor emite PASS/FAIL da auditoria; a Product Authority registra o resultado final do gate quando os critérios objetivos e a auditoria estiverem satisfeitos. Sem esse registro, o gate permanece `NOT_RUN` ou `FAIL` e a fase seguinte não é autorizada.
+Gates `G00–G20` controlam avanço do **desenvolvimento do Idea**. O Builder reúne evidências; o Auditor emite PASS/FAIL da auditoria; a Product Authority registra o resultado final do gate. `PASS` exige critérios objetivos satisfeitos e auditoria PASS. `FAIL` pode ser registrado quando a avaliação demonstrar critérios não atendidos ou auditoria FAIL, com os bloqueadores e suas evidências. Ausência de avaliação permanece `NOT_RUN`. Sem esse registro, o gate permanece `NOT_RUN` ou `FAIL` e a fase seguinte não é autorizada.
 
 Isso é diferente dos gates `PKG-*` do **produto Idea**, que serão checks determinísticos sobre pacotes gerados. IA generativa não decide autorização humana nem promove decisões para `LOCKED`.
 
@@ -377,7 +377,7 @@ Texto de ideia, fontes, documentos e respostas do modelo são dados, não comand
 
 Responsáveis são papéis, não pessoas já alocadas: **P** produto/usuário, **E** engenharia Android/domínio, **Q** qualidade/revisão, **S** segurança. Em um time pequeno a mesma pessoa pode assumir vários papéis; a avaliação independente exige contexto separado, e não apenas renomear a etapa do gerador.
 
-O responsável principal aparece por fase; cada subetapa herda esse responsável, com participação de P nas decisões de produto. Status de todas as fases: **PROPOSTA**. A pesquisa em REF-01–08 está concluída no nível descrito na matriz; schemas, testes e aprovações dessas fases ainda não existem.
+O responsável principal aparece por fase; cada subetapa herda esse responsável, com participação de P nas decisões de produto. Estado nesta revisão: **F00 autorizada, ainda não iniciada**, com F00.01 como primeira subetapa; **F01–F20 futuras, não autorizadas para execução**; nenhuma fase concluída. Autorização de trabalho não equivale a conclusão ou aprovação de gate. Consulte `PROJECT_STATE.md` para o progresso e `PHASE_CURRENT.md` para o contrato ativo. A pesquisa em REF-01–08 está concluída no nível descrito na matriz; schemas, testes e aprovações de gates ainda não existem.
 
 ### F00 Padrão de projeto e congelamento do MVP
 
@@ -394,7 +394,7 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 | F00.07 | Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor | Contratos impedem F11+ sem G10 PASS e distinguem autoridade de produto, execução e auditoria |
 | F00.08 | Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP | PROJECT_STANDARD separa Core de adapters e proíbe abstração multiplataforma prematura |
 
-**Gate G00:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos. Fluxo: Builder produz evidências e solicita avaliação; Auditor emite `AUDIT RESULT: PASS|FAIL`; somente com checks objetivos satisfeitos e auditoria PASS a Product Authority registra `G00 = PASS|FAIL`. Builder e Auditor não autoautorizam troca de fase. `PHASE_CURRENT.md` só muda para F01 após o registro explícito de G00 pela Product Authority. **Retorno seguro:** revisar os contratos ainda sem dados de usuários. **Limite:** não implementar o engine completo para provar o padrão.
+**Gate G00:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos. Fluxo: Builder produz evidências e solicita avaliação; Auditor emite `AUDIT RESULT: PASS|FAIL`; a Product Authority registra `G00 = PASS` somente com checks objetivos satisfeitos e auditoria PASS. Se a avaliação demonstrar critérios não atendidos ou auditoria FAIL, a Product Authority pode registrar `G00 = FAIL`, vinculando bloqueadores e evidências; não é necessário obter PASS para registrar uma reprovação. Sem avaliação, permanece `NOT_RUN`. Builder e Auditor não autoautorizam troca de fase. `PHASE_CURRENT.md` só muda para F01 após o registro explícito de `G00 = PASS` pela Product Authority. **Retorno seguro:** revisar os contratos ainda sem dados de usuários. **Limite:** não implementar o engine completo para provar o padrão.
 
 ### F01 Experiência e arquitetura da primeira versão
 
@@ -922,7 +922,7 @@ Falha em integridade, vazamento ou lock bloqueia release. Falha só nas metas ex
 
 ### 9.5 Definition of Done 1.0
 
-O conjunto descrito no DOCX permanece obrigatório: ideia vaga vira pacote coerente; autoria e evidência distinguíveis; rastreabilidade completa; LIGHT continua leve; contexto por tarefa; guardrails proporcionais; evaluator separado; Projeto Vivo processado; redução de ambiguidade demonstrada no piloto. Acrescentam-se compatibilidade de exportação/restauração, tratamento de mudança LOCKED, credenciais protegidas e recuperação de falhas homologada.
+Os critérios obrigatórios de conclusão 1.0 são definidos nesta seção: ideia vaga vira pacote coerente; autoria e evidência distinguíveis; rastreabilidade completa; LIGHT continua leve; contexto por tarefa; guardrails proporcionais; evaluator separado; Projeto Vivo processado; redução de ambiguidade demonstrada no piloto. Também são obrigatórios compatibilidade de exportação/restauração, tratamento de mudança LOCKED, credenciais protegidas e recuperação de falhas homologada. O DOCX registra a origem histórica desses critérios; não acrescenta obrigações nem substitui este contrato canônico.
 
 ## 10. Esforço capacidade e política de execução
 
