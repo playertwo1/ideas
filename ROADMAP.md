@@ -1,16 +1,16 @@
 # Roadmap detalhado do Idea → MVP
 
-Versão da proposta: 0.3 para validação humana. Data: 13 de setembro de 2026.
+Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
 
-O roadmap completo e seus parâmetros são propostas, não decisões já aprovadas. Nenhuma implementação Android foi iniciada. A base é a leitura integral de `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx`; os oito projetos de referência foram examinados e documentados na [matriz de pesquisa](REFERENCE_MATRIX.md). Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
+Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. Nenhuma implementação Android foi iniciada. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
 
-Leitura sugerida para validar a direção: [visão Core/Factory](#14-idea-core-idea-factory-e-fronteira-de-valor), [versões e marcos](#2-versões-e-marcos-de-entrega), [parâmetros](#3-parâmetros-de-funcionamento-propostos), [fases e subetapas](#6-fases-e-subetapas-de-construção), [protocolo de execução](#102-protocolo-builder--auditor--product-authority), [referências GitHub](#13-referências-github-usadas-na-concepção) e [decisões abertas](#12-decisões-para-validação-do-usuário). O documento mantém 21 fases F00–F20; subetapas e checks podem crescer conforme contratos forem aprovados, sem alterar silenciosamente o escopo.
+Leitura sugerida para validar a direção: [visão Core/Factory](#14-idea-core-idea-factory-e-fronteira-de-valor), [versões e marcos](#2-versões-e-marcos-de-entrega), [parâmetros](#3-parâmetros-de-funcionamento-propostos), [fases e subetapas](#6-fases-e-subetapas-de-construção), [protocolo de execução](#102-protocolo-builder--auditor--product-authority), [referências GitHub](#13-referências-github-usadas-na-concepção) e [decisões fundamentais](#12-decisões-fundamentais-aprovadas). O documento mantém 21 fases F00–F20; subetapas e checks podem crescer conforme contratos forem aprovados, sem alterar silenciosamente o escopo.
 
 ## 1. Resultado de produto e limites
 
-O primeiro usuário recomendado é alguém que já usa agentes de programação e precisa transformar uma ideia em um plano executável. Inicialmente, o próprio time usa o app para especificar utilitários e preparar o Projeto Vivo. Esse público é uma hipótese a validar em D01.
+O primeiro usuário recomendado é alguém que já usa agentes de programação e precisa transformar uma ideia em um plano executável. Inicialmente, o próprio time usa o app para especificar utilitários e preparar o Projeto Vivo. Esse público está aprovado em D01 para o piloto inicial; sua adequação continua sendo hipótese de produto a medir no piloto, sem reabrir D01 automaticamente.
 
 Exemplo concreto: a pessoa escreve “quero organizar meus projetos e saber o próximo passo”. O Idea preserva o texto, propõe uma interpretação, esclarece usuário e problema, registra decisões aprovadas, corta o escopo, cria requisitos verificáveis e exporta um pacote. Uma semana depois, a pessoa muda uma decisão: o app mostra quais requisitos e etapas precisam ser revistos, mantendo a versão anterior.
 
@@ -146,7 +146,13 @@ O `ROADMAP.md` é a autoridade canônica, mas não deve ser usado como única in
 5. `AGENTS.md` + `WATCHDOG.md` — guardrails permanentes durante planejamento e execução.
 6. `AUDIT.md` — revisão independente obrigatória antes de considerar alteração relevante ou gate concluído.
 
-**Precedência:** pedido explícito e vigente do Product Authority → regras de segurança/guardrails → `ROADMAP.md` → `PHASE_CURRENT.md` → `EXECUTION_PLAN.md` → `PROJECT_STATE.md`. Arquivos operacionais não podem silenciosamente redefinir a verdade canônica; divergência deve ser investigada e corrigida.
+**Precedência única:** invariantes de segurança e proibições irreversíveis → pedido explícito e vigente da Product Authority → decisões humanas `LOCKED` → `ROADMAP.md` → `PHASE_CURRENT.md` (autorização operacional) → `EXECUTION_PLAN.md` → `PROJECT_STATE.md` → padrões existentes/julgamento técnico. `AGENTS.md`, `WATCHDOG.md` e `AUDIT.md` aplicam essa precedência; não criam uma hierarquia concorrente. O DOCX original é histórico e não vence documentos canônicos. Arquivos operacionais não podem silenciosamente redefinir a verdade canônica; divergência deve ser investigada e corrigida.
+
+### Governança dos gates de desenvolvimento
+
+Gates `G00–G20` controlam avanço do **desenvolvimento do Idea**. O Builder reúne evidências; o Auditor emite PASS/FAIL da auditoria; a Product Authority registra o resultado final do gate quando os critérios objetivos e a auditoria estiverem satisfeitos. Sem esse registro, o gate permanece `NOT_RUN` ou `FAIL` e a fase seguinte não é autorizada.
+
+Isso é diferente dos gates `PKG-*` do **produto Idea**, que serão checks determinísticos sobre pacotes gerados. IA generativa não decide autorização humana nem promove decisões para `LOCKED`.
 
 **Regra de contexto mínimo:** o Builder não precisa carregar o ROADMAP inteiro em toda tarefa. Deve começar por STATE + PHASE_CURRENT e consultar o ROADMAP somente nas seções necessárias. Isso reduz perda de contexto e drift sem remover rastreabilidade.
 
@@ -375,20 +381,20 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 
 ### F00 Padrão de projeto e congelamento do MVP
 
-**Resultado:** contrato que permite identificar objetivamente o que falta em um pacote. Responsáveis: P + E. Dependências: DOCX e matriz de referências. Reuso: REF-03, REF-04 e REF-05. Esforço inicial: 3–5 dias-pessoa.
+**Resultado:** contrato que permite identificar objetivamente o que falta em um pacote. Responsáveis: P + E. Insumos: DOCX histórico e `REFERENCE_MATRIX.md`; nenhum deles substitui o contrato canônico. Reuso: REF-03, REF-04 e REF-05. Esforço inicial: 3–5 dias-pessoa.
 
 | Subetapa | Trabalho e entregável | Verificação de conclusão |
 |---|---|---|
-| F00.01 | Aprovar problema, público inicial, hipótese e fronteira Idea/Vivo | Um exemplo real percorre o fluxo; non-goals escritos |
+| F00.01 | Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo | Um exemplo real percorre o fluxo; non-goals escritos; nenhum item D01–D09 é reaberto |
 | F00.02 | Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade | LIGHT não exige capacidades DEEP; casos ambíguos têm regra |
 | F00.03 | Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA | Exemplo válido passa; ID duplicado e referência ausente falham |
 | F00.04 | Fixar artefatos por versão/modo e catálogo de gates | Matriz sem artefato obrigatório impossível na versão |
 | F00.05 | Preparar três fixtures: utilitário simples, app médio e projeto sensível | Faltas conhecidas são detectadas, não preenchidas como fatos |
-| F00.06 | Registrar ADRs propostos e decisões D01–D08; congelar corte 0.1 | Usuário identifica exatamente o que entra e o que fica fora |
+| F00.06 | Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar o corte 0.1 | Usuário identifica exatamente o que entra e o que fica fora, sem nova aprovação das decisões já LOCKED |
 | F00.07 | Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor | Contratos impedem F11+ sem G10 PASS e distinguem autoridade de produto, execução e auditoria |
 | F00.08 | Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP | PROJECT_STANDARD separa Core de adapters e proíbe abstração multiplataforma prematura |
 
-**Gate G00:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos. **Retorno seguro:** revisar os contratos ainda sem dados de usuários. **Limite:** não implementar o engine completo para provar o padrão.
+**Gate G00:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos. Fluxo: Builder produz evidências e solicita avaliação; Auditor emite `AUDIT RESULT: PASS|FAIL`; somente com checks objetivos satisfeitos e auditoria PASS a Product Authority registra `G00 = PASS|FAIL`. Builder e Auditor não autoautorizam troca de fase. `PHASE_CURRENT.md` só muda para F01 após o registro explícito de G00 pela Product Authority. **Retorno seguro:** revisar os contratos ainda sem dados de usuários. **Limite:** não implementar o engine completo para provar o padrão.
 
 ### F01 Experiência e arquitetura da primeira versão
 
@@ -951,14 +957,18 @@ Este protocolo governa o desenvolvimento do próprio Idea até decisão posterio
 2. **Antigravity/Builder** executa autonomamente dentro desse contrato, atualiza evidências e não amplia escopo por conveniência.
 3. **Codex/Auditor** recebe diff/estado verificável e confere requisitos, testes, regressões, segurança, escopo e documentação. Não deve simplesmente “refazer do seu jeito”; abre findings objetivos.
 4. Finding corrigível dentro do contrato volta ao Builder sem nova autorização humana.
-5. O usuário/Product Authority entra quando há decisão nova de produto, mudança material de escopo, risco novo relevante, ação externa/destrutiva não autorizada ou conflito sem regra vigente.
-6. PASS do Auditor não substitui gates que explicitamente exigem decisão humana; da mesma forma, aprovação humana não transforma check técnico não executado em PASS.
+5. O usuário/Product Authority entra quando há decisão nova de produto, mudança material de escopo, risco novo relevante, ação externa/destrutiva não autorizada, conflito sem regra vigente **ou para registrar o resultado final de um gate de desenvolvimento Gxx** após evidências e auditoria.
+6. `AUDIT RESULT: PASS` não autoriza sozinho troca de fase; da mesma forma, aprovação humana não transforma check técnico não executado em PASS.
 
-Para reduzir contexto e drift, o repositório deve preferir três níveis de documentação de execução:
+Para reduzir contexto e drift, use o sistema documental já existente:
 
-- `NORTH_STAR.md`: visão, fronteiras, princípios e sucesso; muda raramente.
-- `ROADMAP.md`: este mapa mestre F00–F20 e o estado dos marcos.
-- `PHASE_CURRENT.md`: instruções operacionais da fase atual para Builder/Auditor; curto, específico e descartável/substituível ao trocar de fase.
+- `ROADMAP.md`: contrato canônico, visão, fronteiras, decisões e mapa F00–F20.
+- `PHASE_CURRENT.md`: autorização operacional curta da fase ativa.
+- `EXECUTION_PLAN.md`: sequência/checklist.
+- `PROJECT_STATE.md`: posição atual para retomada.
+- `AGENTS.md` + `WATCHDOG.md`: comportamento, segurança e anti-drift.
+- `AUDIT.md`: revisão independente.
+- `REFERENCE_MATRIX.md`: origem dos padrões externos, sem força normativa própria.
 
 O roadmap mestre não deve ser despejado integralmente em toda tarefa. O agente recebe o menor contexto suficiente e as referências necessárias.
 
@@ -989,7 +999,7 @@ Nenhuma das vinte fases originais foi descartada. Algumas capacidades foram ante
 | Fase do DOCX | Onde aparece nesta proposta | Tratamento |
 |---|---|---|
 | 0 PROJECT_STANDARD | F00 | Detalhada com schemas, perfis e fixtures |
-| 1 Reference Lab | REFERENCE_MATRIX e F00.06 | Pesquisa dos oito realizada; incorporação de trechos ainda não executada |
+| 1 Reference Lab | `REFERENCE_MATRIX.md` e F00.06 | Padrões dos oito consolidados; licença/proveniência para reuso de código só é verificada quando houver componente concreto candidato |
 | 2 Android Skeleton + Local Data | F01–F03 | UX técnica, skeleton e persistência separados |
 | 3 Idea Intake | F05 | Original, interpretação e profundidade |
 | 4 Smart Interview | F06 | Estados persistidos e stop conditions |
