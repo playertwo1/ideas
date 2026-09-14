@@ -1,6 +1,6 @@
 # IDEA — PHASE CURRENT
 
-> Contrato operacional da fase ativa. Derivado do `ROADMAP.md` v0.5. Em conflito, o `ROADMAP.md` vence.
+> Contrato operacional da fase ativa. Derivado do `ROADMAP.md` v0.6. Em conflito, o `ROADMAP.md` vence.
 
 ## Fase ativa
 
@@ -18,9 +18,16 @@ Contrato versionado que permita identificar objetivamente o que falta em um paco
 
 ## Trabalho autorizado
 
+### Estado das decisões para F00.01
+
+- `LOCKED`: D01–D09, incluindo público inicial e distribuição.
+- A formalizar/verificar: problema, hipótese de valor, exemplo ponta a ponta e non-goals.
+- A decidir: somente material novo descoberto durante a formalização; não repetir perguntas já resolvidas por D01–D09.
+
+
 ### [ ] F00.01
-**Fazer:** Aprovar problema, público inicial, hipótese e fronteira Idea/Vivo  
-**Concluir quando:** Um exemplo real percorre o fluxo; non-goals escritos
+**Fazer:** Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo  
+**Concluir quando:** Um exemplo real percorre o fluxo; non-goals escritos; D01–D09 não foram reabertos
 
 ### [ ] F00.02
 **Fazer:** Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade  
@@ -39,7 +46,7 @@ Contrato versionado que permita identificar objetivamente o que falta em um paco
 **Concluir quando:** Faltas conhecidas são detectadas, não preenchidas como fatos
 
 ### [ ] F00.06
-**Fazer:** Registrar ADRs propostos e decisões D01–D08; congelar corte 0.1  
+**Fazer:** Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1  
 **Concluir quando:** Usuário identifica exatamente o que entra e o que fica fora
 
 ### [ ] F00.07
@@ -87,7 +94,8 @@ Checklist de saída:
 - [ ] Portabilidade preservada sem novo target
 - [ ] Codex realizou auditoria proporcional
 - [ ] Findings bloqueantes resolvidos
-- [ ] G00 registrado explicitamente como PASS
+- [ ] Auditor emitiu `AUDIT RESULT: PASS`
+- [ ] Product Authority registrou explicitamente `G00 = PASS`
 
 ## Retorno seguro
 
@@ -98,4 +106,4 @@ Se G00 falhar, permanecer em F00 e revisar contratos/fixtures/decisões. Não h�
 1. Atualizar `PROJECT_STATE.md`.
 2. Marcar os itens correspondentes em `EXECUTION_PLAN.md`.
 3. Entregar evidências ao Codex para auditoria.
-4. Somente com `G00 = PASS`, gerar/substituir `PHASE_CURRENT.md` para F01.
+4. Builder não registra o próprio gate. Somente após `AUDIT RESULT: PASS`, checks objetivos satisfeitos e Product Authority registrar explicitamente `G00 = PASS`, gerar/substituir `PHASE_CURRENT.md` para F01.
