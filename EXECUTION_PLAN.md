@@ -56,7 +56,8 @@
 - [x] **F01.02 — Desenhar wireframes do fluxo principal e estados vazio/erro/offline/interrompido**
   - Artefato: `F01_02_WIREFRAMES.md`
   - Verificar: Usuário encontra retomar, editar e exportar sem explicação técnica
-- [ ] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
+- [x] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
+  - Artefato: `F01_03_NAVIGATION_AND_DRAFTS.md`
   - Verificar: Navegar não descarta entrada sem aviso
 - [ ] **F01.04 — Registrar arquitetura, módulos propostos e portas de IA/export/persistência**
   - Verificar: Domínio não depende de Android nem SDK remoto
