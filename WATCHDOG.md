@@ -26,18 +26,11 @@ Se houver diferença entre documentação e código, investigue antes de alterar
 
 ---
 
-## 2. HIERARQUIA DE DECISÃO
+## 2. AUTORIDADE
 
-Quando houver conflito, siga esta ordem:
+Este arquivo não cria hierarquia própria. Use exclusivamente a precedência canônica definida em `ROADMAP.md` e resumida em `AGENTS.md`.
 
-1. Pedido explícito do usuário.
-2. Regras do `AGENTS.md`.
-3. Regras do `WATCHDOG.md`.
-4. Documentação oficial do projeto.
-5. Arquitetura e padrões existentes.
-6. Melhor julgamento técnico do agente.
-
-Nunca interprete silêncio como autorização para mudanças destrutivas.
+O Watchdog aplica invariantes de segurança e anti-drift dentro dessa precedência. Nunca interprete silêncio como autorização para mudanças destrutivas.
 
 ---
 
