@@ -7,9 +7,9 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M0 — Contrato do produto
 - **Fase:** F01 — Experiência e arquitetura da primeira versão
-- **Subetapa atual:** F01.05 — concluída pelo Builder, aguardando auditoria independente
-- **Última concluída:** F01.05 — ambiente alvo, dispositivos, minSdk e toolchain
-- **Próxima após a atual:** F01.06, somente após F01.05 auditada
+- **Subetapa atual:** F01.06 — concluída pelo Builder, aguardando auditoria independente
+- **Última concluída:** F01.06 — autoridade de LOCK e mudança com impacto
+- **Próxima após a atual:** F01.07, somente após F01.06 auditada
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
@@ -37,7 +37,7 @@ Nenhum bloqueio técnico conhecido para iniciar o trabalho documental de F01.
 
 ## Próxima ação
 
-Submeter F01.05 à auditoria independente. Não iniciar F01.06 nem Android.
+Submeter F01.06 à auditoria independente. Não iniciar F01.07 nem Android.
 
 ## Regra de avanço
 
