@@ -53,7 +53,8 @@
 - [x] **F01.01 — Mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação**
   - Artefato: `F01_01_SCREEN_MAP.md`
   - Verificar: Cada tela tem objetivo, entradas, saídas, ação principal e transições
-- [ ] **F01.02 — Desenhar wireframes do fluxo principal e estados vazio/erro/offline/interrompido**
+- [x] **F01.02 — Desenhar wireframes do fluxo principal e estados vazio/erro/offline/interrompido**
+  - Artefato: `F01_02_WIREFRAMES.md`
   - Verificar: Usuário encontra retomar, editar e exportar sem explicação técnica
 - [ ] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
   - Verificar: Navegar não descarta entrada sem aviso

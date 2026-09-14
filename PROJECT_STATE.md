@@ -7,9 +7,9 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M0 — Contrato do produto
 - **Fase:** F01 — Experiência e arquitetura da primeira versão
-- **Subetapa atual:** F01.02 — wireframes, aguardando início
-- **Última concluída:** F01.01 — mapa de telas e ações principais
-- **Próxima após a atual:** F01.03, somente após F01.02 concluída e verificada
+- **Subetapa atual:** F01.03 — navegação e rascunho, aguardando início
+- **Última concluída:** F01.02 — wireframes do fluxo e estados excepcionais
+- **Próxima após a atual:** F01.04, somente após F01.03 concluída e verificada
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
@@ -37,7 +37,7 @@ Nenhum bloqueio técnico conhecido para iniciar o trabalho documental de F01.
 
 ## Próxima ação
 
-Iniciar F01.02 conforme `PHASE_CURRENT.md`, sem iniciar implementação Android.
+Iniciar F01.03 conforme `PHASE_CURRENT.md`, sem iniciar implementação Android.
 
 ## Regra de avanço
 
