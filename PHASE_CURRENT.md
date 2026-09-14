@@ -1,123 +1,70 @@
 # IDEA — PHASE CURRENT
 
-> Contrato operacional da fase ativa. Derivado do `ROADMAP.md` v0.6. Em conflito, o `ROADMAP.md` vence.
+> Contrato operacional da fase ativa. Derivado do `ROADMAP.md` v0.6. Em conflito, o `ROADMAP.md` vence. O checklist detalhado permanece em `EXECUTION_PLAN.md`.
 
 ## Fase ativa
 
-**F00 — Padrão de projeto e congelamento do MVP**
+**F01 — Experiência e arquitetura da primeira versão**
 
-**Subestado:** findings do G00 corrigidos dentro de F00; validação reproduzível executada; G00 continua aguardando nova auditoria independente e registro final da Product Authority.
+**Subetapa atual:** F01.01 — mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação.
 
-**Objetivo:** fechar o contrato do produto e da fundação antes de iniciar implementação Android.
-
-**Builder:** Antigravity  
-**Auditor:** Codex  
-**Product Authority:** usuário
+**Objetivo:** produzir um fluxo navegável revisável e definir as fronteiras técnicas do próprio app antes de criar o skeleton Android.
 
 ## Resultado esperado
 
-Contrato versionado que permita identificar objetivamente o que falta em um pacote, com Core/Factory, autoridade, schemas, gates, fixtures, decisões fundamentais e portabilidade futura definidos.
+Fluxo, estados e arquitetura documentados de forma verificável, com domínio independente de Android e contratos portáteis preservados.
 
-## Trabalho autorizado
+## Trabalho autorizado agora
 
-### Estado das decisões
+- mapear cada tela de F01.01, seu objetivo, entrada, saída e ação principal;
+- criar ou atualizar artefatos documentais e wireframes de F01;
+- avançar pelas subetapas F01.01–F01.08 somente quando dependências e critérios do `EXECUTION_PLAN.md` estiverem satisfeitos;
+- definir navegação, recuperação de rascunho, fronteiras arquiteturais, portas e ADRs previstos em F01;
+- fixar aparelhos, minSdk e toolchain somente após consultar documentação oficial vigente;
+- executar verificações documentais e arquiteturais proporcionais;
+- atualizar `PROJECT_STATE.md` e `EXECUTION_PLAN.md` quando o estado realmente mudar.
 
-- `LOCKED`: D01–D09, incluindo público inicial e distribuição.
-- Nenhuma D01–D09 foi reaberta durante F00.
-- Nova decisão humana material: nenhuma identificada.
-- O baseline materializado está em `M0_DECISION_BASELINE.md`; `ROADMAP.md` permanece canônico.
+## Não autorizado
 
-### [x] F00.01
-**Fazer:** Formalizar problema, público D01 já LOCKED, hipótese de valor e fronteira Idea/Vivo  
-**Artefato:** `M0_PRODUCT_CONTRACT.md`  
-**Verificado:** exemplo ponta a ponta e non-goals explícitos; D01–D09 preservadas
+- criar projeto Android, código Compose, Room, Gradle ou integração real com provider;
+- iniciar F02 antes de `G01 = PASS` registrado pela Product Authority;
+- implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
+- tratar a baseline de contexto como implementação de F15;
+- alterar D01–D09 sem decisão explícita da Product Authority;
+- criar segundo target, backend, sincronização ou abstração multiplataforma prematura;
+- executar ação externa/destrutiva não necessária à fase.
 
-### [x] F00.02
-**Fazer:** Produzir `PROJECT_STANDARD.md`: modos, IDs, autoria, estados e autoridade  
-**Verificado:** LIGHT não exige capacidades DEEP; casos ambíguos têm regra
+## Decisões e gates vigentes
 
-### [x] F00.03
-**Fazer:** Definir `project.schema.json`, `manifest.schema.json` e schemas de resposta IA  
-**Artefatos:** `schemas/` + `VALIDATION_CONTRACT.md` + `M0_VALIDATION_EVIDENCE.md`  
-**Verificado:** parse, estrutura Draft 2020-12, semântica e expectativa são etapas separadas; fixtures válidas passam; todas as negativas passam estruturalmente e falham com códigos exatos
+- D01–D09: `LOCKED` desde 13/09/2026;
+- G00: `PASS` registrado em 14/09/2026 após auditoria independente;
+- G01: `NOT_RUN`;
+- G10: `NOT_RUN`;
+- Idea Factory/F11–F20: bloqueada.
 
-### [x] F00.04
-**Fazer:** Fixar artefatos por versão/modo e catálogo de gates  
-**Artefato:** `ARTIFACT_CATALOG.md`  
-**Verificado:** matriz não obriga capacidade Factory impossível no MVP 0.1
+`NOT_RUN != PASS`. O Builder não registra o próprio gate.
 
-### [x] F00.05
-**Fazer:** Preparar três fixtures: utilitário simples, app médio e projeto sensível  
-**Artefatos:** `fixtures/light-simple.project.json`, `fixtures/standard-medium.project.json`, `fixtures/deep.project.json`  
-**Verificado:** faltas conhecidas permanecem explícitas; DEEP não inventa capacidades futuras
+## Subetapas e critérios
 
-### [x] F00.06
-**Fazer:** Materializar D01–D09 LOCKED nos ADRs/contratos aplicáveis e congelar corte 0.1  
-**Artefato:** `M0_DECISION_BASELINE.md`  
-**Verificado:** entradas e exclusões do MVP 0.1 estão explícitas sem alterar D01–D09
+1. **F01.01 — Mapa de telas:** cada tela possui objetivo e ação principal.
+2. **F01.02 — Wireframes:** fluxo principal e estados vazio, erro, offline e interrompido são revisáveis.
+3. **F01.03 — Navegação e rascunho:** salvar, voltar e recuperar não descartam entrada silenciosamente.
+4. **F01.04 — Arquitetura:** módulos e portas de IA, exportação e persistência mantêm domínio independente de Android/provider.
+5. **F01.05 — Ambiente alvo:** aparelhos, minSdk e toolchain são definidos com documentação vigente e build de exemplo verificável somente na fase autorizada.
+6. **F01.06 — Autoridade de LOCK:** protótipo distingue sugestão, hipótese aceita e decisão humana fechada.
+7. **F01.07 — Portabilidade:** ADR preserva interfaces para persistência, arquivos, IA e segurança.
+8. **F01.08 — Contrato portátil:** `project.json`/`manifest.json` e compatibilidade de schema não dependem de UI/Room.
 
-### [x] F00.07
-**Fazer:** Formalizar Core/Factory, G10 Go/No-Go, Progressive Commitment, rationale e protocolo Builder/Auditor  
-**Artefatos:** `M0_GOVERNANCE.md` + `PROJECT_STANDARD.md`  
-**Verificado:** F11+ permanece bloqueada sem G10 PASS; autoridade de produto, execução e auditoria estão separadas
+## Gate G01
 
-### [x] F00.08
-**Fazer:** Formalizar D09 e Platform Portability Principle sem adicionar um segundo target ao MVP  
-**Artefatos:** `M0_GOVERNANCE.md` + `PROJECT_STANDARD.md`  
-**Verificado:** Core conceitualmente independente de Android; nenhum segundo target/framework multiplataforma foi adicionado
+**Estado:** `NOT_RUN`.
 
-## Pode fazer sem nova autorização
-
-- Corrigir finding objetivo da auditoria que esteja dentro do contrato F00.
-- Refinar documentação, schemas e fixtures de F00 sem alterar decisões LOCKED.
-- Reexecutar validações afetadas e atualizar evidências.
-- Preparar material de auditoria e sincronizar estado/checklists operacionais.
-
-A autorização acima **não** permite alterar semântica canônica do `ROADMAP.md` por preferência editorial. Mudança de produto, decisão LOCKED, escopo ou regra canônica exige a autoridade prevista na hierarquia documental.
-
-## Não está autorizado nesta fase
-
-- Iniciar implementação Android, Compose, Room ou integração real com provider.
-- Avançar para F01 antes de G00 = PASS.
-- Implementar capacidades F11–F20 / Idea Factory.
-- Alterar materialmente o escopo do MVP 0.1 sem Product Authority.
-- Transformar possibilidade futura Desktop/Web em target atual ou adicionar abstrações multiplataforma prematuras.
-- Executar ações externas/destrutivas não necessárias à F00.
-
-## Decisões fundamentais
-
-- D01–D09 estão **APROVADAS/LOCKED pela Product Authority em 13/09/2026** conforme catálogo do `ROADMAP.md`.
-- O Builder deve implementá-las como restrições vigentes; não deve reabri-las por preferência técnica.
-- Qualquer nova decisão descoberta deve ser apresentada como proposta; o agente não pode promovê-la sozinho a decisão humana LOCKED.
-- Alterar D01–D09 exige pedido explícito da Product Authority e análise de impacto.
-
-## Gate G00
-
-**Estado:** `NOT_RUN` — aguardando Codex/Auditor.
-
-**Critério canônico:** três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
-
-Checklist de saída:
-- [x] F00.01–F00.08 concluídas e verificadas pelo trabalho de preparação
-- [x] `PROJECT_STANDARD.md` coerente com o roadmap
-- [x] Schemas + validação semântica aceitam fixtures corretas e rejeitam casos inválidos previstos
-- [x] Testes adversariais cobrem IDs materiais, roadmap, rationale, autoridade LOCKED e falsos PASS
-- [x] Catálogo de artefatos/gates sem capacidade impossível obrigatória no 0.1
-- [x] D01–D09 materializadas no estado LOCKED correto
-- [x] Core/Factory e G10 formalizados
-- [x] Portabilidade preservada sem novo target
-- [ ] Codex realizou auditoria proporcional
-- [x] Findings bloqueantes da auditoria resolvidos pelo Builder; aguardando confirmação independente
-- [ ] Auditor emitiu `AUDIT RESULT: PASS`
-- [ ] Product Authority registrou explicitamente `G00 = PASS`
+Critério: fluxo aprovado para implementação; modelo de custódia de credenciais e armazenamento resolvido, com provider específico homologado somente em F04.
 
 ## Retorno seguro
 
-Se G00 falhar, permanecer em F00 e revisar apenas contratos/fixtures/decisões afetados. Não há necessidade de migrar dados de usuário porque a implementação do produto ainda não começou.
+Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementação nem dados de usuário a migrar nesta fase.
 
 ## Próxima ação
 
-1. Entregar `G00_AUDIT_PACKET.md` e os artefatos referenciados ao Codex.
-2. Codex executar auditoria proporcional conforme `AUDIT.md`.
-3. Findings corrigíveis dentro de F00 retornam ao Builder sem nova decisão humana.
-4. Somente após `AUDIT RESULT: PASS`, checks objetivos satisfeitos e Product Authority registrar explicitamente `G00 = PASS`, substituir `PHASE_CURRENT.md` pela F01.
+Executar F01.01 e produzir o mapa revisável das telas e ações principais. Não iniciar Android.

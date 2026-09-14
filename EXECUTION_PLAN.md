@@ -17,7 +17,7 @@
 
 ## M0 — Contrato do produto
 
-### [ ] F00 — Padrão de projeto e congelamento do MVP
+### [x] F00 — Padrão de projeto e congelamento do MVP
 
 **Resultado:** contrato que permite identificar objetivamente o que falta em um pacote.
 
@@ -42,9 +42,9 @@
 - [x] Todas as subetapas acima concluídas
 - [x] Verificações executadas
 - [x] Findings do G00 corrigidos e evidência reproduzível atualizada
-- [ ] Auditoria proporcional concluída
-- [ ] Codex/Auditor emitiu `AUDIT RESULT: PASS`
-- [ ] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
+- [x] Auditoria proporcional concluída
+- [x] Codex/Auditor emitiu `AUDIT RESULT: PASS`
+- [x] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
 
 ### [ ] F01 — Experiência e arquitetura da primeira versão
 
