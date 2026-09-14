@@ -68,7 +68,8 @@
 - [x] **F01.06 — Desenhar autorização de LOCK e troca de decisão com impacto**
   - Artefato: `F01_06_LOCK_AUTHORITY_PROTOTYPE.md`
   - Verificar: Protótipo distingue sugestão, hipótese aceita e decisão fechada
-- [ ] **F01.07 — Registrar ADR de portabilidade: Core independente de Android; interfaces para persistência, arquivos, IA e segurança**
+- [x] **F01.07 — Registrar ADR de portabilidade: Core independente de Android; interfaces para persistência, arquivos, IA e segurança**
+  - Artefato: `F01_07_PORTABILITY_ADR.md`
   - Verificar: Teste/inspeção arquitetural confirma que regras centrais não importam APIs Android
 - [ ] **F01.08 — Definir `project.json`/`manifest.json` como contrato portátil e política de compatibilidade de schema**
   - Verificar: Fixture exportada pode ser interpretada sem depender de classes de UI/Room

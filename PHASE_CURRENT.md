@@ -6,7 +6,7 @@
 
 **F01 — Experiência e arquitetura da primeira versão**
 
-**Subetapa atual:** F01.06 — concluída pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F01.07 — concluída pelo Builder, aguardando auditoria independente.
 
 **Objetivo:** produzir um fluxo navegável revisável e definir as fronteiras técnicas do próprio app antes de criar o skeleton Android.
 
@@ -52,7 +52,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 4. **F01.04 — Arquitetura:** concluída e verificada em `F01_04_ARCHITECTURE.md`; módulos e portas de IA, exportação e persistência mantêm domínio independente de Android/provider.
 5. **F01.05 — Ambiente alvo:** concluída e verificada em `F01_05_TARGET_ENVIRONMENT.md`; aparelhos, minSdk, toolchain e comandos do build de exemplo são definidos com documentação vigente, sem executar Android nesta fase.
 6. **F01.06 — Autoridade de LOCK:** concluída e verificada em `F01_06_LOCK_AUTHORITY_PROTOTYPE.md`; protótipo distingue sugestão, hipótese aceita e decisão humana fechada.
-7. **F01.07 — Portabilidade:** ADR preserva interfaces para persistência, arquivos, IA e segurança.
+7. **F01.07 — Portabilidade:** concluída e verificada em `F01_07_PORTABILITY_ADR.md`; ADR preserva interfaces para persistência, arquivos, IA e segurança.
 8. **F01.08 — Contrato portátil:** `project.json`/`manifest.json` e compatibilidade de schema não dependem de UI/Room.
 
 ## Gate G01
@@ -67,4 +67,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Submeter F01.06 à auditoria independente. Não iniciar F01.07 nem Android.
+Submeter F01.07 à auditoria independente. Não iniciar F01.08 nem Android.
