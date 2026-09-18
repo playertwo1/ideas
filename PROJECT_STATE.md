@@ -7,9 +7,9 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M1 — Fundação offline
 - **Fase:** F02 — Skeleton Android e ciclo de desenvolvimento
-- **Subetapa atual:** F02.01 — implementada pelo Builder, aguardando auditoria independente
+- **Subetapa atual:** F02.05 — implementada pelo Builder, aguardando auditoria independente
 - **Última concluída:** F01.08 — contrato portátil e compatibilidade de schema
-- **Próxima após a atual:** auditar F02.01; F02.02–F02.05 somente após autorização operacional
+- **Próxima após a atual:** auditar F02.01–F02.05; F03 somente após `G02 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G10:** NOT_RUN
@@ -42,11 +42,11 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F02.01 foi implementada. F02.02–F02.05 aguardam a auditoria e a autorização operacional correspondente.
+F02.01–F02.05 foram implementadas. A auditoria independente de F02 está pendente.
 
 ## Próxima ação
 
-Auditar exclusivamente F02.01. Não iniciar F02.02–F02.05 nem registrar `G02 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F02.01–F02.05. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 

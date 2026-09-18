@@ -6,7 +6,7 @@
 
 **F02 — Skeleton Android e ciclo de desenvolvimento**
 
-**Subetapa atual:** F02.01 — implementada pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F02.05 — implementada pelo Builder, aguardando auditoria independente.
 
 **Objetivo:** criar um skeleton Android instalável, com navegação base e verificações reproduzíveis.
 
@@ -44,11 +44,11 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F02.01 — Projeto e módulos mínimos:** implementada; checkout limpo produz APK debug; evidência em `F02_01_EVIDENCE.json`.
-2. **F02.02 — Tema, navegação e Home:** instalar e abrir no ambiente autorizado.
-3. **F02.03 — Comandos:** um comando documentado reproduz build, lint e testes.
-4. **F02.04 — Verificações:** testes de domínio e lint sem segredos no repositório.
-5. **F02.05 — Erros e logs:** falhas visíveis e dados sintéticos apenas.
+1. **F02.01 — Projeto e módulos mínimos:** concluída; evidência em `F02_01_EVIDENCE.json`.
+2. **F02.02 — Tema, navegação e Home:** concluída; Home vazia e instalável.
+3. **F02.03 — Comandos:** concluída; comandos em `F02_COMMANDS.md`.
+4. **F02.04 — Verificações:** concluída; testes e lint sem segredos.
+5. **F02.05 — Erros e logs:** concluída; log sintético `home_opened`, sem dados de usuário.
 
 ## Gate G01
 
@@ -62,4 +62,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Auditar exclusivamente F02.01. Não iniciar F02.02–F02.05 nem registrar `G02 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F02.01–F02.05. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.

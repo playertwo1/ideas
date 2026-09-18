@@ -1,0 +1,14 @@
+{
+  "phase": "F02",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "substeps": ["F02.01", "F02.02", "F02.03", "F02.04", "F02.05"],
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "apk": "app/build/outputs/apk/debug/app-debug.apk",
+  "scope": "F02 only"
+}
