@@ -16,6 +16,10 @@ public final class GenerationBudget {
         for (java.util.Map.Entry<String, String> entry : request.decisions().entrySet()) chars += entry.getKey().length() + entry.getValue().length();
         if (chars > maxContextCharacters) throw new IllegalArgumentException("minimum context budget exceeded");
     }
+    public void validateCost(long usageCostMicros) {
+        if (usageCostMicros < 0) throw new IllegalArgumentException("usage cost must be non-negative");
+        if (usageCostMicros > maxCostMicros) throw new IllegalArgumentException("cost budget exceeded");
+    }
     public int maxTokens() { return maxTokens; }
     public long maxCostMicros() { return maxCostMicros; }
 }

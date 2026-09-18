@@ -6,7 +6,7 @@
 
 **F04 — Contrato de IA e execução controlada de geração**
 
-**Subetapa atual:** F04.07 — implementada pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F04.02–F04.07 — findings corrigidos, aguardando reauditoria independente.
 
 **Objetivo:** executar sugestões estruturadas por uma porta provider-neutral, sem acoplar o domínio a rede, credenciais ou fornecedor.
 
@@ -16,7 +16,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Trabalho autorizado agora
 
-- auditar F04.02–F04.07;
+- reauditar F04.02–F04.07;
 - corrigir somente findings reproduzíveis de F04.02–F04.07;
 - manter o fake offline, determinístico e sem credenciais;
 - preservar os contratos e decisões LOCKED de F00–F03;
@@ -47,7 +47,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 ## Subetapas e critérios
 
 1. **F04.01:** porta `AiProvider` e fake determinístico — PASS independente.
-2. **F04.02–F04.07:** implementadas, aguardando auditoria.
+2. **F04.02–F04.07:** findings corrigidos, aguardando reauditoria.
 
 ## Gate G03
 
@@ -61,4 +61,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Auditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.
+Reauditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.

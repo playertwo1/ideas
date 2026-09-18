@@ -20,7 +20,7 @@ public class ProviderAdapterInstrumentedTest {
     @Test public void configuredAdapterParsesStructuredResponseWithoutProviderSdk() {
         InMemorySecretStore secrets = new InMemorySecretStore(); secrets.put("key", "secret-value");
         HttpTransport transport = (endpoint, headers, body, timeout) -> new HttpResponse(200,
-            "{\"content\":{\"suggestion\":\"ok\"},\"references\":{\"projectId\":\"P1\",\"inputRevision\":\"3\",\"schemaVersion\":\"0.1\"},\"hypotheses\":[\"h\"]}");
+            "{\"content\":{\"suggestion\":\"ok\"},\"references\":{\"projectId\":\"P1\",\"inputRevision\":\"3\",\"schemaVersion\":\"0.1\"},\"hypotheses\":[\"h\"],\"usageCostMicros\":7}");
         AiRequest request = new AiRequest("INTERPRET", "P1", 3, "0.1", Collections.singletonMap("idea", "texto"),
             Collections.singletonMap("mode", "STANDARD"), 128, "req-1");
         AiResult result = new HttpAiProviderAdapter(new ProviderConfiguration(URI.create("https://provider.invalid"), "p", "m", "key", 100), secrets, transport)
@@ -28,5 +28,6 @@ public class ProviderAdapterInstrumentedTest {
         assertEquals(AiResult.Outcome.SUCCESS, result.outcome());
         assertEquals("ok", result.content().get("suggestion"));
         assertEquals("P1", result.references().get("projectId"));
+        assertEquals(7, result.usageCostMicros());
     }
 }

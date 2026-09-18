@@ -1,8 +1,9 @@
 {
   "phase": "F04",
   "substep": "F04.02-F04.07",
-  "status": "IMPLEMENTED_AWAITING_AUDIT",
-  "scope": "provider adapter, secret consent, validation, recovery, prompt registry and budget",
+  "status": "IMPLEMENTED_AWAITING_REAUDIT",
+  "scope": "provider adapter, secret consent, validation, bounded retry, recovery, prompt registry and budget",
+  "base_sha": "a32c4aec5cb76505e257211311412613b36500b6",
   "files": [
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiProvider.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiRequest.java",
@@ -11,6 +12,9 @@
     "app/src/main/java/com/playertwo/ideas/domain/ai/FakeAiProvider.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/HttpAiProviderAdapter.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationCoordinator.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationRun.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationBudget.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/RetryPolicy.java",
     "app/src/main/java/com/playertwo/ideas/data/AndroidSecretStore.java",
     "app/src/test/java/com/playertwo/ideas/domain/ai/AiProviderContractTest.java",
     "app/src/test/java/com/playertwo/ideas/domain/ai/GenerationContractTest.java",
@@ -19,11 +23,13 @@
   ],
   "contract": {
     "input": ["operation", "projectId", "inputRevision", "schemaVersion", "context", "decisions", "maxTokens", "requestId"],
-    "output": ["content", "references", "hypotheses", "executionId"],
-    "failures": ["CANCELLED"],
-    "determinism": "SHA-256 of canonical request fields",
-    "dependencies": "Java collections and SHA-256 only; no Android, network, credential or provider SDK",
-    "generation_run": ["runId", "projectId", "inputRevision", "promptId", "promptVersion", "providerId", "status", "requestedTokens", "usageCostMicros", "result"]
+    "output": ["content", "references", "hypotheses", "executionId", "usageCostMicros"],
+    "failures": ["CANCELLED", "TIMEOUT", "INTERRUPTED", "HTTP_401", "HTTP_403", "HTTP_429", "HTTP_5XX", "NETWORK_ERROR", "INVALID_RESPONSE", "INVALID_RESULT", "COST_BUDGET_EXCEEDED"],
+    "retry": {"default_max_retries": 2, "retryable": ["HTTP_429", "HTTP_5XX", "NETWORK_ERROR", "EXECUTION_ERROR"], "non_retryable": ["HTTP_401", "HTTP_403", "TIMEOUT", "CANCELLED", "INVALID_RESULT"]},
+    "determinism": "SHA-256 of canonical request fields for FakeAiProvider",
+    "budget": {"tokens": "request.maxTokens <= maxTokens", "context": "context and decisions character budget", "cost": "usageCostMicros <= maxCostMicros"},
+    "dependencies": "Java collections and SHA-256 only in the domain; AndroidKeyStore and HTTP are adapters",
+    "generation_run": ["runId", "projectId", "inputRevision", "promptId", "promptVersion", "providerId", "status", "requestedTokens", "usageCostMicros", "attempts", "result"]
   },
   "checks": [
     {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 11},
@@ -32,7 +38,7 @@
     {"command": ".\\gradlew.bat test", "exit_code": 0},
     {"command": ".\\gradlew.bat lint", "exit_code": 0},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
-    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0, "tests": 19},
     {"command": "git diff --check", "exit_code": 0}
   ],
   "negative_coverage": [
@@ -40,12 +46,26 @@
     "cancellation returns explicit CANCELLED without content",
     "same request returns equal deterministic result",
     "missing consent and over-budget context are rejected before a run is stored",
-    "401 is mapped without returning the secret",
+    "401 is mapped without returning the secret and is not retried",
+    "429 and 5xx retry at most two times and persist attempts",
     "timeout persists without a partial result",
     "replay returns the persisted result without calling the provider again",
     "mismatched project/revision/schema result is rejected",
+    "provider cost above maxCostMicros is rejected without accepting content",
     "AndroidKeyStore adapter supports replace/remove without plaintext preferences"
   ],
+  "security": {"committed_secrets": false, "credential_logs": false, "provider_real_call_required": false},
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/domain/ai/AiResult.java": "827231bd354b802ad82b6b9c1cb70f6f0a26cb878ade86dd1b312bb536f56874",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationBudget.java": "87c976e085c226c05ac01145ce52c57cbbfcc27b13e9855561e8866aa797204f",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationCoordinator.java": "40658b52b5e9583cc45ac81ffdc64405b53621a9872c79d171058159b2d4ccdf",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationRun.java": "53f1525bde9ed281fa7fabb3d3382aca21b83724613645954d6f970092786bd9",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/RetryPolicy.java": "caff800a54d1d4b9e42adf24147f764fce1c2e4e3164f0d3b9b9f5750972c424",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/HttpAiProviderAdapter.java": "19523202335167e87e85ba62c22f37702f566370afe18c7f00dee7636f43a13c",
+    "app/src/test/java/com/playertwo/ideas/domain/ai/GenerationContractTest.java": "90c23e2c97820966200e93218016c267c08b3d09fe6b284881a4fba6be90a413",
+    "app/src/androidTest/java/com/playertwo/ideas/data/ProviderAdapterInstrumentedTest.java": "ad649866bd0ba54fd26dd767f13c21d01e517637b07c0081b057503fe9fe651f"
+  },
   "not_started": ["F05", "F06"],
-  "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"}
+  "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"},
+  "limitations": ["real provider endpoint execution is not required; adapter remains externally configured", "cost is accepted only when provider reports usageCostMicros"]
 }
