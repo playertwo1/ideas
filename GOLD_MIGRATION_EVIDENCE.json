@@ -1,13 +1,14 @@
 {
   "schemaVersion": "1.0",
-  "baseline": "c5143e7126ef1e685d346347c7303185574e3f82",
+  "baseline": "415821631e567a9ab93ee7543e89a748710c7bcf",
   "phase": "F01",
   "gates": {"G00": "PASS", "G01": "NOT_RUN", "G10": "NOT_RUN"},
   "artifacts": [
-    {"path": "project-manifest.yml", "sha256": "9bde0bb7f2307996d7fd3144d6f4628e8d8c3f7f7865a83c25340a88aaa0b4cf"},
-    {"path": "fixtures/gold-valid/project.json", "sha256": "2192fdf79a093ed97b3940830153136ea8c3d6a1300653bafc5fcb4cdd620d27"},
-    {"path": "examples/gold-standard/project.json", "sha256": "351c595d337b6ac566a8c96cd8736898b7fef4149e669014283d5457109d7fd7"},
-    {"path": "examples/gold-standard/manifest.json", "sha256": "f70b09055869fa8fc9823cf3c4085cfc9b04c26aff7bbb201c399ac4032fb02b"}
+    {"path": "project-manifest.yml", "sha256": "6a94f3062adab8ba42b626496b670740ed31ff1a58c01860258f9cc7f34f3c19"},
+    {"path": "fixtures/gold-valid/project.json", "sha256": "cdbf880ab33709e7ada41e49762e43fbac1112d2e98a3e711f96bd719d05760b"},
+    {"path": "examples/gold-standard/project.json", "sha256": "fd305c7b339eb6cd199f57f566fd6fa98dd67ec8ac457ae057c36c7633c35fd2"},
+    {"path": "examples/gold-standard/manifest.json", "sha256": "384813727f339f5d45fc6d5a1f8b8770271f417d68dfa5a216ba1e49a0c4daeb"},
+    {"path": "scripts/check.py", "sha256": "3bccdc9edd93b15ed1f5d708d67b6a54c49ba9e1e85507acb37aaf534acd1af3"}
   ],
   "checks": [
     "python scripts/check.py",
