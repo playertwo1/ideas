@@ -3,8 +3,10 @@ package com.playertwo.ideas.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
+import androidx.room.ForeignKey;
 
-@Entity(tableName = "drafts")
+@Entity(tableName = "drafts", foreignKeys = @ForeignKey(entity = ProjectEntity.class,
+    parentColumns = "projectId", childColumns = "projectId", onDelete = ForeignKey.CASCADE))
 public class DraftEntity {
     @NonNull @PrimaryKey public final String projectId;
     public final String content;

@@ -26,6 +26,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test:core:1.6.1")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
 }
+
+android.sourceSets.getByName("androidTest").assets.srcDir("$projectDir/schemas")
+android.sourceSets.getByName("androidTest").assets.srcDir("$rootDir/fixtures")
 
 android.defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -2,7 +2,7 @@
   "phase": "F03",
   "status": "IMPLEMENTED_AWAITING_AUDIT",
   "substeps": ["F03.01", "F03.02", "F03.03", "F03.04", "F03.05", "F03.06"],
-  "database": "Room 2.6.1, schema version 1, projectId-scoped entities",
+  "database": "Room 2.6.1, schema version 2, projectId-scoped entities and numbered revisions with foreign keys",
   "fixtures": ["fixtures/f03_migration_v1.json"],
   "test_matrix": "F03_TEST_MATRIX.md",
   "backup_policy": "F03_BACKUP_POLICY.md",
@@ -13,7 +13,29 @@
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
   ],
-  "instrumented_tests": {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "device": "Pixel_10_Pro_XL API 17", "tests": 2, "failures": 0},
-  "schema": "app/schemas/com.playertwo.ideas.data.IdeaDatabase/1.json",
+  "instrumented_tests": {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "device": "Pixel_10_Pro_XL / Android 17", "tests": 17, "failures": 0},
+  "process_restart": {
+    "stage1": "adb shell am instrument -w -e class com.playertwo.ideas.data.ProcessRecoveryInstrumentedTest#stage1_saveConfirmedDraft com.playertwo.ideas.test/androidx.test.runner.AndroidJUnitRunner",
+    "interrupt": "adb shell am force-stop com.playertwo.ideas",
+    "stage2": "adb shell am instrument -w -e class com.playertwo.ideas.data.ProcessRecoveryInstrumentedTest#stage2_recoverAfterExternalForceStop com.playertwo.ideas.test/androidx.test.runner.AndroidJUnitRunner",
+    "result": "PASS; 1 test in each separate invocation, confirmed draft recovered"
+  },
+  "scenarios": {
+    "isolation": "two project IDs, drafts and events separated; orphan rows rejected by SQLite",
+    "rollback": "invalid event after project and numbered revision insert rolls back project, revision and event",
+    "autosave_ui": "edit text, observe Salvo, close and reopen Activity; confirmed text restored",
+    "migration": "Room MigrationTestHelper uses committed version 1 schema and fixture; IDs, text, status and relations preserved; baseline revision created",
+    "lifecycle": "archive, restore and delete affect only selected project ID",
+    "backup": "versioned JSON with revisions, SHA-256 envelope, valid restore, corrupt input rejected without state mutation",
+    "write_failure": "simulated ENOSPC and invalid target preserve previous backup; no physical disk-exhaustion test",
+    "database_corruption": "existing corrupt database rejected without replacement"
+  },
+  "digests_sha256": {
+    "schema_v1": "8C6C96E2980CF85F3C266A96245B7BC678E3CD924845D98AA30A964AE4D2C361",
+    "schema_v2": "BF5B5E2B1AC7F258BD5F19EB761C6ECD45832694D0F5629FA23FD0C5204F9CE5",
+    "migration_fixture": "562A86E8BE4DA9F29204AD8D34929505FFD7D98FA2FE275087A7151D4C772C28",
+    "local_debug_apk": "97C7F3A1E0845EA81026D9F9A93736B38D99B496F15894CB516C4AA7408CC64B"
+  },
+  "schema": "app/schemas/com.playertwo.ideas.data.IdeaDatabase/2.json",
   "scope": "F03 only"
 }
