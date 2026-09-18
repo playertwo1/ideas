@@ -1,14 +1,1 @@
-version: 1
-project: ideas
-standard: gold
-phase: F01
-validation:
-  - scripts/validate_contract.py
-  - scripts/test_gold_migration.py
-fixtures:
-  valid: fixtures/gold-valid/project.json
-  invalid: fixtures/gold-invalid/project.json
-gates:
-  G00: PASS
-  G01: NOT_RUN
-  G10: NOT_RUN
+{"version":1,"project":"ideas","standard":"gold","phase":"F01","validation":["scripts/validate_contract.py","scripts/test_gold_migration.py"],"fixtures":{"valid":"fixtures/gold-valid/project.json","invalid":"fixtures/gold-invalid/project.json"},"gates":{"G00":"PASS","G01":"NOT_RUN","G10":"NOT_RUN"}}

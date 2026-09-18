@@ -5,10 +5,23 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import json
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def validate_gold_manifest(path: Path) -> tuple[bool, list[str]]:
+    from jsonschema import Draft202012Validator
+
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+        schema = json.loads((ROOT / "schemas/project-manifest.schema.json").read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        return False, [str(error)]
+    errors = sorted(Draft202012Validator(schema).iter_errors(value), key=lambda item: list(item.path))
+    return not errors, [error.message for error in errors]
 
 
 def validate_target_file(path: Path) -> int | None:
@@ -35,6 +48,12 @@ def validate_target_file(path: Path) -> int | None:
 
 
 def main() -> int:
+    manifest_ok, manifest_errors = validate_gold_manifest(ROOT / "project-manifest.yml")
+    if not manifest_ok:
+        print("FAIL Gold manifest")
+        for error in manifest_errors:
+            print(f"- {error}")
+        return 1
     target = "."
     if len(sys.argv) > 1:
         target = sys.argv[1]

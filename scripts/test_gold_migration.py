@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -18,9 +19,10 @@ class GoldMigrationTest(unittest.TestCase):
         )
 
     def test_manifest_declares_gold_composition(self) -> None:
-        text = (ROOT / "project-manifest.yml").read_text(encoding="utf-8")
-        for required in ("standard: gold", "fixtures/gold-valid/project.json", "G01: NOT_RUN"):
-            self.assertIn(required, text)
+        value = json.loads((ROOT / "project-manifest.yml").read_text(encoding="utf-8"))
+        self.assertEqual(value["standard"], "gold")
+        self.assertEqual(value["fixtures"]["valid"], "fixtures/gold-valid/project.json")
+        self.assertEqual(value["gates"]["G01"], "NOT_RUN")
 
     def test_valid_fixture_is_parseable(self) -> None:
         value = json.loads((ROOT / "fixtures/gold-valid/project.json").read_text())
@@ -39,6 +41,16 @@ class GoldMigrationTest(unittest.TestCase):
             text=True,
         )
         self.assertNotEqual(result.returncode, 0)
+
+    def test_gold_manifest_schema_rejects_missing_field(self) -> None:
+        from scripts.check import validate_gold_manifest
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "project-manifest.yml"
+            path.write_text('{"version": 1, "project": "ideas"}', encoding="utf-8")
+            valid, errors = validate_gold_manifest(path)
+        self.assertFalse(valid)
+        self.assertTrue(errors)
 
 
 if __name__ == "__main__":
