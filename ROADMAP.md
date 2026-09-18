@@ -1,5 +1,15 @@
 # Roadmap detalhado do Idea → MVP
 
+## Trilho Gold do repositório
+
+O Gold Standard é a camada de contrato e verificação do próprio repositório.
+`PROJECT_STATE.md` é a fonte única de status dinâmico e `PHASE_CURRENT.md` é a
+autorização da fase. `scripts/check.py` é a entrada reproduzível de validação.
+Fixtures, manifesto e evidência Gold não constituem uma nova fase de produto.
+F01/F01.08, `G00 = PASS`, `G01 = NOT_RUN`, `G10 = NOT_RUN` e D01–D09 `LOCKED`
+permanecem inalterados; F02, F11–F20 e o Runner não são iniciados por esta
+camada.
+
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.

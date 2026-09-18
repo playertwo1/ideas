@@ -107,6 +107,15 @@ Nenhum `REF-xx` substitui especificação interna. Um agente deve conseguir impl
 
 O estado estruturado local será a fonte operacional do produto. Markdown é materialização de uma revisão. O pacote exportado inclui `project.json` e `manifest.json`, com IDs, hashes, capabilities, gates e limitações conhecidas.
 
+## Trilho Gold
+
+Este repositório usa o Gold Standard como trilho de trabalho, não como um
+orquestrador de agentes. `PROJECT_STATE.md` guarda o status atual; `ROADMAP.md`
+guarda fases e critérios; `PHASE_CURRENT.md` autoriza o trabalho vigente.
+Da raiz, `python scripts/check.py` executa a validação reproduzível. O
+manifesto, as fixtures e `docs/GOLDEN_DIFF.md` documentam a composição adotada.
+F01 permanece ativa; Android/F02 continua bloqueado até `G01 = PASS`.
+
 ## Estado atual
 
 Não duplique status aqui. **Consulte `PROJECT_STATE.md`.**
