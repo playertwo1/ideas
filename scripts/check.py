@@ -11,6 +11,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def validate_target_file(path: Path) -> int | None:
+    """Validate a project fixture directly; return None for non-project files."""
+    if not path.is_file() or not path.name.endswith(".project.json"):
+        return None
+    try:
+        from scripts.validate_contract import parse, semantic, structural
+    except ModuleNotFoundError:
+        from validate_contract import parse, semantic, structural
+
+    value, parse_errors = parse(path)
+    if parse_errors or not isinstance(value, dict):
+        print(f"FAIL target parse: {path}")
+        return 1
+    errors = structural("project", value) + [message for _, message in semantic(value)]
+    if errors:
+        print(f"FAIL target validation: {path}")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+    print(f"PASS target validation: {path}")
+    return 0
+
+
 def main() -> int:
     target = "."
     if len(sys.argv) > 1:
@@ -22,6 +45,9 @@ def main() -> int:
             if not candidate.exists():
                 print(f"FAIL target missing: {target}")
                 return 2
+            direct_result = validate_target_file(candidate)
+            if direct_result is not None:
+                return direct_result
     checks = (
         ("contracts", [sys.executable, "scripts/validate_contract.py"]),
         ("tests", [sys.executable, "-m", "unittest", "discover", "-s", "scripts", "-q"]),
@@ -36,9 +62,6 @@ def main() -> int:
                 print(result.stderr, end="", file=sys.stderr)
             return result.returncode
         print(f"PASS {name}")
-    if target.endswith("fixtures/gold-invalid") or target.endswith("fixtures\\gold-invalid"):
-        print("FAIL fixture semantic expectation: duplicate decision id")
-        return 1
     return 0
 
 

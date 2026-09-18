@@ -31,6 +31,15 @@ class GoldMigrationTest(unittest.TestCase):
         ids = [item["id"] for item in value["decisions"]]
         self.assertNotEqual(len(ids), len(set(ids)))
 
+    def test_check_rejects_invalid_target_file(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "scripts/check.py", "fixtures/invalid-duplicate-id.project.json"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
