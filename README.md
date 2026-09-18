@@ -10,6 +10,13 @@ O Idea preserva a intenção original, ajuda a esclarecer lacunas, separa sugest
 
 A fronteira do produto é clara: **o Idea termina no handoff**. Execução contínua de agentes, acompanhamento de código e Mission Control pertencem ao Projeto Vivo ou a ferramentas externas.
 
+## Estado atual
+
+F06.01–F06.07 estão implementadas e aguardam auditoria independente. `G05 =
+PASS`, `G06 = NOT_RUN` e F07 não foi iniciada. Nenhuma destas marcações equivale
+a aprovação automática; a autorização de avanço permanece com a Product
+Authority.
+
 ## Arquitetura de produto
 
 ### Idea Core — provar valor
@@ -64,7 +71,7 @@ Autonomia é proporcional: não pedir novamente autorização para trabalho já 
 
 Para retomar o projeto: leia `AGENTS.md` e `PROJECT_STATE.md`; a autorização e os limites da fase estão em `PHASE_CURRENT.md`. Abra `ROADMAP.md` e os contratos específicos somente para a tarefa em mãos.
 
-Da raiz do repositório, execute `python scripts/check.py` para validar contratos e rodar os testes existentes. O comando retorna código não zero em falha. Esta verificação ainda não é um build Android: o projeto está na fase documental F01.
+Da raiz do repositório, execute `python scripts/check.py` para validar contratos e rodar os testes existentes. O comando retorna código não zero em falha. Para o aplicativo Android, use o Gradle Wrapper e os testes indicados em `PHASE_CURRENT.md` e na evidência da fase ativa.
 
 - `AGENTS.md` — contrato mínimo para agentes;
 - `PROJECT_STATE.md` — **única fonte de status operacional dinâmico**;

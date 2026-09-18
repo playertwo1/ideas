@@ -12,9 +12,14 @@ camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
+**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 estão
+implementadas e aguardam auditoria independente. `G05 = PASS`, `G06 = NOT_RUN`
+e F07 ainda não foi iniciada. Esta marcação descreve implementação; não registra
+auditoria, gate ou aprovação de produto.
+
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
 
-Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. Nenhuma implementação Android foi iniciada. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
+Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. A implementação Android está restrita às fases autorizadas até F06; F07+ ainda não foram iniciadas. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
 
 Leitura sugerida para validar a direção: [visão Core/Factory](#14-idea-core-idea-factory-e-fronteira-de-valor), [versões e marcos](#2-versões-e-marcos-de-entrega), [parâmetros](#3-parâmetros-de-funcionamento-propostos), [fases e subetapas](#6-fases-e-subetapas-de-construção), [protocolo de execução](#102-protocolo-builder--auditor--product-authority), [referências GitHub](#13-referências-github-usadas-na-concepção) e [decisões fundamentais](#12-decisões-fundamentais-aprovadas). O documento mantém 21 fases F00–F20; subetapas e checks podem crescer conforme contratos forem aprovados, sem alterar silenciosamente o escopo.
 
@@ -490,6 +495,10 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes. Responsável: E; apoio P/Q. Depende: F04 e F05. Reuso: REF-02 e REF-03. Esforço: 5–8 dias-pessoa.
 
+**Status atual:** F06.01–F06.07 implementadas, aguardando auditoria independente.
+`G06 = NOT_RUN`; não iniciar F07 antes de auditoria e autorização explícita da
+Product Authority.
+
 **Padrões externos aplicados:** REF-02 fornece Propose → Refine → Lock, opções concretas e trade-offs; REF-03 inspira capacidades encadeáveis. LOCK é autoridade humana e nunca consequência automática da IA.
 
 | Subetapa | Trabalho e entregável | Verificação de conclusão |
@@ -507,6 +516,9 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 ### F07 Hipótese mínima, MVP Cutter e requisitos
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis. Responsável: E; apoio P/Q. Depende: F06. Reuso: REF-03 e REF-04. Esforço: 5–8 dias-pessoa.
+
+**Status atual:** não iniciada. A implementação depende de auditoria de F06 e de
+`G06 = PASS` registrado pela Product Authority.
 
 **Padrões externos aplicados:** REF-03 inspira separação entre validação e planejamento; REF-04 fornece REQ/acceptance/rastreabilidade; REF-06 inspira clarificação/readiness. Não usar score cosmético de confiança.
 

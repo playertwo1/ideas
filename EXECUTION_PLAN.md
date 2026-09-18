@@ -4,6 +4,10 @@
 
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
+**Estado atual:** F06.01–F06.07 implementadas e aguardando auditoria
+independente. `G05 = PASS`; `G06 = NOT_RUN`; F07 não iniciada. Os checkboxes de
+F06/G06 permanecem pendentes até a verificação e o gate correspondentes.
+
 ## Regras rápidas
 
 - Não pular fases. Builder reúne evidências; Auditor emite PASS/FAIL da auditoria; Product Authority registra o gate de desenvolvimento que autoriza a troca de fase.
@@ -183,6 +187,9 @@
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes.
 
+**Status de implementação:** F06.01–F06.07 implementadas; aguardando auditoria
+independente. Não registrar `G06` nem iniciar F07 antes do resultado da auditoria.
+
 - [ ] **F06.01 — Catálogo de lacunas por tipo/modo e criticidade**
   - Verificar: Casos simples não recebem questionário completo DEEP
 - [ ] **F06.02 — Rodadas adaptativas com opções, recomendação e trade-offs**
@@ -207,6 +214,8 @@
 ### [ ] F07 — Hipótese mínima, MVP Cutter e requisitos
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis.
+
+**Status:** não iniciada; depende de `G06 = PASS` autorizado pela Product Authority.
 
 - [ ] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
   - Verificar: Dados não medidos ficam NOT_TESTED
