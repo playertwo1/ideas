@@ -6,7 +6,7 @@
 
 **F04 — Contrato de IA e execução controlada de geração**
 
-**Subetapa atual:** F04.01 — implementada pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F04.07 — implementada pelo Builder, aguardando auditoria independente.
 
 **Objetivo:** executar sugestões estruturadas por uma porta provider-neutral, sem acoplar o domínio a rede, credenciais ou fornecedor.
 
@@ -16,15 +16,15 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Trabalho autorizado agora
 
-- auditar F04.01;
-- corrigir somente findings reproduzíveis de F04.01;
+- auditar F04.02–F04.07;
+- corrigir somente findings reproduzíveis de F04.02–F04.07;
 - manter o fake offline, determinístico e sem credenciais;
 - preservar os contratos e decisões LOCKED de F00–F03;
 - atualizar `PROJECT_STATE.md` e `EXECUTION_PLAN.md` quando o estado realmente mudar.
 
 ## Não autorizado
 
-- iniciar F04.02 antes da auditoria independente de F04.01;
+- iniciar F05 antes da auditoria independente de F04.02–F04.07;
 - implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
 - tratar a baseline de contexto como implementação de F15;
 - alterar D01–D09 sem decisão explícita da Product Authority;
@@ -38,6 +38,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 - G01: `PASS` registrado pela Product Authority em 18/09/2026;
 - G02: `PASS` registrado após auditoria independente de F02;
 - G03: `PASS` registrado pela Product Authority após auditoria independente de F03;
+- G04: `NOT_RUN`;
 - G10: `NOT_RUN`;
 - Idea Factory/F11–F20: bloqueada.
 
@@ -45,8 +46,8 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F04.01:** porta `AiProvider` e fake determinístico — implementada, aguardando auditoria.
-2. **F04.02–F04.07:** não iniciadas.
+1. **F04.01:** porta `AiProvider` e fake determinístico — PASS independente.
+2. **F04.02–F04.07:** implementadas, aguardando auditoria.
 
 ## Gate G03
 
@@ -60,4 +61,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Auditar exclusivamente F04.01. Não iniciar F04.02 nem registrar `G04 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.

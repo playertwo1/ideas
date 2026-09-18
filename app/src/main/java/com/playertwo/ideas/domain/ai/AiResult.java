@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /** Structured result; authority, gates and project IDs are never assigned by the provider. */
 public final class AiResult {
-    public enum Outcome { SUCCESS, CANCELLED }
+    public enum Outcome { SUCCESS, CANCELLED, FAILED }
     private final Outcome outcome;
     private final Map<String, String> content;
     private final Map<String, String> references;
@@ -25,14 +25,20 @@ public final class AiResult {
         this.failureCode = failureCode;
     }
 
-    static AiResult success(Map<String, String> content, Map<String, String> references,
+    public static AiResult success(Map<String, String> content, Map<String, String> references,
                             List<String> hypotheses, String executionId) {
         return new AiResult(Outcome.SUCCESS, content, references, hypotheses, executionId, null);
     }
 
-    static AiResult cancelled(String executionId) {
+    public static AiResult cancelled(String executionId) {
         return new AiResult(Outcome.CANCELLED, Collections.emptyMap(), Collections.emptyMap(),
             Collections.emptyList(), executionId, "CANCELLED");
+    }
+
+    public static AiResult failed(String executionId, String failureCode) {
+        if (failureCode == null || failureCode.trim().isEmpty()) throw new IllegalArgumentException("failureCode required");
+        return new AiResult(Outcome.FAILED, Collections.emptyMap(), Collections.emptyMap(),
+            Collections.emptyList(), executionId, failureCode);
     }
 
     public Outcome outcome() { return outcome; }

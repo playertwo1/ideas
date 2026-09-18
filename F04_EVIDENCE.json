@@ -1,25 +1,33 @@
 {
   "phase": "F04",
-  "substep": "F04.01",
+  "substep": "F04.02-F04.07",
   "status": "IMPLEMENTED_AWAITING_AUDIT",
-  "scope": "provider-neutral AiProvider port and deterministic offline fake",
+  "scope": "provider adapter, secret consent, validation, recovery, prompt registry and budget",
   "files": [
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiProvider.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiRequest.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiResult.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/CancellationToken.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/FakeAiProvider.java",
-    "app/src/test/java/com/playertwo/ideas/domain/ai/AiProviderContractTest.java"
+    "app/src/main/java/com/playertwo/ideas/domain/ai/HttpAiProviderAdapter.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationCoordinator.java",
+    "app/src/main/java/com/playertwo/ideas/data/AndroidSecretStore.java",
+    "app/src/test/java/com/playertwo/ideas/domain/ai/AiProviderContractTest.java",
+    "app/src/test/java/com/playertwo/ideas/domain/ai/GenerationContractTest.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/ProviderAdapterInstrumentedTest.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/SecretStoreInstrumentedTest.java"
   ],
   "contract": {
     "input": ["operation", "projectId", "inputRevision", "schemaVersion", "context", "decisions", "maxTokens", "requestId"],
     "output": ["content", "references", "hypotheses", "executionId"],
     "failures": ["CANCELLED"],
     "determinism": "SHA-256 of canonical request fields",
-    "dependencies": "Java collections and SHA-256 only; no Android, network, credential or provider SDK"
+    "dependencies": "Java collections and SHA-256 only; no Android, network, credential or provider SDK",
+    "generation_run": ["runId", "projectId", "inputRevision", "promptId", "promptVersion", "providerId", "status", "requestedTokens", "usageCostMicros", "result"]
   },
   "checks": [
-    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest", "exit_code": 0, "tests": 3},
+    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 11},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 19, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
     {"command": ".\\gradlew.bat lint", "exit_code": 0},
@@ -30,8 +38,14 @@
   "negative_coverage": [
     "missing operation is rejected",
     "cancellation returns explicit CANCELLED without content",
-    "same request returns equal deterministic result"
+    "same request returns equal deterministic result",
+    "missing consent and over-budget context are rejected before a run is stored",
+    "401 is mapped without returning the secret",
+    "timeout persists without a partial result",
+    "replay returns the persisted result without calling the provider again",
+    "mismatched project/revision/schema result is rejected",
+    "AndroidKeyStore adapter supports replace/remove without plaintext preferences"
   ],
-  "not_started": ["F04.02", "F04.03", "F04.04", "F04.05", "F04.06", "F04.07", "F05"],
+  "not_started": ["F05", "F06"],
   "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"}
 }
