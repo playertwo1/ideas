@@ -13,7 +13,7 @@ public interface ProjectIntakeDao {
     int updateSuggestion(String id, String interpretation, String projectType, String restrictions, String depthMode, String reason, long updatedAt);
     @Query("UPDATE project_intake SET interpretationAccepted = 1, updatedAt = :updatedAt WHERE projectId = :id AND interpretation IS NOT NULL")
     int acceptSuggestion(String id, long updatedAt);
-    @Query("UPDATE project_intake SET interpretation = NULL, suggestionReason = NULL, interpretationAccepted = 0, updatedAt = :updatedAt WHERE projectId = :id")
+    @Query("UPDATE project_intake SET interpretation = NULL, projectType = NULL, restrictions = NULL, depthMode = NULL, suggestionReason = NULL, interpretationAccepted = 0, updatedAt = :updatedAt WHERE projectId = :id")
     int rejectSuggestion(String id, long updatedAt);
     @Query("UPDATE project_intake SET progressPercent = :progress, nextAction = :nextAction, updatedAt = :updatedAt WHERE projectId = :id")
     int updateProgress(String id, int progress, String nextAction, long updatedAt);

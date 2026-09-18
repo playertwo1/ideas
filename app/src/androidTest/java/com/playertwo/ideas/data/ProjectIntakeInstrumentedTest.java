@@ -50,8 +50,13 @@ public class ProjectIntakeInstrumentedTest {
         repository.updateSuggestion("P1", "correção", "SCRIPT", "offline", "STANDARD", "usuário corrigiu");
         assertFalse(repository.find("P1").interpretationAccepted);
         repository.rejectSuggestion("P1");
-        assertNull(repository.find("P1").interpretation);
-        assertFalse(repository.find("P1").interpretationAccepted);
+        ProjectIntakeEntity rejected = repository.find("P1");
+        assertNull(rejected.interpretation);
+        assertNull(rejected.projectType);
+        assertNull(rejected.restrictions);
+        assertNull(rejected.depthMode);
+        assertNull(rejected.suggestionReason);
+        assertFalse(rejected.interpretationAccepted);
     }
 
     @Test public void progressAndNextActionArePersistedPerProject() {
@@ -60,8 +65,27 @@ public class ProjectIntakeInstrumentedTest {
         repository.updateProgress("P1", 40, "Revisar interpretação");
         assertEquals(40, repository.find("P1").progressPercent);
         assertEquals("Revisar interpretação", repository.find("P1").nextAction);
-        assertEquals(0, repository.find("P2").progressPercent);
-        assertEquals("Iniciar captura", repository.find("P2").nextAction);
+        assertEquals(40, repository.find("P2").progressPercent);
+        assertEquals("Gerar interpretação", repository.find("P2").nextAction);
+    }
+
+    @Test public void progressIsDerivedFromPersistedSnapshot() {
+        repository.create("P1", "Um", "ideia", "limite");
+        assertEquals(40, repository.find("P1").progressPercent);
+        repository.updateSuggestion("P1", "sugestão", "APP", "offline", "STANDARD", "motivo");
+        assertEquals(60, repository.find("P1").progressPercent);
+        assertEquals("Aceitar ou rejeitar sugestão", repository.find("P1").nextAction);
+        repository.acceptSuggestion("P1");
+        assertEquals(80, repository.find("P1").progressPercent);
+        repository.rejectSuggestion("P1");
+        assertEquals(40, repository.find("P1").progressPercent);
+        assertEquals("Gerar interpretação", repository.find("P1").nextAction);
+    }
+
+    @Test public void legacyProjectWithoutDraftDoesNotFreezeEmptyOriginalSnapshot() {
+        db.projects().insert(new ProjectEntity("LEGACY", "Rascunho", "ACTIVE", 1));
+        repository.ensureFromLegacy("LEGACY");
+        assertNull(repository.find("LEGACY"));
     }
 
     @Test public void providerSuggestionIsStoredAsEditableUnacceptedInterpretation() {
