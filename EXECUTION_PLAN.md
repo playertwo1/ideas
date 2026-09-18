@@ -4,9 +4,10 @@
 
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
-**Estado atual:** F06.01–F06.07 corrigidas e aguardando reauditoria
-independente. `G05 = PASS`; `G06 = NOT_RUN`; F07 não iniciada. Os checkboxes de
-F06/G06 permanecem pendentes até a verificação e o gate correspondentes.
+**Estado atual:** F06.01–F06.07 reauditadas com PASS. `G05 = PASS`;
+`G06 = PASS`; F07 autorizada e aguardando implementação. O ciclo de F07 permite
+no máximo três rodadas Builder↔Auditor: para no primeiro PASS ou escala após três
+FAIL.
 
 ## Regras rápidas
 
@@ -187,8 +188,8 @@ F06/G06 permanecem pendentes até a verificação e o gate correspondentes.
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes.
 
-**Status de implementação:** F06.01–F06.07 corrigidas; aguardando reauditoria
-independente. Não registrar `G06` nem iniciar F07 antes do resultado da reauditoria.
+**Status:** F06.01–F06.07 reauditadas com PASS; `G06 = PASS` registrado pela
+Product Authority.
 
 - [ ] **F06.01 — Catálogo de lacunas por tipo/modo e criticidade**
   - Verificar: Casos simples não recebem questionário completo DEEP
@@ -215,7 +216,7 @@ independente. Não registrar `G06` nem iniciar F07 antes do resultado da reaudit
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis.
 
-**Status:** não iniciada; depende de `G06 = PASS` autorizado pela Product Authority.
+**Status:** autorizada, aguardando implementação; `G07 = NOT_RUN`.
 
 - [ ] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
   - Verificar: Dados não medidos ficam NOT_TESTED

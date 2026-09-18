@@ -12,9 +12,9 @@ camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
-**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 foram corrigidas
-e aguardam reauditoria independente. `G05 = PASS`, `G06 = NOT_RUN`
-e F07 ainda não foi iniciada. Esta marcação descreve implementação; não registra
+**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 foram reauditadas
+com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = NOT_RUN` e F07 está autorizada para
+implementação. Esta marcação descreve autorização; não registra
 auditoria, gate ou aprovação de produto.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
@@ -495,9 +495,7 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes. Responsável: E; apoio P/Q. Depende: F04 e F05. Reuso: REF-02 e REF-03. Esforço: 5–8 dias-pessoa.
 
-**Status atual:** F06.01–F06.07 corrigidas, aguardando reauditoria independente.
-`G06 = NOT_RUN`; não iniciar F07 antes de reauditoria e autorização explícita da
-Product Authority.
+**Status atual:** F06.01–F06.07 reauditadas com PASS; `G06 = PASS`.
 
 **Padrões externos aplicados:** REF-02 fornece Propose → Refine → Lock, opções concretas e trade-offs; REF-03 inspira capacidades encadeáveis. LOCK é autoridade humana e nunca consequência automática da IA.
 
@@ -517,8 +515,9 @@ Product Authority.
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis. Responsável: E; apoio P/Q. Depende: F06. Reuso: REF-03 e REF-04. Esforço: 5–8 dias-pessoa.
 
-**Status atual:** não iniciada. A implementação depende de auditoria de F06 e de
-`G06 = PASS` registrado pela Product Authority.
+**Status atual:** autorizada, aguardando implementação. `G07 = NOT_RUN`; não
+iniciar F08 antes de auditoria independente e autorização explícita da Product
+Authority.
 
 **Padrões externos aplicados:** REF-03 inspira separação entre validação e planejamento; REF-04 fornece REQ/acceptance/rastreabilidade; REF-06 inspira clarificação/readiness. Não usar score cosmético de confiança.
 

@@ -4,19 +4,20 @@
 
 ## Fase ativa
 
-**F06 — Entrevista inteligente e decisões versionadas**
+**F07 — Hipótese mínima, MVP Cutter e requisitos**
 
-**Subetapas:** F06.01–F06.07 corrigidas, aguardando reauditoria independente.
+**Subetapas:** F07.01–F07.06 autorizadas, aguardando implementação.
 
 ## Trabalho autorizado agora
 
-- reauditar F06.01–F06.07;
-- corrigir somente findings reproduzíveis de F06;
-- preservar entrevista offline, decisões humanas, histórico e D01–D09.
+- implementar F07.01–F07.06;
+- executar até três rodadas Builder↔Auditor, parando no primeiro PASS;
+- após três FAIL, parar e escalar sem registrar G07;
+- preservar decisões humanas, histórico, offline e D01–D09.
 
 ## Não autorizado
 
-- iniciar F07 ou registrar `G06` antes da auditoria independente;
+- iniciar F08 ou registrar `G07` antes da auditoria independente;
 - transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
 - iniciar F11–F20 enquanto `G10 != PASS`.
@@ -29,19 +30,19 @@
 - G03: `PASS`;
 - G04: `PASS`;
 - G05: `PASS`;
-- G06: `NOT_RUN`;
+- G06: `PASS`;
+- G07: `NOT_RUN`;
 - G10: `NOT_RUN`.
 
-## Critérios F06
+## Critérios F07
 
-1. Lacunas catalogadas por tipo, modo e criticidade.
-2. Rodadas adaptativas sem repetição desnecessária.
-3. Responder, editar, adiar e aceitar default explícito.
-4. DecisionRevision com Propose/Refine/Lock humano.
-5. Reabertura com delta e invalidação de derivados.
-6. Stop condition e orçamento de rodadas.
-7. Histórico legível com autoria e rastreabilidade.
+1. Ficha de problema, hipótese, teste barato, métrica e limiar.
+2. Features MUST/SHOULD/COULD/LATER/REJECTED com justificativas.
+3. Fluxo ponta a ponta mínimo e non-goals explícitos.
+4. REQ/NFR com IDs estáveis, origem e acceptance.
+5. Jornadas, estados e erros relevantes.
+6. Prévia, aprovação de lote, cobertura e duplicação.
 
 ## Próxima ação
 
-Reauditoria independente de F06. Não iniciar F07 nem registrar `G06 = PASS`.
+Implementação de F07 seguida de auditoria independente. Máximo de três rodadas; não iniciar F08 nem registrar `G07 = PASS` sem PASS do Auditor e ação da Product Authority.
