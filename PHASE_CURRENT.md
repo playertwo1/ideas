@@ -4,11 +4,11 @@
 
 ## Fase ativa
 
-**F03 — Persistência local e histórico confiável**
+**F04 — Contrato de IA e execução controlada de geração**
 
-**Subetapa atual:** F03.06 — implementada pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F04.01 — implementada pelo Builder, aguardando auditoria independente.
 
-**Objetivo:** preservar projetos, revisões, rascunhos e eventos após reinício e falhas.
+**Objetivo:** executar sugestões estruturadas por uma porta provider-neutral, sem acoplar o domínio a rede, credenciais ou fornecedor.
 
 ## Resultado esperado
 
@@ -16,16 +16,15 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Trabalho autorizado agora
 
-- criar projeto, wrapper, catálogo de versões e módulos mínimos;
-- implementar somente a navegação base e a Home vazia;
-- documentar comandos reproduzíveis de build, lint e teste;
-- manter testes e logs sem segredos ou dados reais;
-- preservar os contratos e decisões LOCKED de F00/F01;
+- auditar F04.01;
+- corrigir somente findings reproduzíveis de F04.01;
+- manter o fake offline, determinístico e sem credenciais;
+- preservar os contratos e decisões LOCKED de F00–F03;
 - atualizar `PROJECT_STATE.md` e `EXECUTION_PLAN.md` quando o estado realmente mudar.
 
 ## Não autorizado
 
-- iniciar F04 antes de `G03 = PASS` registrado pela Product Authority;
+- iniciar F04.02 antes da auditoria independente de F04.01;
 - implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
 - tratar a baseline de contexto como implementação de F15;
 - alterar D01–D09 sem decisão explícita da Product Authority;
@@ -38,6 +37,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 - G00: `PASS` registrado em 14/09/2026 após auditoria independente;
 - G01: `PASS` registrado pela Product Authority em 18/09/2026;
 - G02: `PASS` registrado após auditoria independente de F02;
+- G03: `PASS` registrado pela Product Authority após auditoria independente de F03;
 - G10: `NOT_RUN`;
 - Idea Factory/F11–F20: bloqueada.
 
@@ -45,18 +45,14 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F03.01:** entidades Room e DAOs com `projectId`.
-2. **F03.02:** gravação de projeto e evento na mesma transação.
-3. **F03.03:** entidade de rascunho e autosave local.
-4. **F03.04:** schema Room exportado em `app/schemas/`.
-5. **F03.05:** arquivar, restaurar e excluir por ID exato.
-6. **F03.06:** política de backup e falhas sem fallback destrutivo.
+1. **F04.01:** porta `AiProvider` e fake determinístico — implementada, aguardando auditoria.
+2. **F04.02–F04.07:** não iniciadas.
 
-## Gate G01
+## Gate G03
 
 **Estado:** `PASS`.
 
-Critério: fluxo aprovado para implementação; modelo de custódia de credenciais e armazenamento resolvido, com provider específico homologado somente em F04.
+Critério: F03 auditada independentemente; F04 autorizada pela Product Authority.
 
 ## Retorno seguro
 
@@ -64,4 +60,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Auditar exclusivamente F03.01–F03.06. Não iniciar F04 nem registrar `G03 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F04.01. Não iniciar F04.02 nem registrar `G04 = PASS` antes da auditoria correspondente.

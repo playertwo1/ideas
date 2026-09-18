@@ -1,0 +1,37 @@
+{
+  "phase": "F04",
+  "substep": "F04.01",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "scope": "provider-neutral AiProvider port and deterministic offline fake",
+  "files": [
+    "app/src/main/java/com/playertwo/ideas/domain/ai/AiProvider.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/AiRequest.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/AiResult.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/CancellationToken.java",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/FakeAiProvider.java",
+    "app/src/test/java/com/playertwo/ideas/domain/ai/AiProviderContractTest.java"
+  ],
+  "contract": {
+    "input": ["operation", "projectId", "inputRevision", "schemaVersion", "context", "decisions", "maxTokens", "requestId"],
+    "output": ["content", "references", "hypotheses", "executionId"],
+    "failures": ["CANCELLED"],
+    "determinism": "SHA-256 of canonical request fields",
+    "dependencies": "Java collections and SHA-256 only; no Android, network, credential or provider SDK"
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest", "exit_code": 0, "tests": 3},
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "negative_coverage": [
+    "missing operation is rejected",
+    "cancellation returns explicit CANCELLED without content",
+    "same request returns equal deterministic result"
+  ],
+  "not_started": ["F04.02", "F04.03", "F04.04", "F04.05", "F04.06", "F04.07", "F05"],
+  "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"}
+}

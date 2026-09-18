@@ -6,13 +6,14 @@
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M1 — Fundação offline
-- **Fase:** F03 — Persistência local e histórico confiável
-- **Subetapa atual:** F03.06 — implementada pelo Builder, aguardando auditoria independente
+- **Fase:** F04 — Contrato de IA e execução controlada de geração
+- **Subetapa atual:** F04.01 — implementada pelo Builder, aguardando auditoria independente
 - **Última concluída:** F02.05 — erros e logs sintéticos
-- **Próxima após a atual:** auditar F03.01–F03.06; F04 somente após `G03 = PASS`
+- **Próxima após a atual:** auditar F04.01; não iniciar F04.02 antes da auditoria
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G02:** PASS — registrado após auditoria independente de F02
+- **G03:** PASS — registrado pela Product Authority após auditoria independente de F03 em 18/09/2026
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -43,12 +44,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F03.01–F03.06 foram implementadas. A auditoria independente de F03 está pendente.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi implementada e aguarda auditoria independente.
 
 ## Próxima ação
 
-Auditar exclusivamente F03.01–F03.06. Não iniciar F04 nem registrar `G03 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F04.01. Não iniciar F04.02 nem registrar `G04 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 
-F02 está autorizada após `G01 = PASS`; Android ainda não foi implementado. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F04 está autorizada após `G03 = PASS`; F04.02+ e integração real ainda não foram implementadas. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
