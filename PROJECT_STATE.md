@@ -5,7 +5,7 @@
 - **Projeto:** Idea
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
-- **Milestone:** M1 — Fundação offline
+- **Milestone:** M2 — MVP 0.1 / Idea Core
 - **Fase:** F04 — Contrato de IA e execução controlada de geração
 - **Subetapa atual:** F04.01 — implementada pelo Builder, aguardando auditoria independente
 - **Última concluída:** F02.05 — erros e logs sintéticos
