@@ -52,6 +52,11 @@ class GoldMigrationTest(unittest.TestCase):
         self.assertFalse(valid)
         self.assertTrue(errors)
 
+    def test_local_ci_has_minimal_contract(self) -> None:
+        from scripts.ci_local import commands
+
+        self.assertEqual(commands(), ("python scripts/check.py", "git diff --check"))
+
 
 if __name__ == "__main__":
     unittest.main()
