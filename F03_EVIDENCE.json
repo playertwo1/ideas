@@ -13,6 +13,7 @@
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
   ],
+  "instrumented_tests": {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "device": "Pixel_10_Pro_XL API 17", "tests": 2, "failures": 0},
   "schema": "app/schemas/com.playertwo.ideas.data.IdeaDatabase/1.json",
   "scope": "F03 only"
 }
