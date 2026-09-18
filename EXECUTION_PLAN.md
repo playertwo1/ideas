@@ -46,7 +46,7 @@
 - [x] Codex/Auditor emitiu `AUDIT RESULT: PASS`
 - [x] Product Authority registrou explicitamente `G00 = PASS` — três fixtures auditáveis, contrato versionado e bloqueadores de fundação resolvidos.
 
-### [ ] F01 — Experiência e arquitetura da primeira versão
+### [x] F01 — Experiência e arquitetura da primeira versão
 
 **Resultado:** fluxo navegável revisável e fronteiras técnicas do próprio app.
 
@@ -76,16 +76,16 @@
   - Verificar: Fixture exportada pode ser interpretada sem depender de classes de UI/Room
 
 **G01**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G01 = PASS` — fluxo aprovado para implementação; modelo de custódia de credenciais e armazenamento resolvido, com provider específico homologado em F04.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G01 = PASS` — registrado pela Product Authority após auditoria independente; fluxo aprovado para implementação.
 
 ---
 
 ## M1 — Fundação offline
 
-### [ ] F02 — Skeleton Android e ciclo de desenvolvimento
+### [ ] F02 — Skeleton Android e ciclo de desenvolvimento *(próxima fase autorizada)*
 
 **Resultado:** aplicativo instalável com navegação base e verificações automatizadas.
 

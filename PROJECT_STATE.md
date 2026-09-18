@@ -5,12 +5,13 @@
 - **Projeto:** Idea
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
-- **Milestone:** M0 — Contrato do produto
-- **Fase:** F01 — Experiência e arquitetura da primeira versão
-- **Subetapa atual:** F01.08 — concluída pelo Builder, aguardando auditoria independente
+- **Milestone:** M1 — Fundação offline
+- **Fase:** F02 — Skeleton Android e ciclo de desenvolvimento
+- **Subetapa atual:** F02.01 — ainda não iniciada
 - **Última concluída:** F01.08 — contrato portátil e compatibilidade de schema
-- **Próxima após a atual:** auditoria de F01/G01; F02 somente após `G01 = PASS` registrado pela Product Authority
+- **Próxima após a atual:** implementar F02.01; G02 somente após todas as subetapas e auditoria
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
+- **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -41,12 +42,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-Nenhum bloqueio técnico conhecido para iniciar o trabalho documental de F01.
+Nenhum bloqueio técnico conhecido para iniciar F02. Android só pode ser implementado dentro do escopo F02.
 
 ## Próxima ação
 
-Submeter F01.08 à auditoria independente e preparar a avaliação de G01. Não registrar `G01 = PASS` nem iniciar F02/Android.
+Iniciar exclusivamente F02.01. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 
-F01 está autorizada. Android permanece não iniciado; implementação do skeleton pertence a F02 e depende de G01. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F02 está autorizada após `G01 = PASS`; Android ainda não foi implementado. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
