@@ -17,21 +17,22 @@ public final class GenerationRun {
     public GenerationRun(String runId, String projectId, long inputRevision, String promptId,
                          String promptVersion, String providerId, GenerationStatus status,
                          AiResult result, String failureCode) {
-        this(runId, projectId, inputRevision, promptId, promptVersion, providerId, status, result, failureCode, 0, 0, 0);
+        this(runId, projectId, inputRevision, promptId, promptVersion, providerId, status, result, failureCode, 0, 0);
     }
     public GenerationRun(String runId, String projectId, long inputRevision, String promptId,
                          String promptVersion, String providerId, GenerationStatus status,
                          AiResult result, String failureCode, int requestedTokens, long usageCostMicros) {
-        this(runId, projectId, inputRevision, promptId, promptVersion, providerId, status, result, failureCode, requestedTokens, usageCostMicros, 0);
+        this(runId, projectId, inputRevision, promptId, promptVersion, providerId, status, result, failureCode,
+            requestedTokens, usageCostMicros, 0);
     }
     public GenerationRun(String runId, String projectId, long inputRevision, String promptId,
                          String promptVersion, String providerId, GenerationStatus status,
                          AiResult result, String failureCode, int requestedTokens, long usageCostMicros, int attempts) {
+        if (attempts < 0) throw new IllegalArgumentException("attempts must be non-negative");
         this.runId = runId; this.projectId = projectId; this.inputRevision = inputRevision;
         this.promptId = promptId; this.promptVersion = promptVersion; this.providerId = providerId;
         this.status = status; this.result = result; this.failureCode = failureCode;
-        this.requestedTokens = requestedTokens; this.usageCostMicros = usageCostMicros;
-        this.attempts = attempts;
+        this.requestedTokens = requestedTokens; this.usageCostMicros = usageCostMicros; this.attempts = attempts;
     }
     public String runId() { return runId; }
     public String projectId() { return projectId; }

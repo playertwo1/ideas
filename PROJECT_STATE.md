@@ -7,7 +7,7 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M2 — MVP 0.1 / Idea Core
 - **Fase:** F04 — Contrato de IA e execução controlada de geração
-- **Subetapa atual:** F04.07 — implementada pelo Builder, aguardando auditoria independente
+- **Subetapa atual:** F04.02–F04.07 — findings corrigidos, aguardando reauditoria independente
 - **Última concluída:** F02.05 — erros e logs sintéticos
 - **Próxima após a atual:** auditar F04.02–F04.07; não iniciar F05 antes de `G04 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
@@ -45,12 +45,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F03.01–F03.06 foram auditadas independentemente com PASS. F04.02–F04.07 foram implementadas e aguardam auditoria independente.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.02–F04.07 tiveram os findings corrigidos e aguardam reauditoria independente.
 
 ## Próxima ação
 
-Auditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.
+Reauditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 
-F04.02–F04.07 estão implementadas e aguardam auditoria; F05 permanece bloqueada até `G04 = PASS`. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F04.02–F04.07 estão corrigidas e aguardam reauditoria; F05 permanece bloqueada até `G04 = PASS`. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.

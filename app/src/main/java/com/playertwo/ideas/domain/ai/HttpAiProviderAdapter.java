@@ -70,7 +70,9 @@ public final class HttpAiProviderAdapter implements AiProvider {
         Map<String, String> content = strings(rawContent); Map<String, String> references = strings(rawReferences);
         JSONArray rawHypotheses = body.optJSONArray("hypotheses"); List<String> hypotheses = new ArrayList<>();
         if (rawHypotheses != null) for (int i = 0; i < rawHypotheses.length(); i++) hypotheses.add(rawHypotheses.getString(i));
-        return AiResult.success(content, references, hypotheses, executionId);
+        long usageCostMicros = body.has("usageCostMicros")
+            ? Long.parseLong(String.valueOf(body.get("usageCostMicros"))) : 0;
+        return AiResult.success(content, references, hypotheses, executionId, usageCostMicros);
     }
 
     private static Map<String, String> strings(JSONObject object) throws Exception {
