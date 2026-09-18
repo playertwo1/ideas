@@ -1,0 +1,17 @@
+{
+  "phase": "F02",
+  "substep": "F02.01",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "target_sdk": 36,
+  "min_sdk": 26,
+  "commands": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": "python scripts/check.py", "exit_code": 0},
+    {"command": "python scripts/validate_contract.py", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "apk": "app/build/outputs/apk/debug/app-debug.apk",
+  "scope": "F02.01 only"
+}

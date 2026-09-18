@@ -6,7 +6,7 @@
 
 **F02 — Skeleton Android e ciclo de desenvolvimento**
 
-**Subetapa atual:** F02.01 — não iniciada.
+**Subetapa atual:** F02.01 — implementada pelo Builder, aguardando auditoria independente.
 
 **Objetivo:** criar um skeleton Android instalável, com navegação base e verificações reproduzíveis.
 
@@ -44,7 +44,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F02.01 — Projeto e módulos mínimos:** criar wrapper, catálogo e skeleton; checkout limpo produz APK debug.
+1. **F02.01 — Projeto e módulos mínimos:** implementada; checkout limpo produz APK debug; evidência em `F02_01_EVIDENCE.json`.
 2. **F02.02 — Tema, navegação e Home:** instalar e abrir no ambiente autorizado.
 3. **F02.03 — Comandos:** um comando documentado reproduz build, lint e testes.
 4. **F02.04 — Verificações:** testes de domínio e lint sem segredos no repositório.
@@ -62,4 +62,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Iniciar exclusivamente F02.01. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F02.01. Não iniciar F02.02–F02.05 nem registrar `G02 = PASS` antes da auditoria correspondente.
