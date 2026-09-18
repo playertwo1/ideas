@@ -6,9 +6,14 @@
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
     {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": "python scripts/android_check.py", "exit_code": 0},
+    {"command": "adb install -r app/build/outputs/apk/debug/app-debug.apk", "exit_code": 0},
+    {"command": "adb shell monkey -p com.playertwo.ideas 1", "exit_code": 0},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
   ],
   "apk": "app/build/outputs/apk/debug/app-debug.apk",
+  "apk_sha256": "D999C8F047B4058AC92FD1B233DAB683C07AD54467F7FB88CBDD2021D18234A6",
+  "device": {"avd": "Pixel_10_Pro_XL", "model": "sdk_gphone16k_x86_64", "android": "17", "activity": "com.playertwo.ideas/.MainActivity"},
   "scope": "F02 only"
 }
