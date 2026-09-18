@@ -18,6 +18,14 @@
 - **Auditor:** Codex
 - **Product Authority:** usuário
 
+## Trilho Gold
+
+- **Gold migration:** em execução documental, sem mudança de gate.
+- **Baseline:** `docs/GOLD_MIGRATION_BASELINE.md`.
+- **Golden Diff:** `docs/GOLDEN_DIFF.md`.
+- **Validação:** `scripts/check.py`.
+- **Runner:** externo e inalterado.
+
 ## Estado atual
 
 F00.01–F00.08 foram concluídas e verificadas. A auditoria independente da branch `docs/context-efficiency-f00`, incluindo a correção de paridade entre `AI_CONTEXT_INDEX.md` e `context-manifest.json`, resultou em `AUDIT RESULT: PASS`. A Product Authority autorizou e registrou `G00 = PASS` neste ciclo.

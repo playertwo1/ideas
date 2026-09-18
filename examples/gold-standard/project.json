@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-GOLD-EXAMPLE",
+  "title": "Example Gold project",
+  "mode": "STANDARD",
+  "decisions": [],
+  "requirements": [],
+  "roadmap": [],
+  "gaps": [],
+  "gates": []
+}

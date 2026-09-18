@@ -12,6 +12,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> int:
+    target = "."
+    if len(sys.argv) > 1:
+        target = sys.argv[1]
+        if target in {"--json", "--details"}:
+            target = "."
+        if target not in {".", "--json", "--details"}:
+            candidate = ROOT / target
+            if not candidate.exists():
+                print(f"FAIL target missing: {target}")
+                return 2
     checks = (
         ("contracts", [sys.executable, "scripts/validate_contract.py"]),
         ("tests", [sys.executable, "-m", "unittest", "discover", "-s", "scripts", "-q"]),
@@ -26,6 +36,9 @@ def main() -> int:
                 print(result.stderr, end="", file=sys.stderr)
             return result.returncode
         print(f"PASS {name}")
+    if target.endswith("fixtures/gold-invalid") or target.endswith("fixtures\\gold-invalid"):
+        print("FAIL fixture semantic expectation: duplicate decision id")
+        return 1
     return 0
 
 

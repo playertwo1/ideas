@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.1",
+  "projectId": "PRJ-GOLD-IDEAS",
+  "title": "Gold fixture with duplicate decisions",
+  "mode": "STANDARD",
+  "decisions": [{"id": "DEC-1"}, {"id": "DEC-1"}],
+  "requirements": [],
+  "roadmap": [],
+  "gaps": [],
+  "gates": []
+}
