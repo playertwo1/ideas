@@ -13,8 +13,16 @@ public final class GenerationCoordinator {
                                   String providerId, ConsentManager consent, PromptRegistry prompts,
                                   GenerationBudget budget, GenerationRunStore store,
                                   CancellationToken cancellationToken, long timeoutMillis) {
+        return execute(runId, request, promptId, provider, providerId, consent, prompts, budget, store,
+            cancellationToken, timeoutMillis, new RetryPolicy(1));
+    }
+
+    public GenerationRun execute(String runId, AiRequest request, String promptId, AiProvider provider,
+                                  String providerId, ConsentManager consent, PromptRegistry prompts,
+                                  GenerationBudget budget, GenerationRunStore store,
+                                  CancellationToken cancellationToken, long timeoutMillis, RetryPolicy retryPolicy) {
         required(runId, "runId"); required(providerId, "providerId");
-        if (provider == null || consent == null || prompts == null || budget == null || store == null || cancellationToken == null)
+        if (provider == null || consent == null || prompts == null || budget == null || store == null || cancellationToken == null || retryPolicy == null)
             throw new IllegalArgumentException("coordinator dependencies required");
         GenerationRun previous = store.find(runId);
         if (previous != null) {
@@ -28,29 +36,38 @@ public final class GenerationCoordinator {
         store.save(new GenerationRun(runId, request.projectId(), request.inputRevision(), prompt.id(), prompt.version(),
             providerId, GenerationStatus.RUNNING, null, null, request.maxTokens(), 0));
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<AiResult> future = executor.submit(() -> provider.generate(request, cancellationToken));
+        int attempts = 0;
         try {
-            AiResult result = future.get(timeoutMillis, TimeUnit.MILLISECONDS);
-            if (result.outcome() == AiResult.Outcome.CANCELLED) return finish(store, runId, request, prompt, providerId, GenerationStatus.CANCELLED, result, result.failureCode());
-            if (result.outcome() == AiResult.Outcome.FAILED) return finish(store, runId, request, prompt, providerId, GenerationStatus.FAILED, result, result.failureCode());
-            AiResultValidator.validate(request, result);
-            return finish(store, runId, request, prompt, providerId, GenerationStatus.SUCCEEDED, result, null);
-        } catch (TimeoutException error) {
-            future.cancel(true); return finish(store, runId, request, prompt, providerId, GenerationStatus.TIMED_OUT, null, "TIMEOUT");
-        } catch (InterruptedException error) {
-            Thread.currentThread().interrupt(); future.cancel(true);
-            return finish(store, runId, request, prompt, providerId, GenerationStatus.CANCELLED, null, "INTERRUPTED");
-        } catch (ExecutionException error) {
-            return finish(store, runId, request, prompt, providerId, GenerationStatus.FAILED, null, "EXECUTION_ERROR");
-        } catch (RuntimeException error) {
-            return finish(store, runId, request, prompt, providerId, GenerationStatus.REJECTED, null, "INVALID_RESULT");
+            while (true) {
+                attempts++;
+                Future<AiResult> future = executor.submit(() -> provider.generate(request, cancellationToken));
+                try {
+                    AiResult result = future.get(timeoutMillis, TimeUnit.MILLISECONDS);
+                    if (result.outcome() == AiResult.Outcome.CANCELLED) return finish(store, runId, request, prompt, providerId, GenerationStatus.CANCELLED, result, result.failureCode(), attempts);
+                    if (result.outcome() == AiResult.Outcome.FAILED) {
+                        if (retryPolicy.shouldRetry(result.failureCode(), attempts)) continue;
+                        return finish(store, runId, request, prompt, providerId, GenerationStatus.FAILED, result, result.failureCode(), attempts);
+                    }
+                    AiResultValidator.validate(request, result);
+                    return finish(store, runId, request, prompt, providerId, GenerationStatus.SUCCEEDED, result, null, attempts);
+                } catch (TimeoutException error) {
+                    future.cancel(true); return finish(store, runId, request, prompt, providerId, GenerationStatus.TIMED_OUT, null, "TIMEOUT", attempts);
+                } catch (InterruptedException error) {
+                    Thread.currentThread().interrupt(); future.cancel(true);
+                    return finish(store, runId, request, prompt, providerId, GenerationStatus.CANCELLED, null, "INTERRUPTED", attempts);
+                } catch (ExecutionException error) {
+                    return finish(store, runId, request, prompt, providerId, GenerationStatus.FAILED, null, "EXECUTION_ERROR", attempts);
+                } catch (RuntimeException error) {
+                    return finish(store, runId, request, prompt, providerId, GenerationStatus.REJECTED, null, "INVALID_RESULT", attempts);
+                }
+            }
         } finally { executor.shutdownNow(); }
     }
 
     private static GenerationRun finish(GenerationRunStore store, String runId, AiRequest request,
                                         PromptTemplate prompt, String providerId, GenerationStatus status,
-                                        AiResult result, String failure) {
-        GenerationRun run = new GenerationRun(runId, request.projectId(), request.inputRevision(), prompt.id(), prompt.version(), providerId, status, result, failure, request.maxTokens(), 0);
+                                        AiResult result, String failure, int attempts) {
+        GenerationRun run = new GenerationRun(runId, request.projectId(), request.inputRevision(), prompt.id(), prompt.version(), providerId, status, result, failure, request.maxTokens(), 0, attempts);
         store.save(run); return run;
     }
     private static String required(String value, String name) {

@@ -3,6 +3,12 @@
   "substep": "F04.02-F04.07",
   "status": "IMPLEMENTED_AWAITING_AUDIT",
   "scope": "provider adapter, secret consent, validation, recovery, prompt registry and budget",
+  "provider": {
+    "adapter": "HttpAiProviderAdapter",
+    "transport": "java.net.HttpURLConnection",
+    "version": "adapter-v1",
+    "real_call": "not executed; endpoint and secret are external configuration only"
+  },
   "files": [
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiProvider.java",
     "app/src/main/java/com/playertwo/ideas/domain/ai/AiRequest.java",
@@ -20,13 +26,13 @@
   "contract": {
     "input": ["operation", "projectId", "inputRevision", "schemaVersion", "context", "decisions", "maxTokens", "requestId"],
     "output": ["content", "references", "hypotheses", "executionId"],
-    "failures": ["CANCELLED"],
+    "failures": ["CANCELLED", "FAILED", "HTTP_401", "HTTP_403", "HTTP_429", "HTTP_5xx", "NETWORK_ERROR", "TIMEOUT"],
     "determinism": "SHA-256 of canonical request fields",
     "dependencies": "Java collections and SHA-256 only; no Android, network, credential or provider SDK",
     "generation_run": ["runId", "projectId", "inputRevision", "promptId", "promptVersion", "providerId", "status", "requestedTokens", "usageCostMicros", "result"]
   },
   "checks": [
-    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 11},
+    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 12},
     {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 19, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
@@ -43,9 +49,19 @@
     "401 is mapped without returning the secret",
     "timeout persists without a partial result",
     "replay returns the persisted result without calling the provider again",
+    "HTTP_429 retries once within the explicit retry policy and then succeeds",
     "mismatched project/revision/schema result is rejected",
     "AndroidKeyStore adapter supports replace/remove without plaintext preferences"
   ],
-  "not_started": ["F05", "F06"],
+  "not_started": ["F05", "F06", "F11-F20"],
+  "digests_sha256": {
+    "debug_apk": "BF856CC127EED5597F5D6DD6C93169AC45AC283C7B05F6E5A670CACB1C926EC3",
+    "http_adapter_source": "EC19F7A5DB9760A9F0AA78A858B2081C3B7C4F65813FE52821EFE9DBE7FDF6F6",
+    "generation_coordinator_source": "AF68EFC335849143C9BF5C029B4817389C4205E19FFE1FE864CC1941AE586381",
+    "android_secret_store_source": "D94DC40E37EBEFC473520BFD9B9899CA8652B6A9EFA87E6F47ECFC6F5B9A7A77",
+    "generation_tests_source": "F693C5F7F18F0B6AEACE5FC33B289FB59F1D203732BB15879BA264BE1CE19C98"
+  },
+  "secrets": {"committed": false, "logs": "synthetic identifiers and failure codes only"},
+  "limitations": ["No external provider credential or production endpoint was used; homologation remains an explicit follow-up for audit/product decision."],
   "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"}
 }

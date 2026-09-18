@@ -80,6 +80,19 @@ public class GenerationContractTest {
         assertEquals(1, calls[0]); assertEquals(first.status(), replay.status()); assertEquals(first.result(), replay.result());
     }
 
+    @Test public void coordinatorRetriesTransientFailureWithinLimit() {
+        InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
+        InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
+        final int[] calls = new int[1];
+        AiProvider transientProvider = (req, token) -> {
+            calls[0]++;
+            if (calls[0] == 1) return AiResult.failed("x", "HTTP_429");
+            return new FakeAiProvider().generate(req, token);
+        };
+        GenerationRun run = new GenerationCoordinator().execute("run-retry", request(), "interpret", transientProvider, "fake", consent, prompts(), new GenerationBudget(128, 100, 0), store, CancellationToken.never(), 1000, new RetryPolicy(2));
+        assertEquals(GenerationStatus.SUCCEEDED, run.status()); assertEquals(2, calls[0]); assertEquals(2, run.attempts());
+    }
+
     @Test public void coordinatorTimeoutPersistsWithoutPartialResult() {
         InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
         InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
