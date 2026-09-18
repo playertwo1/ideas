@@ -24,13 +24,24 @@ reproduzíveis, sem transformar o projeto em um clone do `ideias_standard`.
 - Contexto adicional será roteado por `AI_CONTEXT_INDEX.md` e
   `context-manifest.json`.
 
+Fontes e artefatos canônicos:
+
+- status: `PROJECT_STATE.md`;
+- contrato de fases: `ROADMAP.md`;
+- autorização da fase: `PHASE_CURRENT.md`;
+- instruções de agentes: `AGENTS.md`;
+- validação: `scripts/check.py` e `scripts/validate_contract.py`;
+- manifesto Gold: `project-manifest.yml`;
+- evidência da migração: `GOLD_MIGRATION_EVIDENCE.json`;
+- comparação de adoção: `docs/GOLDEN_DIFF.md`.
+
 ## Componentes Gold
 
-1. Manifesto e validação reproduzível na raiz.
-2. Fixtures válida e defeituosa para provar PASS/FAIL.
-3. Evidência versionada com digest dos artefatos relevantes.
-4. Golden Diff documentando o que foi adotado, rejeitado ou mantido.
-5. Dogfooding do próprio repositório e do exemplo Gold.
+1. `project-manifest.yml` e validação reproduzível na raiz.
+2. `fixtures/gold-valid/` e `fixtures/gold-invalid/` para provar PASS/FAIL.
+3. `GOLD_MIGRATION_EVIDENCE.json` com digests dos artefatos relevantes.
+4. `docs/GOLDEN_DIFF.md` documentando o que foi adotado, rejeitado ou mantido.
+5. Dogfooding do próprio repositório e de `examples/gold-standard/`.
 
 Nenhum componente será adicionado apenas por simetria com o template; cada
 item deve ter uso verificável no projeto.
@@ -55,7 +66,9 @@ item deve ter uso verificável no projeto.
 ## Critérios de aceitação
 
 - README, ROADMAP, PROJECT_STATE e AGENTS não se contradizem.
-- A validação reproduzível passa na raiz e nas fixtures.
-- O próprio `ideas` e o exemplo Gold passam pelo fluxo dogfooded.
-- Evidências apontam para arquivos existentes e têm digest verificável.
-- O estado preserva F01/G00/G01 e não registra gate ou aprovação automática.
+- `python scripts/check.py` e `python scripts/validate_contract.py` passam na raiz.
+- As fixtures `gold-valid` e `gold-invalid` produzem PASS e FAIL esperados.
+- O próprio `ideas` e `examples/gold-standard/` passam pelo fluxo dogfooded.
+- `GOLD_MIGRATION_EVIDENCE.json` aponta para arquivos existentes e digests verificáveis.
+- O estado preserva F01.08, `G00 = PASS`, `G01 = NOT_RUN` e `G10 = NOT_RUN`.
+- Nenhum gate ou aprovação automática é registrado.
