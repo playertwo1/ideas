@@ -1,64 +1,45 @@
 # IDEA — PHASE CURRENT
 
-> Contrato operacional da fase ativa. Derivado do `ROADMAP.md` v0.6. Em conflito, o `ROADMAP.md` vence. O checklist detalhado permanece em `EXECUTION_PLAN.md`.
+> Contrato operacional da fase ativa. O `ROADMAP.md` é a fonte canônica; este arquivo só registra o estado corrente e a autorização vigente.
 
 ## Fase ativa
 
-**F04 — Contrato de IA e execução controlada de geração**
+**F05 — Captura e interpretação inicial**
 
-**Subetapa atual:** F04.02–F04.07 — findings corrigidos, aguardando reauditoria independente.
-
-**Objetivo:** executar sugestões estruturadas por uma porta provider-neutral, sem acoplar o domínio a rede, credenciais ou fornecedor.
-
-## Resultado esperado
-
-Fluxo, estados e arquitetura documentados de forma verificável, com domínio independente de Android e contratos portáteis preservados.
+**Subetapas:** F05.01–F05.05 implementadas, aguardando auditoria independente.
 
 ## Trabalho autorizado agora
 
-- reauditar F04.02–F04.07;
-- corrigir somente findings reproduzíveis de F04.02–F04.07;
-- manter o fake offline, determinístico e sem credenciais;
-- preservar os contratos e decisões LOCKED de F00–F03;
-- atualizar `PROJECT_STATE.md` e `EXECUTION_PLAN.md` quando o estado realmente mudar.
+- auditar F05.01–F05.05;
+- corrigir somente findings reproduzíveis de F05;
+- manter execução offline por padrão e isolamento por `projectId`;
+- preservar F00–F04 e D01–D09.
 
 ## Não autorizado
 
-- iniciar F05 antes da auditoria independente de F04.02–F04.07;
-- implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
-- tratar a baseline de contexto como implementação de F15;
-- alterar D01–D09 sem decisão explícita da Product Authority;
-- criar segundo target, backend, sincronização ou abstração multiplataforma prematura;
-- executar ação externa/destrutiva não necessária à fase.
+- iniciar F06 ou registrar `G05` antes da auditoria independente;
+- alterar D01–D09;
+- adicionar sincronização, upload ou IA além das portas já existentes;
+- registrar aprovação de gate pelo Builder ou Auditor.
 
-## Decisões e gates vigentes
+## Gates
 
-- D01–D09: `LOCKED` desde 13/09/2026;
-- G00: `PASS` registrado em 14/09/2026 após auditoria independente;
-- G01: `PASS` registrado pela Product Authority em 18/09/2026;
-- G02: `PASS` registrado após auditoria independente de F02;
-- G03: `PASS` registrado pela Product Authority após auditoria independente de F03;
-- G04: `NOT_RUN`;
-- G10: `NOT_RUN`;
-- Idea Factory/F11–F20: bloqueada.
+- G00: `PASS`;
+- G01: `PASS`;
+- G02: `PASS`;
+- G03: `PASS`;
+- G04: `PASS` — Product Authority autorizou F05;
+- G05: `NOT_RUN`;
+- G10: `NOT_RUN`.
 
-`NOT_RUN != PASS`. O Builder não registra o próprio gate.
+## Critérios F05
 
-## Subetapas e critérios
-
-1. **F04.01:** porta `AiProvider` e fake determinístico — PASS independente.
-2. **F04.02–F04.07:** findings corrigidos, aguardando reauditoria.
-
-## Gate G03
-
-**Estado:** `PASS`.
-
-Critério: F03 auditada independentemente; F04 autorizada pela Product Authority.
-
-## Retorno seguro
-
-Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementação nem dados de usuário a migrar nesta fase.
+1. Entrada com título, ideia, limites, multiline e validação.
+2. Snapshot original imutável com hash SHA-256.
+3. Tipo, restrições, profundidade e motivo visíveis e corrigíveis.
+4. Interpretação é sugestão editável; aceitar/rejeitar é explícito.
+5. Progresso e próxima ação persistem por estado e `projectId`.
 
 ## Próxima ação
 
-Reauditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.
+Auditoria independente de F05. Não iniciar F06 nem registrar `G05 = PASS`.

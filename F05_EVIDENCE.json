@@ -1,0 +1,49 @@
+{
+  "phase": "F05",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "scope": ["F05.01", "F05.02", "F05.03", "F05.04", "F05.05"],
+  "base_sha": "c6e37314c33ab6904f1739d2da828bf23907d663",
+  "offline_default": true,
+  "scenarios": {
+    "input": "ProjectIntakeRepository validates projectId/title/idea, preserves accents and multiline text, and stores limits.",
+    "original_snapshot": "originalTitle/originalIdea/originalLimits and originalHash are write-once; suggestions update separate fields.",
+    "type_depth": "suggestion stores projectType, restrictions, depthMode and a visible reason; the repository permits correction.",
+    "interpretation": "FakeAiProvider suggestion is editable, explicitly accepted or rejected, and never becomes a decision automatically.",
+    "progress": "progressPercent and nextAction are persisted per projectId and rendered on the Home screen.",
+    "isolation": "instrumented tests use two project IDs and assert progress/intake values do not cross projects"
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 24, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0, "tests": 19},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "artifacts": [
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeRepository.java",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectInterpretationService.java",
+    "app/src/main/java/com/playertwo/ideas/MainActivity.java",
+    "app/src/main/res/layout/activity_main.xml",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/3.json"
+  ],
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeEntity.java": "8e53f3cf6c2960b8ea153b9567a7b4dd91b48f5f64a5b0e760aba55313f8e3bb",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeDao.java": "86becd807d5d72d84a0ea199bfc355e93b0ae2783331f591cbc80d6279875ba5",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeRepository.java": "fa2e462df951fd8e5db2745d68d805c943abf1660eb853b5ade54a251ff70e75",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectInterpretationService.java": "480ecdf50a23c4072aabcc6c79462bf35984b1c09fd29b48658cd94a9c66e343",
+    "app/src/main/java/com/playertwo/ideas/MainActivity.java": "58590bafed0aa26d0fdf0665fed2c70c00f6fd34f86fa22753b89c0fdff4da29",
+    "app/src/main/res/layout/activity_main.xml": "399dd212dd2fad39544654ec74d712a8846d4270f84f0b3c922a357c7215fb36",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/3.json": "c3e5cf780f3d9cfabb82c179057c91d22d03e21f4bcb88e852cacf0c0593c475"
+  },
+  "gates": {"G03": "PASS", "G04": "PASS", "G05": "NOT_RUN", "G10": "NOT_RUN"},
+  "not_started": ["F06", "F07", "G05"],
+  "limitations": [
+    "The default UI uses FakeAiProvider offline; selecting a real provider remains F04 configuration work.",
+    "The F03 backup envelope is not extended with the new intake table in this F05 change; Room persistence is covered.",
+    "Acceptance of F05 and registration of G05 require independent audit and explicit Product Authority action."
+  ]
+}

@@ -6,15 +6,16 @@
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M2 — MVP 0.1 / Idea Core
-- **Fase:** F04 — Contrato de IA e execução controlada de geração
-- **Subetapa atual:** F04.02–F04.07 — findings corrigidos, aguardando reauditoria independente
+- **Fase:** F05 — Captura e interpretação inicial
+- **Subetapa atual:** F05.01–F05.05 — implementadas, aguardando auditoria independente
 - **Última concluída:** F02.05 — erros e logs sintéticos
-- **Próxima após a atual:** auditar F04.02–F04.07; não iniciar F05 antes de `G04 = PASS`
+- **Próxima após a atual:** auditar F05.01–F05.05; não iniciar F06 antes de `G05 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G02:** PASS — registrado após auditoria independente de F02
 - **G03:** PASS — registrado pela Product Authority após auditoria independente de F03 em 18/09/2026
-- **G04:** NOT_RUN
+- **G04:** PASS — autorizado pela Product Authority em 18/09/2026; F05 liberada
+- **G05:** NOT_RUN
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -45,12 +46,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F03.01–F03.06 foram auditadas independentemente com PASS. F04.02–F04.07 tiveram os findings corrigidos e aguardam reauditoria independente.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 estão implementadas e aguardam auditoria independente.
 
 ## Próxima ação
 
-Reauditar exclusivamente F04.02–F04.07. Não iniciar F05 nem registrar `G04 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F05.01–F05.05. Não iniciar F06 nem registrar `G05 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 
-F04.02–F04.07 estão corrigidas e aguardam reauditoria; F05 permanece bloqueada até `G04 = PASS`. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F05.01–F05.05 estão implementadas e aguardam auditoria; F06 permanece bloqueada até `G05 = PASS`. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.

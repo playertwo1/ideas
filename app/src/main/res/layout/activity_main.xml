@@ -3,10 +3,30 @@
     android:orientation="vertical" android:padding="24dp"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="Idea" android:textSize="24sp" />
+        android:text="Idea — captura local" android:textSize="24sp" />
+    <EditText android:id="@+id/title_editor" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="Título" android:enabled="false" />
     <EditText android:id="@+id/draft_editor" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="Rascunho local"
+        android:layout_height="wrap_content" android:hint="Ideia / rascunho local"
         android:inputType="textMultiLine" />
+    <EditText android:id="@+id/limits_editor" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="Limites" android:enabled="false" />
+    <Button android:id="@+id/suggest_button" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Sugerir interpretação (offline)" />
+    <TextView android:id="@+id/interpretation_view" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Interpretação: ainda não sugerida" />
+    <TextView android:id="@+id/type_view" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Tipo: —" />
+    <TextView android:id="@+id/depth_view" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Modo: —" />
+    <Button android:id="@+id/accept_button" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Aceitar sugestão" />
+    <Button android:id="@+id/reject_button" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Rejeitar sugestão" />
+    <TextView android:id="@+id/progress_view" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Progresso: 0%" />
+    <TextView android:id="@+id/next_action_view" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Próxima ação: Iniciar captura" />
     <TextView android:id="@+id/save_status" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="Carregando" />
 </LinearLayout>
