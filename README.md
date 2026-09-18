@@ -1,112 +1,70 @@
 # Idea
 
-**Idea** é um aplicativo Android local-first para transformar uma ideia incompleta em um pacote de especificação coerente, verificável e pronto para execução por pessoas ou agentes de programação.
+**Idea** é um aplicativo Android local-first para transformar uma ideia incompleta em um pacote de especificação claro, verificável e útil para implementação por pessoas ou agentes.
 
-> **Regra de ouro:** não queremos uma máquina de gerar documentos. Queremos uma máquina de reduzir ambiguidade antes que uma IA escreva código.
+> Regra de ouro: reduzir ambiguidade antes de escrever código.
 
-## Visão
-
-O Idea preserva a intenção original, ajuda a esclarecer lacunas, separa sugestões da IA de decisões humanas, corta o MVP, cria requisitos verificáveis, organiza o roadmap e exporta um pacote versionado.
-
-A fronteira do produto é clara: **o Idea termina no handoff**. Execução contínua de agentes, acompanhamento de código e Mission Control pertencem ao Projeto Vivo ou a ferramentas externas.
-
-## Arquitetura de produto
-
-### Idea Core — provar valor
+## Fluxo do produto
 
 `Capture → Clarify → Decide → Cut → Specify → Plan → Export`
 
-Corresponde a F00–F10. O MVP 0.1 deve provar que um pacote exportado permite entender o que construir, o que ficou fora e como verificar o resultado sem reconstruir a conversa original.
+O Idea preserva a ideia original, ajuda a esclarecer lacunas, separa sugestões da IA de decisões humanas, corta o MVP, cria requisitos com critérios de aceite, organiza um roadmap e exporta o resultado.
 
-### Idea Factory — ampliar um núcleo já útil
-
-`Research → Validate → Blueprint → Task DAG → Context Compiler → Guardrails → Independent Review → Bootstrap → Agent Handoff`
-
-Corresponde a F11–F20. **Não pode entrar em implementação antes de `G10 = PASS`.**
-
-## Modos
-
-- **LIGHT:** utilitário, experimento ou alteração pequena; processo proporcional.
-- **STANDARD:** aplicativos/features normais; entrevista, validação, spec, MVP e roadmap.
-- **DEEP:** sistemas amplos, sensíveis, multiagente ou com integrações relevantes; capacidades avançadas entram somente quando realmente suportadas.
-
-Segurança aplicável deriva do risco, não apenas do modo escolhido.
-
-## Princípios
-
-- intenção original e interpretação da IA são entidades separadas;
-- decisão humana, sugestão, hipótese e evidência externa permanecem distinguíveis;
-- IDs, locks, dependências, integridade e gates usam regras determinísticas;
-- `NOT_RUN` nunca significa `PASS`;
-- readiness é baseado em checks, não em percentuais cosméticos;
-- profundidade cresce com risco/complexidade;
-- regeneração da IA não sobrescreve edição humana aceita;
-- mudança `LOCKED` cria revisão e análise de impacto;
-- itens materiais registram `rationale`;
-- documentação deve reduzir ambiguidade, não aumentar burocracia;
-- agentes devem receber **minimum sufficient context**, não o repositório inteiro por padrão.
-
-## Progressive Commitment
-
-`CAPTURED → SUGGESTED → ACCEPTED → LOCKED → IMPLEMENTATION_RELEVANT`
-
-A IA pode propor; somente autoridade humana apropriada fecha decisões materiais de produto/escopo.
-
-## Papéis de desenvolvimento
-
-- **Product Authority:** usuário — produto, escopo e decisões materiais.
-- **Builder:** Antigravity — executa o contrato autorizado e produz evidências.
-- **Auditor:** Codex — tenta falsificar a solução, verificando diff, acceptance, regressões, segurança e evidências com contexto independente.
-
-Autonomia é proporcional: não pedir novamente autorização para trabalho já autorizado; escalar somente decisão nova, risco novo, mudança material, ação irreversível/destrutiva não autorizada ou conflito canônico real.
-
-## Documentação operacional
-
-Para retomar o projeto: leia `AGENTS.md` e `PROJECT_STATE.md`; a autorização e os limites da fase estão em `PHASE_CURRENT.md`. Abra `ROADMAP.md` e os contratos específicos somente para a tarefa em mãos.
-
-Da raiz do repositório, execute `python scripts/check.py` para validar contratos e rodar os testes existentes. O comando retorna código não zero em falha. Esta verificação ainda não é um build Android: o projeto está na fase documental F01.
-
-- `AGENTS.md` — contrato mínimo para agentes;
-- `PROJECT_STATE.md` — **única fonte de status operacional dinâmico**;
-- `PHASE_CURRENT.md` — autorização e limites da fase atual;
-- `EXECUTION_PLAN.md` — checklist completo;
-- `ROADMAP.md` — contrato canônico e decisões;
-- `CONTEXT_POLICY.md` — política de eficiência de contexto;
-- `AI_CONTEXT_INDEX.md` + `context-manifest.json` — roteamento de contexto por tarefa;
-- `WATCHDOG.md` — segurança/anti-drift carregado por gatilho;
-- `AUDIT.md` — método de auditoria independente;
-- `REFERENCE_MATRIX.md` — referências externas, adoção e limites.
-
-O DOCX original é fonte histórica de pesquisa, não autoridade operacional.
-
-## Contexto mínimo para agentes
-
-Bootstrap padrão:
-
-1. `AGENTS.md`;
-2. `PROJECT_STATE.md`;
-3. pedido atual.
-
-Depois o agente usa `AI_CONTEXT_INDEX.md`/`context-manifest.json` para ampliar contexto somente quando necessário. ROADMAP completo, WATCHDOG, AUDIT, histórico e pesquisa externa não são leitura padrão.
-
-A política detalhada está em `CONTEXT_POLICY.md`.
+O produto termina no **handoff**. Execução contínua de agentes, acompanhamento do código e Mission Control pertencem a ferramentas externas/Projeto Vivo.
 
 ## MVP 0.1
 
-Inclui projetos locais, captura da ideia original, interpretação separada, modos LIGHT/STANDARD/DEEP, Smart Interview, decisões versionadas, hipótese/teste mínimo, MVP Cutter, REQ/NFR + acceptance, roadmap básico, readiness por checks, exportação Markdown/JSON/ZIP, restauração, histórico e proteção de credenciais.
+O MVP precisa provar uma coisa: alguém que receba apenas o pacote exportado deve conseguir entender:
 
-Fora do MVP 0.1: execução de agentes pelo app, Git remoto, criação automática de repositório, pesquisa web profunda, Task DAG completo, Context Compiler, Guardrail Generator, revisão independente completa, Mission Control, grafo spec↔código, JIRA, Figma e roteamento automático de modelos.
+- qual problema será resolvido;
+- para quem;
+- qual é o MVP;
+- o que ficou fora;
+- quais decisões foram tomadas pelo usuário;
+- quais pontos ainda são hipótese ou pendência;
+- quais requisitos devem ser atendidos;
+- como verificar o resultado;
+- qual sequência de implementação é sugerida.
 
-## Referências externas
+O MVP é Android-first e local-first. Leitura, edição, salvamento e exportação não dependem da IA. Geração assistida exige conexão.
 
-As referências GitHub usadas na concepção são inspiração, não dependências. A matriz canônica de adoção/proveniência está em `REFERENCE_MATRIX.md`.
+## Regras que não negociamos
 
-Nenhum `REF-xx` substitui especificação interna. Um agente deve conseguir implementar uma fase usando contratos do Idea sem precisar consultar o repositório externo de referência.
+- ideia original e interpretação da IA são separadas;
+- IA pode sugerir, mas não pode criar decisão `LOCKED`;
+- autoria e autoridade permanecem distinguíveis;
+- `NOT_RUN` nunca significa `PASS`;
+- IDs e referências do pacote são validados deterministicamente;
+- o domínio não depende diretamente de Compose, Room ou SDK de provider;
+- não construir a Idea Factory antes de o Core provar valor.
 
-## Fonte da verdade
+## Desenvolvimento
 
-O estado estruturado local será a fonte operacional do produto. Markdown é materialização de uma revisão. O pacote exportado inclui `project.json` e `manifest.json`, com IDs, hashes, capabilities, gates e limitações conhecidas.
+Papéis:
 
-## Estado atual
+- **Product Authority:** usuário; decide produto e mudanças materiais.
+- **Builder:** implementa o trabalho autorizado.
+- **Auditor:** revisa mudanças relevantes de forma independente.
 
-Não duplique status aqui. **Consulte `PROJECT_STATE.md`.**
+Não há gate humano em toda pequena fase. Cada etapa avança quando seu acceptance objetivo passa. O gate estratégico mantido é **G10**, que decide se vale expandir o Core para a futura Idea Factory.
+
+## Documentos ativos
+
+- `AGENTS.md` — regras mínimas para agentes;
+- `PROJECT_STATE.md` — estado atual e próximo passo;
+- `PRODUCT_SPEC.md` — produto, escopo e decisões atuais;
+- `ROADMAP.md` — caminho enxuto até o MVP e backlog pós-MVP;
+- `ARCHITECTURE.md` — arquitetura essencial e baseline Android;
+- `VALIDATION_CONTRACT.md` — regras determinísticas do formato;
+- `WATCHDOG.md` — segurança/anti-drift para tarefas de risco;
+- `AUDIT.md` — método de auditoria independente.
+
+Contratos executáveis ficam em `schemas/`, exemplos em `fixtures/` e validações em `scripts/`.
+
+Para verificar os contratos existentes:
+
+```bash
+python scripts/check.py
+```
+
+O DOCX original permanece apenas como pesquisa histórica. O Git preserva versões anteriores dos documentos removidos durante a simplificação.
