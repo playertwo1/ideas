@@ -6,12 +6,13 @@
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M1 — Fundação offline
-- **Fase:** F02 — Skeleton Android e ciclo de desenvolvimento
-- **Subetapa atual:** F02.05 — implementada pelo Builder, aguardando auditoria independente
-- **Última concluída:** F01.08 — contrato portátil e compatibilidade de schema
-- **Próxima após a atual:** auditar F02.01–F02.05; F03 somente após `G02 = PASS`
+- **Fase:** F03 — Persistência local e histórico confiável
+- **Subetapa atual:** F03.06 — implementada pelo Builder, aguardando auditoria independente
+- **Última concluída:** F02.05 — erros e logs sintéticos
+- **Próxima após a atual:** auditar F03.01–F03.06; F04 somente após `G03 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
+- **G02:** PASS — registrado após auditoria independente de F02
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -42,11 +43,11 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F02.01–F02.05 foram implementadas. A auditoria independente de F02 está pendente.
+F03.01–F03.06 foram implementadas. A auditoria independente de F03 está pendente.
 
 ## Próxima ação
 
-Auditar exclusivamente F02.01–F02.05. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F03.01–F03.06. Não iniciar F04 nem registrar `G03 = PASS` antes da auditoria correspondente.
 
 ## Regra de avanço
 

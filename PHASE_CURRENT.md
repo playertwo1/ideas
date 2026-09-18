@@ -4,11 +4,11 @@
 
 ## Fase ativa
 
-**F02 — Skeleton Android e ciclo de desenvolvimento**
+**F03 — Persistência local e histórico confiável**
 
-**Subetapa atual:** F02.05 — implementada pelo Builder, aguardando auditoria independente.
+**Subetapa atual:** F03.06 — implementada pelo Builder, aguardando auditoria independente.
 
-**Objetivo:** criar um skeleton Android instalável, com navegação base e verificações reproduzíveis.
+**Objetivo:** preservar projetos, revisões, rascunhos e eventos após reinício e falhas.
 
 ## Resultado esperado
 
@@ -25,7 +25,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Não autorizado
 
-- iniciar F03 antes de `G02 = PASS` registrado pela Product Authority;
+- iniciar F04 antes de `G03 = PASS` registrado pela Product Authority;
 - implementar F11–F20 / Idea Factory enquanto `G10 != PASS`;
 - tratar a baseline de contexto como implementação de F15;
 - alterar D01–D09 sem decisão explícita da Product Authority;
@@ -37,6 +37,7 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 - D01–D09: `LOCKED` desde 13/09/2026;
 - G00: `PASS` registrado em 14/09/2026 após auditoria independente;
 - G01: `PASS` registrado pela Product Authority em 18/09/2026;
+- G02: `PASS` registrado após auditoria independente de F02;
 - G10: `NOT_RUN`;
 - Idea Factory/F11–F20: bloqueada.
 
@@ -44,11 +45,12 @@ Fluxo, estados e arquitetura documentados de forma verificável, com domínio in
 
 ## Subetapas e critérios
 
-1. **F02.01 — Projeto e módulos mínimos:** concluída; evidência em `F02_01_EVIDENCE.json`.
-2. **F02.02 — Tema, navegação e Home:** concluída; Home vazia e instalável.
-3. **F02.03 — Comandos:** concluída; comandos em `F02_COMMANDS.md`.
-4. **F02.04 — Verificações:** concluída; testes e lint sem segredos.
-5. **F02.05 — Erros e logs:** concluída; log sintético `home_opened`, sem dados de usuário.
+1. **F03.01:** entidades Room e DAOs com `projectId`.
+2. **F03.02:** gravação de projeto e evento na mesma transação.
+3. **F03.03:** entidade de rascunho e autosave local.
+4. **F03.04:** schema Room exportado em `app/schemas/`.
+5. **F03.05:** arquivar, restaurar e excluir por ID exato.
+6. **F03.06:** política de backup e falhas sem fallback destrutivo.
 
 ## Gate G01
 
@@ -62,4 +64,4 @@ Se F01 ou G01 falhar, revisar wireframes, contratos e ADRs. Não há implementa�
 
 ## Próxima ação
 
-Auditar exclusivamente F02.01–F02.05. Não iniciar F03 nem registrar `G02 = PASS` antes da auditoria correspondente.
+Auditar exclusivamente F03.01–F03.06. Não iniciar F04 nem registrar `G03 = PASS` antes da auditoria correspondente.

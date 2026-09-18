@@ -1,0 +1,15 @@
+{
+  "phase": "F03",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "substeps": ["F03.01", "F03.02", "F03.03", "F03.04", "F03.05", "F03.06"],
+  "database": "Room 2.6.1, schema version 1, projectId-scoped entities",
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "schema": "app/schemas/com.playertwo.ideas.data.IdeaDatabase/1.json",
+  "scope": "F03 only"
+}

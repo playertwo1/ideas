@@ -12,8 +12,15 @@ android {
     }
     buildTypes { release { isMinifyEnabled = false } }
     testOptions { unitTests.isIncludeAndroidResources = true }
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions.argument("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
 }
 
 dependencies {
     testImplementation(libs.junit)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
 }
