@@ -11,7 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
-@Database(entities = {ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class}, version = 2, exportSchema = true)
+@Database(entities = {ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class, ProjectIntakeEntity.class}, version = 3, exportSchema = true)
 public abstract class IdeaDatabase extends RoomDatabase {
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
@@ -30,10 +30,17 @@ public abstract class IdeaDatabase extends RoomDatabase {
             db.execSQL("CREATE INDEX index_project_revisions_projectId ON project_revisions(projectId)");
         }
     };
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS project_intake (projectId TEXT NOT NULL, originalTitle TEXT NOT NULL, originalIdea TEXT NOT NULL, originalLimits TEXT NOT NULL, originalHash TEXT NOT NULL, interpretation TEXT, projectType TEXT, restrictions TEXT, depthMode TEXT, suggestionReason TEXT, interpretationAccepted INTEGER NOT NULL, progressPercent INTEGER NOT NULL, nextAction TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_project_intake_projectId ON project_intake(projectId)");
+        }
+    };
     public abstract ProjectDao projects();
     public abstract DraftDao drafts();
     public abstract EventDao events();
     public abstract RevisionDao revisions();
+    public abstract ProjectIntakeDao intakes();
     public static IdeaDatabase open(Context context) {
         File file = context.getDatabasePath("idea.db");
         if (file.exists()) {
@@ -46,6 +53,6 @@ public abstract class IdeaDatabase extends RoomDatabase {
             }
         }
         return Room.databaseBuilder(context.getApplicationContext(), IdeaDatabase.class, "idea.db")
-            .addMigrations(MIGRATION_1_2).build();
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
     }
 }
