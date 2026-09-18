@@ -23,8 +23,8 @@
   ],
   "contract": {
     "input": ["operation", "projectId", "inputRevision", "schemaVersion", "context", "decisions", "maxTokens", "requestId"],
-    "output": ["content", "references", "hypotheses", "executionId", "usageCostMicros"],
-    "failures": ["CANCELLED", "TIMEOUT", "INTERRUPTED", "HTTP_401", "HTTP_403", "HTTP_429", "HTTP_5XX", "NETWORK_ERROR", "INVALID_RESPONSE", "INVALID_RESULT", "COST_BUDGET_EXCEEDED"],
+    "output": ["content", "references", "hypotheses", "executionId", "usageCostMicros", "usageCostReported"],
+    "failures": ["CANCELLED", "TIMEOUT", "INTERRUPTED", "HTTP_401", "HTTP_403", "HTTP_429", "HTTP_5XX", "NETWORK_ERROR", "EXECUTION_ERROR", "INVALID_RESPONSE", "INVALID_RESULT", "COST_UNAVAILABLE", "COST_BUDGET_EXCEEDED"],
     "retry": {"default_max_retries": 2, "retryable": ["HTTP_429", "HTTP_5XX", "NETWORK_ERROR", "EXECUTION_ERROR"], "non_retryable": ["HTTP_401", "HTTP_403", "TIMEOUT", "CANCELLED", "INVALID_RESULT"]},
     "determinism": "SHA-256 of canonical request fields for FakeAiProvider",
     "budget": {"tokens": "request.maxTokens <= maxTokens", "context": "context and decisions character budget", "cost": "usageCostMicros <= maxCostMicros"},
@@ -32,7 +32,7 @@
     "generation_run": ["runId", "projectId", "inputRevision", "promptId", "promptVersion", "providerId", "status", "requestedTokens", "usageCostMicros", "attempts", "result"]
   },
   "checks": [
-    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 11},
+    {"command": ".\\gradlew.bat testDebugUnitTest --tests com.playertwo.ideas.domain.ai.AiProviderContractTest --tests com.playertwo.ideas.domain.ai.GenerationContractTest", "exit_code": 0, "tests": 17},
     {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 19, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
@@ -48,24 +48,27 @@
     "missing consent and over-budget context are rejected before a run is stored",
     "401 is mapped without returning the secret and is not retried",
     "429 and 5xx retry at most two times and persist attempts",
+    "NETWORK_ERROR and EXECUTION_ERROR retry at most two times and persist attempts",
     "timeout persists without a partial result",
     "replay returns the persisted result without calling the provider again",
     "mismatched project/revision/schema result is rejected",
+    "missing provider cost is rejected without accepting content",
     "provider cost above maxCostMicros is rejected without accepting content",
     "AndroidKeyStore adapter supports replace/remove without plaintext preferences"
   ],
   "security": {"committed_secrets": false, "credential_logs": false, "provider_real_call_required": false},
   "artifact_sha256": {
-    "app/src/main/java/com/playertwo/ideas/domain/ai/AiResult.java": "827231bd354b802ad82b6b9c1cb70f6f0a26cb878ade86dd1b312bb536f56874",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/AiResult.java": "f76c4028c759d9804d973abd0e7a1bcbeaac93713f2d87dadb76a1a1a2b7ce2d",
     "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationBudget.java": "87c976e085c226c05ac01145ce52c57cbbfcc27b13e9855561e8866aa797204f",
-    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationCoordinator.java": "40658b52b5e9583cc45ac81ffdc64405b53621a9872c79d171058159b2d4ccdf",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationCoordinator.java": "0df1a40685167ee15e25db448f631d593bc94186e1666b28ce301211b9763c92",
     "app/src/main/java/com/playertwo/ideas/domain/ai/GenerationRun.java": "53f1525bde9ed281fa7fabb3d3382aca21b83724613645954d6f970092786bd9",
     "app/src/main/java/com/playertwo/ideas/domain/ai/RetryPolicy.java": "caff800a54d1d4b9e42adf24147f764fce1c2e4e3164f0d3b9b9f5750972c424",
-    "app/src/main/java/com/playertwo/ideas/domain/ai/HttpAiProviderAdapter.java": "19523202335167e87e85ba62c22f37702f566370afe18c7f00dee7636f43a13c",
-    "app/src/test/java/com/playertwo/ideas/domain/ai/GenerationContractTest.java": "90c23e2c97820966200e93218016c267c08b3d09fe6b284881a4fba6be90a413",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/HttpAiProviderAdapter.java": "becf0f1ce03b1e80035785fd3f92bf07d7b3d545a0cdc317a55204e7e93cabd8",
+    "app/src/main/java/com/playertwo/ideas/domain/ai/FakeAiProvider.java": "1f0ea8ab260bd2eabdd1c2f7707f6ad3ac337b6fd280941c61f4d88938ed5146",
+    "app/src/test/java/com/playertwo/ideas/domain/ai/GenerationContractTest.java": "11ec0dd0338277be9ef85fa4859b78875cbee576a3875ee86ea9bf06e2746f81",
     "app/src/androidTest/java/com/playertwo/ideas/data/ProviderAdapterInstrumentedTest.java": "ad649866bd0ba54fd26dd767f13c21d01e517637b07c0081b057503fe9fe651f"
   },
   "not_started": ["F05", "F06"],
   "gates": {"G03": "PASS", "G04": "NOT_RUN", "G10": "NOT_RUN"},
-  "limitations": ["real provider endpoint execution is not required; adapter remains externally configured", "cost is accepted only when provider reports usageCostMicros"]
+  "limitations": ["real provider endpoint execution is not required; adapter remains externally configured", "a real provider must report usageCostMicros for acceptance"]
 }

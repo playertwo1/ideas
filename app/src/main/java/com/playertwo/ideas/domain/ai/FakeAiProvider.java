@@ -22,7 +22,7 @@ public final class FakeAiProvider implements AiProvider {
         references.put("inputRevision", Long.toString(request.inputRevision()));
         references.put("schemaVersion", request.schemaVersion());
         return AiResult.success(content, references,
-            Arrays.asList("fake-provider", "unverified-suggestion"), executionId);
+            Arrays.asList("fake-provider", "unverified-suggestion"), executionId, 0);
     }
 
     private static String sha256(String value) {

@@ -160,11 +160,58 @@ public class GenerationContractTest {
         assertEquals(1, authRun.attempts());
     }
 
+    @Test public void coordinatorRetriesNetworkFailureAndPersistsAttempts() {
+        InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
+        InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
+        final int[] calls = new int[1];
+        AiProvider network = (req, token) -> {
+            calls[0]++;
+            if (calls[0] < 3) return AiResult.failed("network-" + calls[0], "NETWORK_ERROR");
+            return new FakeAiProvider().generate(req, token);
+        };
+        GenerationRun run = new GenerationCoordinator().execute("run-network", request(), "interpret", network, "fake", consent,
+            prompts(), new GenerationBudget(128, 100, 0), store, CancellationToken.never(), 1000);
+        assertEquals(GenerationStatus.SUCCEEDED, run.status());
+        assertEquals(3, calls[0]);
+        assertEquals(3, run.attempts());
+    }
+
+    @Test public void coordinatorRetriesExecutionFailureAndPersistsAttempts() {
+        InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
+        InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
+        final int[] calls = new int[1];
+        AiProvider execution = (req, token) -> {
+            calls[0]++;
+            if (calls[0] < 3) throw new IllegalStateException("transient");
+            return new FakeAiProvider().generate(req, token);
+        };
+        GenerationRun run = new GenerationCoordinator().execute("run-execution", request(), "interpret", execution, "fake", consent,
+            prompts(), new GenerationBudget(128, 100, 0), store, CancellationToken.never(), 1000);
+        assertEquals(GenerationStatus.SUCCEEDED, run.status());
+        assertEquals(3, calls[0]);
+        assertEquals(3, run.attempts());
+    }
+
+    @Test public void coordinatorRejectsProviderResultWithoutReportedCost() {
+        InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
+        InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
+        AiProvider missingCost = (req, token) -> AiResult.success(
+            Collections.singletonMap("suggestion", "x"),
+            new java.util.HashMap<String, String>() {{ put("projectId", "P1"); put("inputRevision", "3"); put("schemaVersion", "0.1"); }},
+            Collections.emptyList(), "missing-cost");
+        GenerationRun run = new GenerationCoordinator().execute("run-missing-cost", request(), "interpret", missingCost, "fake", consent,
+            prompts(), new GenerationBudget(128, 100, 100), store, CancellationToken.never(), 1000);
+        assertEquals(GenerationStatus.REJECTED, run.status());
+        assertEquals("COST_UNAVAILABLE", run.failureCode());
+        assertNull(run.result());
+    }
+
     @Test public void coordinatorRejectsProviderCostBeforeAcceptingResult() {
         InMemoryConsentManager consent = new InMemoryConsentManager(); consent.grant("P1");
         InMemoryGenerationRunStore store = new InMemoryGenerationRunStore();
         AiProvider costly = (req, token) -> AiResult.success(Collections.singletonMap("suggestion", "x"),
-            java.util.Collections.emptyMap(), java.util.Collections.emptyList(), "costly", 101);
+            new java.util.HashMap<String, String>() {{ put("projectId", "P1"); put("inputRevision", "3"); put("schemaVersion", "0.1"); }},
+            java.util.Collections.emptyList(), "costly", 101);
         GenerationRun run = new GenerationCoordinator().execute("run-cost", request(), "interpret", costly, "fake", consent,
             prompts(), new GenerationBudget(128, 100, 100), store, CancellationToken.never(), 1000);
         assertEquals(GenerationStatus.REJECTED, run.status());

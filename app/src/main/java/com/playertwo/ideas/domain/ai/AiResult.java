@@ -15,9 +15,11 @@ public final class AiResult {
     private final String executionId;
     private final String failureCode;
     private final long usageCostMicros;
+    private final boolean usageCostReported;
 
     private AiResult(Outcome outcome, Map<String, String> content, Map<String, String> references,
-                     List<String> hypotheses, String executionId, String failureCode, long usageCostMicros) {
+                     List<String> hypotheses, String executionId, String failureCode, long usageCostMicros,
+                     boolean usageCostReported) {
         if (usageCostMicros < 0) throw new IllegalArgumentException("usageCostMicros must be non-negative");
         this.outcome = outcome;
         this.content = Collections.unmodifiableMap(content);
@@ -26,27 +28,28 @@ public final class AiResult {
         this.executionId = executionId;
         this.failureCode = failureCode;
         this.usageCostMicros = usageCostMicros;
+        this.usageCostReported = usageCostReported;
     }
 
     public static AiResult success(Map<String, String> content, Map<String, String> references,
                             List<String> hypotheses, String executionId) {
-        return success(content, references, hypotheses, executionId, 0);
+        return new AiResult(Outcome.SUCCESS, content, references, hypotheses, executionId, null, 0, false);
     }
 
     public static AiResult success(Map<String, String> content, Map<String, String> references,
                             List<String> hypotheses, String executionId, long usageCostMicros) {
-        return new AiResult(Outcome.SUCCESS, content, references, hypotheses, executionId, null, usageCostMicros);
+        return new AiResult(Outcome.SUCCESS, content, references, hypotheses, executionId, null, usageCostMicros, true);
     }
 
     public static AiResult cancelled(String executionId) {
         return new AiResult(Outcome.CANCELLED, Collections.emptyMap(), Collections.emptyMap(),
-            Collections.emptyList(), executionId, "CANCELLED", 0);
+            Collections.emptyList(), executionId, "CANCELLED", 0, false);
     }
 
     public static AiResult failed(String executionId, String failureCode) {
         if (failureCode == null || failureCode.trim().isEmpty()) throw new IllegalArgumentException("failureCode required");
         return new AiResult(Outcome.FAILED, Collections.emptyMap(), Collections.emptyMap(),
-            Collections.emptyList(), executionId, failureCode, 0);
+            Collections.emptyList(), executionId, failureCode, 0, false);
     }
 
     public Outcome outcome() { return outcome; }
@@ -56,6 +59,7 @@ public final class AiResult {
     public String executionId() { return executionId; }
     public String failureCode() { return failureCode; }
     public long usageCostMicros() { return usageCostMicros; }
+    public boolean usageCostReported() { return usageCostReported; }
 
     @Override public boolean equals(Object other) {
         if (!(other instanceof AiResult)) return false;
@@ -63,7 +67,7 @@ public final class AiResult {
         return outcome == that.outcome && Objects.equals(content, that.content)
             && Objects.equals(references, that.references) && Objects.equals(hypotheses, that.hypotheses)
             && Objects.equals(executionId, that.executionId) && Objects.equals(failureCode, that.failureCode)
-            && usageCostMicros == that.usageCostMicros;
+            && usageCostMicros == that.usageCostMicros && usageCostReported == that.usageCostReported;
     }
-    @Override public int hashCode() { return Objects.hash(outcome, content, references, hypotheses, executionId, failureCode, usageCostMicros); }
+    @Override public int hashCode() { return Objects.hash(outcome, content, references, hypotheses, executionId, failureCode, usageCostMicros, usageCostReported); }
 }

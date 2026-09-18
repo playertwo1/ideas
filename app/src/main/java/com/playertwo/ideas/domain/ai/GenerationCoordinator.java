@@ -54,13 +54,17 @@ public final class GenerationCoordinator {
                         }
                         return finish(store, runId, request, prompt, providerId, GenerationStatus.FAILED, result, result.failureCode(), attempts);
                     }
+                    AiResultValidator.validate(request, result);
+                    if (!result.usageCostReported()) {
+                        return finish(store, runId, request, prompt, providerId, GenerationStatus.REJECTED, null,
+                            "COST_UNAVAILABLE", attempts);
+                    }
                     try {
                         budget.validateCost(result.usageCostMicros());
                     } catch (IllegalArgumentException costError) {
                         return finish(store, runId, request, prompt, providerId, GenerationStatus.REJECTED, null,
                             "COST_BUDGET_EXCEEDED", attempts, result.usageCostMicros());
                     }
-                    AiResultValidator.validate(request, result);
                     return finish(store, runId, request, prompt, providerId, GenerationStatus.SUCCEEDED, result, null, attempts);
                 } catch (TimeoutException error) {
                     future.cancel(true);
