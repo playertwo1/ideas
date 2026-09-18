@@ -11,7 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
-@Database(entities = {ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class, ProjectIntakeEntity.class}, version = 3, exportSchema = true)
+@Database(entities = {ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class, ProjectIntakeEntity.class, InterviewSessionEntity.class, InterviewGapEntity.class, DecisionRevisionEntity.class, DecisionHistoryEntity.class}, version = 4, exportSchema = true)
 public abstract class IdeaDatabase extends RoomDatabase {
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
@@ -36,11 +36,25 @@ public abstract class IdeaDatabase extends RoomDatabase {
             db.execSQL("CREATE INDEX IF NOT EXISTS index_project_intake_projectId ON project_intake(projectId)");
         }
     };
+    public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS interview_sessions (projectId TEXT NOT NULL PRIMARY KEY, projectType TEXT NOT NULL, depthMode TEXT NOT NULL, status TEXT NOT NULL, round INTEGER NOT NULL, maxRounds INTEGER NOT NULL, gateBlocked INTEGER NOT NULL, nextAction TEXT NOT NULL, updatedAt INTEGER NOT NULL, FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS interview_gaps (projectId TEXT NOT NULL, gapId TEXT NOT NULL, criticality TEXT NOT NULL, prompt TEXT NOT NULL, options TEXT NOT NULL, recommendation TEXT NOT NULL, tradeoffs TEXT NOT NULL, defaultValue TEXT, status TEXT NOT NULL, answer TEXT, answerSource TEXT, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, gapId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS decision_revisions (projectId TEXT NOT NULL, revision INTEGER NOT NULL, status TEXT NOT NULL, author TEXT NOT NULL, reason TEXT NOT NULL, derivedValid INTEGER NOT NULL, createdAt INTEGER NOT NULL, PRIMARY KEY(projectId, revision), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS decision_history (historyId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, projectId TEXT NOT NULL, revision INTEGER NOT NULL, action TEXT NOT NULL, actor TEXT NOT NULL, gapId TEXT, detail TEXT NOT NULL, createdAt INTEGER NOT NULL, FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_interview_gaps_projectId ON interview_gaps(projectId)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_decision_history_projectId ON decision_history(projectId)");
+        }
+    };
     public abstract ProjectDao projects();
     public abstract DraftDao drafts();
     public abstract EventDao events();
     public abstract RevisionDao revisions();
     public abstract ProjectIntakeDao intakes();
+    public abstract InterviewSessionDao interviewSessions();
+    public abstract InterviewGapDao interviewGaps();
+    public abstract DecisionRevisionDao decisionRevisions();
+    public abstract DecisionHistoryDao decisionHistory();
     public static IdeaDatabase open(Context context) {
         File file = context.getDatabasePath("idea.db");
         if (file.exists()) {
@@ -53,6 +67,6 @@ public abstract class IdeaDatabase extends RoomDatabase {
             }
         }
         return Room.databaseBuilder(context.getApplicationContext(), IdeaDatabase.class, "idea.db")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4).build();
     }
 }

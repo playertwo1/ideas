@@ -1,0 +1,55 @@
+{
+  "phase": "F06",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "scope": ["F06.01", "F06.02", "F06.03", "F06.04", "F06.05", "F06.06", "F06.07"],
+  "base_sha": "20517326be8a38833be9bbfe28dde36d763303e5",
+  "offline_default": true,
+  "scenarios": {
+    "catalog": "GapCatalog returns a smaller STANDARD catalog and a DEEP/APP catalog with critical gaps.",
+    "adaptive_rounds": "Answered gaps leave the open queue and are not repeated without explicit reopen.",
+    "response_modes": "Answers, edits, explicit deferrals and explicit defaults are persisted with source and history.",
+    "decision_revision": "PROPOSED, REFINED and LOCKED revisions are versioned; only a human actor can lock.",
+    "reopen": "Human reopen records delta/reason, invalidates derived revisions and opens the selected gap.",
+    "stop_condition": "Round budget produces EXHAUSTED plus a clear manual choice; no automatic approval occurs.",
+    "history": "Every transition is readable by projectId, revision, actor, action and detail.",
+    "isolation": "P1 and P2 sessions and histories remain separate."
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 33, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0, "tests": 19},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "artifacts": [
+    "app/src/main/java/com/playertwo/ideas/data/GapCatalog.java",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewRepository.java",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewSessionEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewGapEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/DecisionRevisionEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/DecisionHistoryEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F06InterviewInstrumentedTest.java",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/4.json"
+  ],
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/data/GapCatalog.java": "f505b6e2530fa05d842fce74c25470b4398c686faf29c4839a11cae31439a68b",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewRepository.java": "1defdb5bf028ad0127433e65c43b803214ae09c6760b4a886de1f5f91d0c9343",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewSessionEntity.java": "180c64114e4324304309c5e8ee66acbfe994d6574e98f50461b02ef67b762cb6",
+    "app/src/main/java/com/playertwo/ideas/data/InterviewGapEntity.java": "1004cc19c3f954babf485b120274bdd9f865164b92ed5a8887cfcb4079da65e0",
+    "app/src/main/java/com/playertwo/ideas/data/DecisionRevisionEntity.java": "f9987b6ae498d469f2893775fe27f37b6eb2dfd378b53f994a23cc785ddc8026",
+    "app/src/main/java/com/playertwo/ideas/data/DecisionHistoryEntity.java": "d98d64e48efca384a14ca14486b3994edfad4230d5e59981ca1c0c33f91bfd89",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java": "e0a9749ed6d03c0cb4639194455b31d842050307ae25a99b903488911c7d7ffd",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F06InterviewInstrumentedTest.java": "41d4f776b05c69ac784006c0450bf4fc44f1ec79de4cd2f5211ce3aae355077f",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/4.json": "6c910e74f16b43c2a6a7c961d28378d3a5cacba0eb16728fb843926edb246ede"
+  },
+  "gates": {"G05": "PASS", "G06": "NOT_RUN", "G10": "NOT_RUN"},
+  "not_started": ["F07", "G06"],
+  "limitations": [
+    "The interview workflow is exposed through provider-neutral repository APIs; F06 UI polish is not added.",
+    "AI never writes interview state; any provider suggestion must be converted into an explicit human action.",
+    "G06 requires independent audit and explicit Product Authority action."
+  ]
+}

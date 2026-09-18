@@ -6,18 +6,17 @@
 
 **F06 — Entrevista inteligente e decisões versionadas**
 
-**Subetapas:** F06.01–F06.07 autorizadas, ainda não implementadas.
+**Subetapas:** F06.01–F06.07 implementadas, aguardando auditoria independente.
 
 ## Trabalho autorizado agora
 
-- implementar F06.01–F06.07;
-- manter entrevista offline por padrão;
-- preservar decisões humanas, rastreabilidade e D01–D09;
-- atualizar evidência e estado somente com mudanças reais.
+- auditar F06.01–F06.07;
+- corrigir somente findings reproduzíveis de F06;
+- preservar entrevista offline, decisões humanas, histórico e D01–D09.
 
 ## Não autorizado
 
-- iniciar F07 ou registrar `G06` antes da auditoria de F06;
+- iniciar F07 ou registrar `G06` antes da auditoria independente;
 - transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
 - iniciar F11–F20 enquanto `G10 != PASS`.
@@ -29,7 +28,7 @@
 - G02: `PASS`;
 - G03: `PASS`;
 - G04: `PASS`;
-- G05: `PASS` — Product Authority autorizou F06;
+- G05: `PASS`;
 - G06: `NOT_RUN`;
 - G10: `NOT_RUN`.
 
@@ -45,4 +44,4 @@
 
 ## Próxima ação
 
-Implementar F06.01–F06.07 e parar para auditoria independente. Não iniciar F07 nem registrar `G06 = PASS`.
+Auditoria independente de F06. Não iniciar F07 nem registrar `G06 = PASS`.
