@@ -1,102 +1,104 @@
-# VALIDATION_CONTRACT — M0
+# VALIDATION CONTRACT — Idea Core
 
-Este documento materializa a validação semântica de F00.03 que não pode ser
-expressa apenas com JSON Schema. `ROADMAP.md` continua canônico.
+Contrato determinístico dos formatos estruturados do Idea. Os schemas vivem em `schemas/`; as regras semânticas que não cabem em JSON Schema são verificadas por `scripts/validate_contract.py`.
 
-## Pipeline obrigatório
+## Pipeline
 
-Cada documento é processado nesta ordem, sem misturar resultados:
+Sempre nesta ordem:
 
-1. **Parse:** ler o arquivo e decodificar JSON;
-2. **Estrutural:** validar contra o schema Draft 2020-12 correspondente;
-3. **Semântico:** executar regras determinísticas somente se o parse e a
-   validação estrutural passarem;
-4. **Expectativa:** para fixtures negativas, comparar exatamente o conjunto de
-   códigos semânticos esperado. Uma substring coincidente não é suficiente.
+1. parse JSON;
+2. validar o schema Draft 2020-12;
+3. executar regras semânticas;
+4. para fixtures negativas, comparar exatamente os códigos esperados.
 
-Falha em qualquer etapa produz `FAIL`; ausência de execução produz `NOT_RUN`.
+Falha em qualquer etapa é `FAIL`. Ausência de execução é `NOT_RUN`.
 
-## Regras semânticas mínimas do `project.json`
+## Regras semânticas
 
 ### VAL-001 — IDs materiais únicos
 
-Todos os IDs materiais são únicos no namespace global do snapshot. As coleções
-F00 cobertas são:
+IDs cobertos pelo snapshot não podem se repetir, inclusive entre coleções incompatíveis:
 
-- `decisions[].id` (`DEC-*`);
-- `requirements[].id` (`REQ-*` e `NFR-*`);
-- `roadmap[].id` (`PHASE-*` e `TASK-*`);
-- `gaps[].id` (`GAP-*`);
-- `gates[].id` (`GATE-*`);
-- `references[].id` (`REF-*`).
-
-A regra detecta repetição dentro de uma coleção e colisão entre coleções,
-mesmo que os objetos tenham conteúdo diferente. Entidades exclusivas da
-Idea Factory não fazem parte desta lista.
+- `DEC-*`;
+- `REQ-*` / `NFR-*`;
+- `PHASE-*` / `TASK-*`;
+- `GAP-*`;
+- `GATE-*`;
+- `REF-*`.
 
 ### VAL-002 — referências internas existentes
 
-Toda referência interna coberta pelo schema deve apontar para entidade
-existente no mesmo snapshot:
+Referências internas devem apontar para entidades existentes.
 
-- `requirements[].decisionRefs[]` deve existir em `decisions[].id`;
-- `roadmap[].dependsOn[]` deve existir em `roadmap[].id`;
-- um item do roadmap não pode depender de si mesmo.
+Cobertura atual:
 
-Detecção completa de ciclos do roadmap permanece fora deste contrato F00.
+- `requirements[].decisionRefs[]` → decisão existente;
+- `roadmap[].dependsOn[]` → item existente;
+- item de roadmap não depende de si mesmo.
 
-### VAL-003 — decisão LOCKED exige autoridade humana explícita
+### VAL-003 — LOCKED exige autoridade humana
 
-Uma decisão `LOCKED` somente é válida quando `author=USER`, `authority=USER`
-e `lockAction=HUMAN_EXPLICIT`. IA ou autoridade não humana não pode fechar a
-decisão.
+Uma decisão `LOCKED` só é válida com:
 
-### VAL-004 — namespace incompatível
+- `author=USER`;
+- `authority=USER`;
+- `lockAction=HUMAN_EXPLICIT`.
 
-O prefixo do ID deve ser compatível com sua coleção, conforme a lista de
-`VAL-001`. O schema fornece a primeira barreira; este código mantém a regra
-explícita na camada semântica para valores avaliados fora do parser de schema.
+IA, importação ou regra de sistema não podem fechar a decisão em nome do usuário.
+
+### VAL-004 — namespace compatível
+
+O prefixo do ID deve corresponder ao tipo de entidade definido pelo schema/contrato.
 
 ### VAL-005 — NOT_APPLICABLE exige rationale
 
-`NOT_APPLICABLE` exige rationale presente, textual e não vazio após remover
-espaços. A regra vale para `gates[].status`, `roadmap[].gateStatus` e para
-`manifest.gateResults[].status`. O schema exige a presença do campo; a camada
-semântica exige conteúdo não vazio.
+`NOT_APPLICABLE` exige justificativa textual não vazia nos campos aplicáveis.
 
-`NOT_RUN` continua sendo um estado distinto: não executado nunca equivale a
-`PASS`.
+`NOT_RUN` continua diferente de `PASS`.
 
-### Integridade não é inventada
+## Integridade
 
-Se uma referência necessária está ausente, o validador não cria entidade,
-remove referência ou transforma o problema em warning silencioso.
+O validador nunca corrige silenciosamente um snapshot inválido. Não cria entidade ausente, remove referência problemática nem converte erro em warning para fazer o pacote passar.
 
-## Fixtures negativas
+## Fixtures
 
-Cada fixture negativa deve ser JSON parseável, passar estruturalmente, falhar
-semanticamente e apresentar exatamente os códigos listados:
+Fixtures válidas demonstram exemplos LIGHT, STANDARD e DEEP do contrato 0.1.
 
-- `invalid-duplicate-id.project.json` → `VAL-001`;
-- `invalid-missing-ref.project.json` → `VAL-002`;
-- `invalid-ai-locked.project.json` → `VAL-003`;
-- `invalid-duplicate-gate-id.project.json` → `VAL-001`;
-- `invalid-duplicate-roadmap-id.project.json` → `VAL-001`;
-- `invalid-missing-roadmap-ref.project.json` → `VAL-002`;
-- `invalid-not-applicable-rationale.project.json` → `VAL-005`.
+Fixtures negativas cobrem pelo menos:
 
-O script também verifica que remover o defeito esperado ou introduzir um erro
-adicional faz a expectativa exata falhar com código de saída diferente de zero.
+- ID duplicado → `VAL-001`;
+- referência ausente → `VAL-002`;
+- IA tentando criar `LOCKED` → `VAL-003`;
+- gate/roadmap duplicado → `VAL-001`;
+- dependência de roadmap ausente → `VAL-002`;
+- `NOT_APPLICABLE` sem rationale → `VAL-005`.
 
-## Critério de aceite de F00.03
+Os testes devem falhar se o defeito esperado desaparecer ou se surgir código semântico adicional inesperado.
 
-F00.03 só pode ser considerada verificada quando os três schemas existem,
-todos os exemplos válidos passam as três primeiras etapas, cada fixture
-negativa passa estruturalmente e falha semanticamente com o conjunto exato
-esperado, e os testes adversariais passam.
+## Contrato portátil
 
-## Implementação futura
+`project.json` e `manifest.json` são independentes de UI, Room e provider.
 
-A implementação Android deve portar estas regras para uma camada de domínio
-testável, sem dependência de UI, Room ou provider de IA. O comportamento do
-validador é parte do contrato portátil do Core.
+Leitura futura do pacote deve seguir:
+
+```text
+bytes
+→ JSON parse
+→ schema
+→ regras semânticas
+→ coerência manifest/projeto
+→ integridade dos arquivos
+→ snapshot candidato
+```
+
+Versão desconhecida/incompatível deve ser rejeitada explicitamente, nunca interpretada parcialmente.
+
+## Verificação
+
+Da raiz:
+
+```bash
+python scripts/check.py
+```
+
+Esse comando valida os contratos e executa os testes existentes. Android terá checks próprios quando B1 criar o aplicativo.
