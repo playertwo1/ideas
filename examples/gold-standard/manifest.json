@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "0.1",
+  "generatorVersion": "ideas-gold",
+  "templateVersion": "1.0",
+  "projectId": "PRJ-GOLD-EXAMPLE",
+  "projectRevision": 1,
+  "modeRequested": "STANDARD",
+  "capabilities": ["contract-validation"],
+  "packageStatus": "DRAFT",
+  "createdAt": "2026-09-18T00:00:00Z",
+  "files": [],
+  "gateResults": [{"id": "GATE-GOLD", "status": "NOT_RUN"}],
+  "knownLimitations": ["No Android implementation"]
+}
