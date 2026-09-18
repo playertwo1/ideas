@@ -1,26 +1,26 @@
 # IDEA — PHASE CURRENT
 
-> Contrato operacional da fase ativa. O `ROADMAP.md` é a fonte canônica; este arquivo só registra o estado corrente e a autorização vigente.
+> Contrato operacional da fase ativa. O `ROADMAP.md` é a fonte canônica; este arquivo registra apenas estado e autorização.
 
 ## Fase ativa
 
-**F05 — Captura e interpretação inicial**
+**F06 — Entrevista inteligente e decisões versionadas**
 
-**Subetapas:** F05.01–F05.05 implementadas, aguardando auditoria independente.
+**Subetapas:** F06.01–F06.07 autorizadas, ainda não implementadas.
 
 ## Trabalho autorizado agora
 
-- auditar F05.01–F05.05;
-- corrigir somente findings reproduzíveis de F05;
-- manter execução offline por padrão e isolamento por `projectId`;
-- preservar F00–F04 e D01–D09.
+- implementar F06.01–F06.07;
+- manter entrevista offline por padrão;
+- preservar decisões humanas, rastreabilidade e D01–D09;
+- atualizar evidência e estado somente com mudanças reais.
 
 ## Não autorizado
 
-- iniciar F06 ou registrar `G05` antes da auditoria independente;
+- iniciar F07 ou registrar `G06` antes da auditoria de F06;
+- transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
-- adicionar sincronização, upload ou IA além das portas já existentes;
-- registrar aprovação de gate pelo Builder ou Auditor.
+- iniciar F11–F20 enquanto `G10 != PASS`.
 
 ## Gates
 
@@ -28,18 +28,21 @@
 - G01: `PASS`;
 - G02: `PASS`;
 - G03: `PASS`;
-- G04: `PASS` — Product Authority autorizou F05;
-- G05: `NOT_RUN`;
+- G04: `PASS`;
+- G05: `PASS` — Product Authority autorizou F06;
+- G06: `NOT_RUN`;
 - G10: `NOT_RUN`.
 
-## Critérios F05
+## Critérios F06
 
-1. Entrada com título, ideia, limites, multiline e validação.
-2. Snapshot original imutável com hash SHA-256.
-3. Tipo, restrições, profundidade e motivo visíveis e corrigíveis.
-4. Interpretação é sugestão editável; aceitar/rejeitar é explícito.
-5. Progresso e próxima ação persistem por estado e `projectId`.
+1. Lacunas catalogadas por tipo, modo e criticidade.
+2. Rodadas adaptativas sem repetição desnecessária.
+3. Responder, editar, adiar e aceitar default explícito.
+4. DecisionRevision com Propose/Refine/Lock humano.
+5. Reabertura com delta e invalidação de derivados.
+6. Stop condition e orçamento de rodadas.
+7. Histórico legível com autoria e rastreabilidade.
 
 ## Próxima ação
 
-Auditoria independente de F05. Não iniciar F06 nem registrar `G05 = PASS`.
+Implementar F06.01–F06.07 e parar para auditoria independente. Não iniciar F07 nem registrar `G06 = PASS`.
