@@ -4,7 +4,7 @@
 
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
-**Estado atual:** F06.01–F06.07 implementadas e aguardando auditoria
+**Estado atual:** F06.01–F06.07 corrigidas e aguardando reauditoria
 independente. `G05 = PASS`; `G06 = NOT_RUN`; F07 não iniciada. Os checkboxes de
 F06/G06 permanecem pendentes até a verificação e o gate correspondentes.
 
@@ -187,8 +187,8 @@ F06/G06 permanecem pendentes até a verificação e o gate correspondentes.
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes.
 
-**Status de implementação:** F06.01–F06.07 implementadas; aguardando auditoria
-independente. Não registrar `G06` nem iniciar F07 antes do resultado da auditoria.
+**Status de implementação:** F06.01–F06.07 corrigidas; aguardando reauditoria
+independente. Não registrar `G06` nem iniciar F07 antes do resultado da reauditoria.
 
 - [ ] **F06.01 — Catálogo de lacunas por tipo/modo e criticidade**
   - Verificar: Casos simples não recebem questionário completo DEEP

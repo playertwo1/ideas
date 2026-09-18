@@ -12,8 +12,8 @@ camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
-**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 estão
-implementadas e aguardam auditoria independente. `G05 = PASS`, `G06 = NOT_RUN`
+**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 foram corrigidas
+e aguardam reauditoria independente. `G05 = PASS`, `G06 = NOT_RUN`
 e F07 ainda não foi iniciada. Esta marcação descreve implementação; não registra
 auditoria, gate ou aprovação de produto.
 
@@ -495,8 +495,8 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes. Responsável: E; apoio P/Q. Depende: F04 e F05. Reuso: REF-02 e REF-03. Esforço: 5–8 dias-pessoa.
 
-**Status atual:** F06.01–F06.07 implementadas, aguardando auditoria independente.
-`G06 = NOT_RUN`; não iniciar F07 antes de auditoria e autorização explícita da
+**Status atual:** F06.01–F06.07 corrigidas, aguardando reauditoria independente.
+`G06 = NOT_RUN`; não iniciar F07 antes de reauditoria e autorização explícita da
 Product Authority.
 
 **Padrões externos aplicados:** REF-02 fornece Propose → Refine → Lock, opções concretas e trade-offs; REF-03 inspira capacidades encadeáveis. LOCK é autoridade humana e nunca consequência automática da IA.

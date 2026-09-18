@@ -7,9 +7,9 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M2 — MVP 0.1 / Idea Core
 - **Fase:** F06 — Entrevista inteligente e decisões versionadas
-- **Subetapa atual:** F06.01–F06.07 — implementadas, aguardando auditoria independente
+- **Subetapa atual:** F06.01–F06.07 — corrigidas, aguardando reauditoria independente
 - **Última concluída:** F02.05 — erros e logs sintéticos
-- **Próxima após a atual:** auditar F06.01–F06.07; não iniciar F07 antes de `G06 = PASS`
+- **Próxima após a atual:** reauditar F06.01–F06.07; não iniciar F07 antes de `G06 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G02:** PASS — registrado após auditoria independente de F02
@@ -47,12 +47,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 estão implementadas e aguardam auditoria independente.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 foram corrigidas e aguardam reauditoria independente.
 
 ## Próxima ação
 
-Auditar exclusivamente F06.01–F06.07. Não iniciar F07 nem registrar `G06 = PASS` antes da auditoria correspondente.
+Reauditar exclusivamente F06.01–F06.07. Não iniciar F07 nem registrar `G06 = PASS` antes da reauditoria correspondente.
 
 ## Regra de avanço
 
-F06.01–F06.07 estão implementadas e aguardam auditoria independente. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F06.01–F06.07 foram corrigidas e aguardam reauditoria independente. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.

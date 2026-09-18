@@ -62,6 +62,22 @@ public class F06InterviewInstrumentedTest {
         assertEquals("LOCKED", repository.session("P1").status);
     }
 
+    @Test public void rejectsNonHumanAndUnknownLockActors() {
+        repository.initialize("P1", "GENERAL", "STANDARD", 2);
+        repository.answer("P1", "goal", "validar", "USER");
+        repository.answer("P1", "audience", "eu", "USER");
+        for (String actor : new String[] {"AI", "SYSTEM", "BOT", "AUTOMATION", "AI_AGENT", "NOT_A_ROLE"}) {
+            try {
+                repository.lock("P1", actor, "tentativa não humana");
+                fail("lock accepted actor " + actor);
+            } catch (IllegalArgumentException | IllegalStateException expected) { }
+        }
+        assertEquals("ACTIVE", repository.session("P1").status);
+        assertNotEquals("LOCKED", repository.latestRevision("P1").status);
+        repository.lock("P1", ActorType.HUMAN, "decisão explícita");
+        assertEquals("HUMAN", repository.latestRevision("P1").author);
+    }
+
     @Test public void reopenCreatesDeltaAndInvalidatesDerivedRevisions() {
         repository.initialize("P1", "GENERAL", "STANDARD", 2);
         repository.answer("P1", "goal", "validar", "USER");

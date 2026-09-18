@@ -6,11 +6,11 @@
 
 **F06 — Entrevista inteligente e decisões versionadas**
 
-**Subetapas:** F06.01–F06.07 implementadas, aguardando auditoria independente.
+**Subetapas:** F06.01–F06.07 corrigidas, aguardando reauditoria independente.
 
 ## Trabalho autorizado agora
 
-- auditar F06.01–F06.07;
+- reauditar F06.01–F06.07;
 - corrigir somente findings reproduzíveis de F06;
 - preservar entrevista offline, decisões humanas, histórico e D01–D09.
 
@@ -44,4 +44,4 @@
 
 ## Próxima ação
 
-Auditoria independente de F06. Não iniciar F07 nem registrar `G06 = PASS`.
+Reauditoria independente de F06. Não iniciar F07 nem registrar `G06 = PASS`.

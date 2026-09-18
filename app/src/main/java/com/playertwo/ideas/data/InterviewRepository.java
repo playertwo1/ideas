@@ -73,6 +73,10 @@ public final class InterviewRepository {
     public void refine(String projectId, String actor, String reason) { transition(projectId, actor, "REFINED", "REFINE", reason); }
 
     public void lock(String projectId, String actor, String reason) {
+        lock(projectId, ActorType.parse(actor), reason);
+    }
+
+    public void lock(String projectId, ActorType actor, String reason) {
         String id = required(projectId, "projectId"); humanOnly(actor); required(reason, "reason");
         database.runInTransaction(() -> {
             InterviewSessionEntity session = requireSession(id);
@@ -81,22 +85,22 @@ public final class InterviewRepository {
                 if ("CRITICAL".equals(gap.criticality) && !"ANSWERED".equals(gap.status))
                     throw new IllegalStateException("critical gap blocks lock");
             int next = revision(id) + 1; long now = System.currentTimeMillis();
-            database.decisionRevisions().insert(new DecisionRevisionEntity(id, next, "LOCKED", actor, reason, true, now));
-            history(id, next, "LOCK", actor, null, reason, now);
+            database.decisionRevisions().insert(new DecisionRevisionEntity(id, next, "LOCKED", actor.name(), reason, true, now));
+            history(id, next, "LOCK", actor.name(), null, reason, now);
             database.interviewSessions().update(id, "LOCKED", session.round, false, "Decisão bloqueada por ação humana", now);
         });
     }
 
     public void reopen(String projectId, String gapId, String actor, String reason) {
-        String id = required(projectId, "projectId"); humanOnly(actor); required(reason, "reason");
+        String id = required(projectId, "projectId"); ActorType actorType = humanOnly(actor); required(reason, "reason");
         database.runInTransaction(() -> {
             InterviewSessionEntity session = requireSession(id);
             InterviewGapEntity gap = gap(id, gapId);
             database.decisionRevisions().invalidateAll(id);
             database.interviewGaps().answer(id, gap.gapId, "OPEN", null, null, System.currentTimeMillis());
             int next = revision(id) + 1; long now = System.currentTimeMillis();
-            database.decisionRevisions().insert(new DecisionRevisionEntity(id, next, "PROPOSED", actor, reason, false, now));
-            history(id, next, "REOPEN", actor, gap.gapId, reason, now);
+            database.decisionRevisions().insert(new DecisionRevisionEntity(id, next, "PROPOSED", actorType.name(), reason, false, now));
+            history(id, next, "REOPEN", actorType.name(), gap.gapId, reason, now);
             database.interviewSessions().update(id, "ACTIVE", session.round, true, "Revisar delta reaberto", now);
         });
     }
@@ -178,9 +182,13 @@ public final class InterviewRepository {
     }
 
     private static void humanOrSystem(String actor) { required(actor, "actor"); }
-    private static void humanOnly(String actor) {
-        required(actor, "actor");
-        if ("AI".equalsIgnoreCase(actor) || "SYSTEM".equalsIgnoreCase(actor)) throw new IllegalStateException("human action required");
+    private static ActorType humanOnly(String actor) {
+        return humanOnly(ActorType.parse(actor));
+    }
+    private static ActorType humanOnly(ActorType actor) {
+        if (actor == null) throw new IllegalArgumentException("actor required");
+        if (actor != ActorType.HUMAN) throw new IllegalStateException("human action required");
+        return actor;
     }
     private static String required(String value, String name) {
         if (value == null || value.trim().isEmpty()) throw new IllegalArgumentException(name + " required");
