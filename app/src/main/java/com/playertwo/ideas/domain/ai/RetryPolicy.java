@@ -5,6 +5,8 @@ public final class RetryPolicy {
     private final int maxRetries;
     private final long backoffMillis;
 
+    public RetryPolicy(int maxRetries) { this(maxRetries, 0); }
+
     public RetryPolicy(int maxRetries, long backoffMillis) {
         if (maxRetries < 0 || backoffMillis < 0) throw new IllegalArgumentException("invalid retry policy");
         this.maxRetries = maxRetries;
