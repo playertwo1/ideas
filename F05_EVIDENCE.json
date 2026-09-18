@@ -9,14 +9,16 @@
     "original_snapshot": "originalTitle/originalIdea/originalLimits and originalHash are write-once; suggestions update separate fields.",
     "type_depth": "suggestion stores projectType, restrictions, depthMode and a visible reason; the repository permits correction.",
     "interpretation": "FakeAiProvider suggestion is editable, explicitly accepted or rejected, and never becomes a decision automatically.",
-    "progress": "progressPercent and nextAction are persisted per projectId and rendered on the Home screen.",
+    "progress": "progressPercent and nextAction are derived from persisted snapshot state and rendered on the Home screen; no gate is advanced.",
+    "rejection": "reject clears interpretation, type, restrictions, depth and reason, then recomputes progress from the preserved original input.",
+    "legacy": "legacy projects without a nonblank draft do not receive an empty immutable snapshot; first valid input creates it.",
     "isolation": "instrumented tests use two project IDs and assert progress/intake values do not cross projects"
   },
   "checks": [
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
     {"command": ".\\gradlew.bat lint", "exit_code": 0},
-    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 24, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 26, "failures": 0, "device": "Pixel_10_Pro_XL / Android 17"},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "python -m unittest discover -s scripts -q", "exit_code": 0, "tests": 19},
     {"command": "git diff --check", "exit_code": 0}
@@ -28,15 +30,17 @@
     "app/src/main/java/com/playertwo/ideas/data/ProjectInterpretationService.java",
     "app/src/main/java/com/playertwo/ideas/MainActivity.java",
     "app/src/main/res/layout/activity_main.xml",
+    "app/src/androidTest/java/com/playertwo/ideas/data/ProjectIntakeInstrumentedTest.java",
     "app/schemas/com.playertwo.ideas.data.IdeaDatabase/3.json"
   ],
   "artifact_sha256": {
     "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeEntity.java": "8e53f3cf6c2960b8ea153b9567a7b4dd91b48f5f64a5b0e760aba55313f8e3bb",
-    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeDao.java": "86becd807d5d72d84a0ea199bfc355e93b0ae2783331f591cbc80d6279875ba5",
-    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeRepository.java": "fa2e462df951fd8e5db2745d68d805c943abf1660eb853b5ade54a251ff70e75",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeDao.java": "11cd6b3555078228427904cd4fba7a8e959f45dd3d7045009e9b0ce0dcedd64e",
+    "app/src/main/java/com/playertwo/ideas/data/ProjectIntakeRepository.java": "4875dcc6cc0186535d4471861dfc448ca4b436c78881c1a41da2aa21a8bd9c90",
     "app/src/main/java/com/playertwo/ideas/data/ProjectInterpretationService.java": "480ecdf50a23c4072aabcc6c79462bf35984b1c09fd29b48658cd94a9c66e343",
-    "app/src/main/java/com/playertwo/ideas/MainActivity.java": "58590bafed0aa26d0fdf0665fed2c70c00f6fd34f86fa22753b89c0fdff4da29",
+    "app/src/main/java/com/playertwo/ideas/MainActivity.java": "013d7b5387449a1998e888964405d62bcc3dfd5d9b9a8e7c406f7e1753dbfb5c",
     "app/src/main/res/layout/activity_main.xml": "399dd212dd2fad39544654ec74d712a8846d4270f84f0b3c922a357c7215fb36",
+    "app/src/androidTest/java/com/playertwo/ideas/data/ProjectIntakeInstrumentedTest.java": "df599a461853c456476c301bc1925f219b2f5bce4626e2f201a5ea0a94638dee",
     "app/schemas/com.playertwo.ideas.data.IdeaDatabase/3.json": "c3e5cf780f3d9cfabb82c179057c91d22d03e21f4bcb88e852cacf0c0593c475"
   },
   "gates": {"G03": "PASS", "G04": "PASS", "G05": "NOT_RUN", "G10": "NOT_RUN"},

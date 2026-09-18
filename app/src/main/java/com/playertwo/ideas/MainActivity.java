@@ -89,7 +89,9 @@ public final class MainActivity extends Activity {
                     try {
                         ProjectIntakeRepository repository = new ProjectIntakeRepository(database);
                         if (repository.find(projectId) == null) {
-                            repository.create(projectId, titleValue.trim().isEmpty() ? "Rascunho" : titleValue, content, limitsValue);
+                            if (database.projects().find(projectId) == null)
+                                repository.create(projectId, titleValue.trim().isEmpty() ? "Rascunho" : titleValue, content, limitsValue);
+                            else repository.createForLegacy(projectId, titleValue.trim().isEmpty() ? "Rascunho" : titleValue, content, limitsValue);
                             ProjectIntakeEntity created = repository.find(projectId);
                             runOnUiThread(() -> {
                                 title.setEnabled(false); limits.setEnabled(false);
@@ -118,7 +120,7 @@ public final class MainActivity extends Activity {
         accept.setOnClickListener(v -> storage.execute(() -> {
             try {
                 ProjectIntakeRepository repository = new ProjectIntakeRepository(database);
-                repository.acceptSuggestion(projectId); repository.updateProgress(projectId, 80, "Aguardando próxima fase");
+                repository.acceptSuggestion(projectId);
                 ProjectIntakeEntity updated = repository.find(projectId);
                 runOnUiThread(() -> render(updated, interpretation, type, depth, progress, next));
             } catch (RuntimeException error) { runOnUiThread(() -> status.setText("Aceite uma sugestão válida")); }
@@ -126,7 +128,7 @@ public final class MainActivity extends Activity {
         reject.setOnClickListener(v -> storage.execute(() -> {
             try {
                 ProjectIntakeRepository repository = new ProjectIntakeRepository(database);
-                repository.rejectSuggestion(projectId); repository.updateProgress(projectId, 20, "Revisar a captura");
+                repository.rejectSuggestion(projectId);
                 ProjectIntakeEntity updated = repository.find(projectId);
                 runOnUiThread(() -> render(updated, interpretation, type, depth, progress, next));
             } catch (RuntimeException error) { runOnUiThread(() -> status.setText("Não foi possível rejeitar")); }
