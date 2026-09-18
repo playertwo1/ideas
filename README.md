@@ -62,6 +62,10 @@ Autonomia é proporcional: não pedir novamente autorização para trabalho já 
 
 ## Documentação operacional
 
+Para retomar o projeto: leia `AGENTS.md` e `PROJECT_STATE.md`; a autorização e os limites da fase estão em `PHASE_CURRENT.md`. Abra `ROADMAP.md` e os contratos específicos somente para a tarefa em mãos.
+
+Da raiz do repositório, execute `python scripts/check.py` para validar contratos e rodar os testes existentes. O comando retorna código não zero em falha. Esta verificação ainda não é um build Android: o projeto está na fase documental F01.
+
 - `AGENTS.md` — contrato mínimo para agentes;
 - `PROJECT_STATE.md` — **única fonte de status operacional dinâmico**;
 - `PHASE_CURRENT.md` — autorização e limites da fase atual;
