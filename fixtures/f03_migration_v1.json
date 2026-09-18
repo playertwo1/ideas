@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "projects": [{"projectId": "P-001", "title": "Projeto teste", "status": "ACTIVE"}],
+  "drafts": [{"projectId": "P-001", "content": "rascunho", "updatedAt": 1700000000000}],
+  "events": [{"projectId": "P-001", "type": "CREATED", "createdAt": 1700000000000}]
+}

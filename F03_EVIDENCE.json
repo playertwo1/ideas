@@ -3,6 +3,9 @@
   "status": "IMPLEMENTED_AWAITING_AUDIT",
   "substeps": ["F03.01", "F03.02", "F03.03", "F03.04", "F03.05", "F03.06"],
   "database": "Room 2.6.1, schema version 1, projectId-scoped entities",
+  "fixtures": ["fixtures/f03_migration_v1.json"],
+  "test_matrix": "F03_TEST_MATRIX.md",
+  "backup_policy": "F03_BACKUP_POLICY.md",
   "checks": [
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
