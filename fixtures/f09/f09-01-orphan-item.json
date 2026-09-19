@@ -1,0 +1,6 @@
+{
+  "projectId": "P1",
+  "phaseId": "PH-MISSING",
+  "itemId": "ITEM-ORPHAN",
+  "expected": "reject phaseId missing before rendering"
+}

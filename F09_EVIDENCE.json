@@ -11,13 +11,14 @@
     "snapshot": "Only interpretationAccepted snapshots are rendered; original fields and originalHash are preserved.",
     "unicode_multiline": "Unicode and multiline text are retained in canonical fenced blocks with normalized line endings.",
     "relationships": "Phase and item IDs, phaseId, dependencies, orderIndex, status and projectId are rendered.",
-    "isolation": "Foreign project entities are rejected before rendering and no foreign content is emitted."
+    "isolation": "Foreign project entities are rejected before rendering and no foreign content is emitted.",
+    "orphan_validation": "An item whose phaseId is absent is rejected before rendering instead of being dropped."
   },
   "checks": [
     {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
     {"command": ".\\gradlew.bat test", "exit_code": 0},
     {"command": ".\\gradlew.bat lint", "exit_code": 0},
-    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 57, "failures": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 58, "failures": 0},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
@@ -27,16 +28,18 @@
     "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java",
     "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java",
     "fixtures/f09/f09-01-snapshot.json",
+    "fixtures/f09/f09-01-orphan-item.json",
     "README.md",
     "ROADMAP.md",
     "PROJECT_STATE.md",
     "PHASE_CURRENT.md"
   ],
   "artifact_sha256": {
-    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "aa59015aef84c74f7cb9c4ea85ad4ce0e9195ab56f4b973ef15be06c6455ec25",
-    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "89fec94fae727ee6b790a3bf1b6a967ba7dcb53fb3659962420b46f22b740eed",
-    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "396df194c6e630952206ed074b33aed0dea2a4da87e4485f7100e0250af23103",
+    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "d42e4c5ed31fd5823e97262303a6f6ed76eddd4cb55e07ec74ccc2d8062f65dd",
+    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "f9f2ef3ddaf0acbf04b97edb7c5172eac6bf53a3f2cd6eed95a2041144151c78",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "0991899c417c3b0c2882929092375b87e2b5cf165080645f5ff3bfd49a23e90d",
     "fixtures/f09/f09-01-snapshot.json": "2219ffdb2685e82d6b7dcee6b4269e25d3ba7e434dade9c6775d135e4e1a66c5",
+    "fixtures/f09/f09-01-orphan-item.json": "f07621caecf77fcfd16c7c3d631494f0e25ec9625143c83df354e72e7a056867",
     "README.md": "e964aa4bfb61a8e0f4ddd71c72bd175b720b3d9882fafcf02285c54696442d73",
     "ROADMAP.md": "8418c2c394cd339eed5377103dbd0664eede3583fa6ad704a3514011084ef37e",
     "PROJECT_STATE.md": "7e93408ff95423728a92c599a874b86313d24a2289b23bdc740fbde640dbaedf",

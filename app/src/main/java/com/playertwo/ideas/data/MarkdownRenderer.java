@@ -3,7 +3,9 @@ package com.playertwo.ideas.data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** Canonical, offline Markdown rendering for one accepted project snapshot. */
 public final class MarkdownRenderer {
@@ -16,6 +18,12 @@ public final class MarkdownRenderer {
         if (!project.projectId.equals(snapshot.projectId)) throw new IllegalArgumentException("projectId mismatch");
         List<PhaseEntity> safePhases = copyPhases(project.projectId, phases);
         List<RoadmapItemEntity> safeItems = copyItems(project.projectId, items);
+        Set<String> phaseIds = new HashSet<>();
+        for (PhaseEntity phase : safePhases) phaseIds.add(phase.phaseId);
+        for (RoadmapItemEntity item : safeItems) {
+            if (!phaseIds.contains(item.phaseId))
+                throw new IllegalArgumentException("phaseId missing: " + item.phaseId);
+        }
         StringBuilder output = new StringBuilder();
         output.append("# Idea Snapshot\n\n");
         line(output, "projectId", project.projectId);
