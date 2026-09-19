@@ -4,9 +4,11 @@
 
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
-**Estado atual:** F06.01–F06.07 reauditadas com PASS. `G05 = PASS`;
-`G06 = PASS`; F07 auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
-`G07 = PASS`; F08.01–F08.05 implementadas e aguardando auditoria independente.
+**Estado atual:** F00–F08 estão concluídas conforme os gates `G00`–`G08`
+registrados. F04.02–F04.07 permanecem implementadas e aguardam reauditoria,
+conforme `PROJECT_STATE.md`. F09.01 está implementada e aguardando auditoria
+independente; F09.02+, F10 e F11–F20 não foram iniciadas. `G09 = NOT_RUN` e
+`G10 = NOT_RUN`.
 
 ## Regras rápidas
 
@@ -89,127 +91,130 @@
 
 ## M1 — Fundação offline
 
-### [ ] F02 — Skeleton Android e ciclo de desenvolvimento *(próxima fase autorizada)*
+### [x] F02 — Skeleton Android e ciclo de desenvolvimento
 
 **Resultado:** aplicativo instalável com navegação base e verificações automatizadas.
 
-- [ ] **F02.01 — Criar projeto, wrapper, catálogo de versões e módulos mínimos**
+- [x] **F02.01 — Criar projeto, wrapper, catálogo de versões e módulos mínimos**
   - Verificar: Checkout limpo produz APK debug
-- [ ] **F02.02 — Tema, tipografia, navegação e tela Home vazia**
+- [x] **F02.02 — Tema, tipografia, navegação e tela Home vazia**
   - Verificar: Instalação e navegação em emulador e aparelho
-- [ ] **F02.03 — Estabelecer convenções e commands de build/lint/test**
+- [x] **F02.03 — Estabelecer convenções e commands de build/lint/test**
   - Verificar: Um comando documentado reproduz cada check
-- [ ] **F02.04 — CI com build, testes de domínio e lint, sem segredos no repo**
+- [x] **F02.04 — CI com build, testes de domínio e lint, sem segredos no repo**
   - Verificar: Falha introduzida no fixture falha no job esperado
-- [ ] **F02.05 — Configurar erros visíveis e logging com dados sintéticos**
+- [x] **F02.05 — Configurar erros visíveis e logging com dados sintéticos**
   - Verificar: Relatório não inclui ideia ou credencial real
 
 **G02**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G02 = PASS` — APK abre e os checks passam.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G02 = PASS` — APK abre e os checks passam.
 
-### [ ] F03 — Persistência local e histórico confiável
+### [x] F03 — Persistência local e histórico confiável
 
 **Resultado:** projetos e revisões sobrevivem a reinício e falhas.
 
-- [ ] **F03.01 — Implementar entidades atuais, DAOs e relações por projectId**
+- [x] **F03.01 — Implementar entidades atuais, DAOs e relações por projectId**
   - Verificar: Teste impede associação entre projetos distintos
-- [ ] **F03.02 — Implementar transação alteração + revisão + evento**
+- [x] **F03.02 — Implementar transação alteração + revisão + evento**
   - Verificar: Falha injetada não deixa meio estado gravado
-- [ ] **F03.03 — Rascunhos, autosave, indicador salvo e recuperação**
+- [x] **F03.03 — Rascunhos, autosave, indicador salvo e recuperação**
   - Verificar: Matar processo após salvar preserva dados confirmados
-- [ ] **F03.04 — Exportar schema Room e criar teste de migração de fixture**
+- [x] **F03.04 — Exportar schema Room e criar teste de migração de fixture**
   - Verificar: Migração preserva IDs, textos e relações
-- [ ] **F03.05 — Arquivar, restaurar e excluir definitivamente projeto**
+- [x] **F03.05 — Arquivar, restaurar e excluir definitivamente projeto**
   - Verificar: Ações têm efeito previsível e seleção exata do projeto
-- [ ] **F03.06 — Política de backup, armazenamento e erros de espaço/corrupção**
+- [x] **F03.06 — Política de backup, armazenamento e erros de espaço/corrupção**
   - Verificar: Erro de leitura não vira projeto vazio silenciosamente
 
 **G03**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G03 = PASS` — teste offline e matriz de interrupção passam; sem fallback destrutivo para dados reais.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G03 = PASS` — teste offline e matriz de interrupção passam; sem fallback destrutivo para dados reais.
 
 ---
 
 ## M2 — MVP 0.1 / Idea Core
 
-### [ ] F04 — Contrato de IA e execução controlada de geração
+### [x] F04 — Contrato de IA e execução controlada de geração
 
 **Resultado:** uma geração estruturada pode falhar, cancelar e ser retomada sem corromper projeto.
 
-- [ ] **F04.01 — Implementar porta AiProvider e fake determinístico**
+**Status:** F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e
+aguardam reauditoria, conforme `PROJECT_STATE.md`.
+
+- [x] **F04.01 — Implementar porta AiProvider e fake determinístico**
   - Verificar: Casos de uso funcionam sem rede ou chave
-- [ ] **F04.02 — Homologar um provider, credencial e formatos de resposta**
+- [x] **F04.02 — Homologar um provider, credencial e formatos de resposta**
   - Verificar: Chamada real mínima autorizada gera payload validável
-- [ ] **F04.03 — Cofre cifrado, remover/trocar credencial e consentimento de envio**
+- [x] **F04.03 — Cofre cifrado, remover/trocar credencial e consentimento de envio**
   - Verificar: Chave ausente de logs, banco exportável e pacote
-- [ ] **F04.04 — Validation pipeline: parse, schema, semântica básica e inputRevision**
+- [x] **F04.04 — Validation pipeline: parse, schema, semântica básica e inputRevision**
   - Verificar: JSON inválido e resultado atrasado não alteram dados aceitos
-- [ ] **F04.05 — Cancelamento, timeout, erros 401/403/429/5xx e estados persistidos**
+- [x] **F04.05 — Cancelamento, timeout, erros 401/403/429/5xx e estados persistidos**
   - Verificar: Cada falha tem mensagem e retomada sem aplicação duplicada
-- [ ] **F04.06 — Prompt registry e contabilização por GenerationRun**
+- [x] **F04.06 — Prompt registry e contabilização por GenerationRun**
   - Verificar: Revisão do prompt, provider e uso ficam identificáveis
-- [ ] **F04.07 — Limites de custo/tokens e envio mínimo de contexto**
+- [x] **F04.07 — Limites de custo/tokens e envio mínimo de contexto**
   - Verificar: Reparos respeitam orçamento; projeto B não aparece no pedido A
 
 **G04**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G04 = PASS` — fixture adversarial completo passa; uma integração real homologada.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G04 = PASS` — fixture adversarial completo passa; uma integração real homologada.
 
-### [ ] F05 — Captura e interpretação da ideia
+### [x] F05 — Captura e interpretação da ideia
 
 **Resultado:** usuário cria projeto e compara interpretação com original.
 
-- [ ] **F05.01 — Entrada textual com título, limites e salvar rascunho**
+- [x] **F05.01 — Entrada textual com título, limites e salvar rascunho**
   - Verificar: Acentos, multiline e limites preservados
-- [ ] **F05.02 — Snapshot original imutável e comparação com resumo**
+- [x] **F05.02 — Snapshot original imutável e comparação com resumo**
   - Verificar: Editar resumo não altera original/hash
-- [ ] **F05.03 — Tipo de projeto, restrições e modo sugerido com motivo**
+- [x] **F05.03 — Tipo de projeto, restrições e modo sugerido com motivo**
   - Verificar: Usuário pode corrigir recomendação e ver efeito
-- [ ] **F05.04 — Gerar interpretação como sugestão e permitir editar/aceitar**
+- [x] **F05.04 — Gerar interpretação como sugestão e permitir editar/aceitar**
   - Verificar: IA não converte detalhe presumido em decisão humana
-- [ ] **F05.05 — Tela de projeto com progresso e próxima ação explicável**
+- [x] **F05.05 — Tela de projeto com progresso e próxima ação explicável**
   - Verificar: Progresso corresponde aos gates, não só quantidade de telas
 
 **G05**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G05 = PASS` — criar e retomar offline, original preservado.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G05 = PASS` — criar e retomar offline, original preservado.
 
-### [ ] F06 — Entrevista inteligente e decisões versionadas
+### [x] F06 — Entrevista inteligente e decisões versionadas
 
 **Resultado:** preencher lacunas com esforço limitado e decisões persistentes.
 
 **Status:** F06.01–F06.07 reauditadas com PASS; `G06 = PASS` registrado pela
 Product Authority.
 
-- [ ] **F06.01 — Catálogo de lacunas por tipo/modo e criticidade**
+- [x] **F06.01 — Catálogo de lacunas por tipo/modo e criticidade**
   - Verificar: Casos simples não recebem questionário completo DEEP
-- [ ] **F06.02 — Rodadas adaptativas com opções, recomendação e trade-offs**
+- [x] **F06.02 — Rodadas adaptativas com opções, recomendação e trade-offs**
   - Verificar: Perguntas já respondidas não repetem sem causa
-- [ ] **F06.03 — Responder, editar, adiar e aceitar default explícito**
+- [x] **F06.03 — Responder, editar, adiar e aceitar default explícito**
   - Verificar: CRÍTICA adiada continua bloqueando gate pertinente
-- [ ] **F06.04 — DecisionRevision e transições Propose/Refine/Lock**
+- [x] **F06.04 — DecisionRevision e transições Propose/Refine/Lock**
   - Verificar: Só ação humana autorizada fecha a revisão
-- [ ] **F06.05 — Reabertura com delta, motivo e invalidação de derivados**
+- [x] **F06.05 — Reabertura com delta, motivo e invalidação de derivados**
   - Verificar: Resultado de IA não desfaz lock nem edição humana
-- [ ] **F06.06 — Stop condition, orçamento de rodadas e lista de lacunas**
+- [x] **F06.06 — Stop condition, orçamento de rodadas e lista de lacunas**
   - Verificar: Esgotar orçamento gera escolha clara, não aprovação automática
-- [ ] **F06.07 — Histórico legível de decisões e autoria**
+- [x] **F06.07 — Histórico legível de decisões e autoria**
   - Verificar: Usuário identifica o que decidiu e o que foi assumido
 
 **G06**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G06 = PASS` — nenhuma decisão muda sem rastreabilidade; fixture com contradição fica visível.
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G06 = PASS` — nenhuma decisão muda sem rastreabilidade; fixture com contradição fica visível.
 
 ### [x] F07 — Hipótese mínima, MVP Cutter e requisitos
 
@@ -231,8 +236,8 @@ Product Authority.
   - Verificar: Regeneração preserva IDs aceitos e marca potenciais duplicatas
 
 **G07**
-- [ ] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
+- [x] Todas as subetapas acima concluídas
+- [x] Verificações executadas
 - [x] Auditoria proporcional concluída
 - [x] `G07 = PASS` — escopo, hipótese/teste e acceptance aprováveis; zero MUST órfão.
 
@@ -253,15 +258,18 @@ Product Authority.
 
 **G08**
 - [x] Todas as subetapas acima concluídas
-- [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
-- [ ] `G08 = PASS` — cada MUST aparece em pelo menos um item do roadmap e cada item tem verificação ou justificativa de infraestrutura.
+- [x] Verificações executadas
+- [x] Auditoria proporcional concluída
+- [x] `G08 = PASS` — cada MUST aparece em pelo menos um item do roadmap e cada item tem verificação ou justificativa de infraestrutura.
 
 ### [ ] F09 — Exportação Markdown ZIP e restauração
 
 **Resultado:** levar o projeto para fora do app com versão, relações e integridade.
 
-- [ ] **F09.01 — Renderizadores determinísticos a partir do snapshot aceito**
+**Status:** F09.01 está implementada e aguardando auditoria independente;
+F09.02+ não foram iniciadas.
+
+- [x] **F09.01 — Renderizadores determinísticos a partir do snapshot aceito**
   - Verificar: Mesmas entradas/versões geram mesmo conteúdo canônico
 - [ ] **F09.02 — Manifest, project.json, hashes e status rascunho/pronto**
   - Verificar: Todos os arquivos pertencem à mesma revisão
