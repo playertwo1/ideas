@@ -1,0 +1,57 @@
+{
+  "phase": "F08",
+  "status": "IMPLEMENTED_AWAITING_INDEPENDENT_AUDIT",
+  "base_sha": "e53b32fb032878ea0f46a72f16b1571664ac8941",
+  "scope": ["F08.01", "F08.02", "F08.03", "F08.04", "F08.05"],
+  "offline_default": true,
+  "gates": {"G07": "PASS", "G08": "NOT_RUN", "G10": "NOT_RUN"},
+  "not_started": ["F09", "G08", "G10"],
+  "scenarios": {
+    "model": "PhaseEntity and RoadmapItemEntity persist objective, delivery, verify, sourceRef, revision and dependencies per projectId.",
+    "manual_edit": "RoadmapRepository creates phases/items offline and reorder requires the complete exact item set without duplicate or foreign IDs.",
+    "mvp_cut": "MVP and POST_MVP tracks are explicit; an MVP item depending on POST_MVP is reported with its item and dependency IDs.",
+    "checks": "Readiness reports orphan phases, missing dependencies, cycles, old revisions, missing MUST coverage and exact item locations.",
+    "readiness": "Readiness is persisted per project with actionable pending dimensions; G08_NOT_RUN remains pending and never becomes PASS automatically.",
+    "isolation": "All phase, item and readiness queries are scoped by projectId."
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug --no-daemon", "exit_code": 0},
+    {"command": ".\\gradlew.bat test --no-daemon", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint --no-daemon", "exit_code": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 0, "tests": 52, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "artifacts": [
+    "app/src/main/java/com/playertwo/ideas/data/PhaseEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapItemEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/PhaseDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapItemDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessSnapshotEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessReport.java",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json"
+  ],
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/data/PhaseEntity.java": "7330e9095b7aaa3dbabf743e353e332e1fa1c84f1d23cc577226b2a69da156dd",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapItemEntity.java": "0aa082bf54e048c9362396e17b0156e8f0a937123741003c260423c94fd60e90",
+    "app/src/main/java/com/playertwo/ideas/data/PhaseDao.java": "5244e9ffeb80b1246cb3aa6620b0a2adc9d5d1163f3dd151dee9fcf050d1c819",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapItemDao.java": "76d1a4992f468f61486de86b13acb5f8cabc1dc66c65a1e0833d9dd3b1680078",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessSnapshotEntity.java": "405ab8924383e4b97d550ee35044c6f055dba19bee189d68d55d16926bd31136",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessDao.java": "ad987519c9a8f6d2378d3a55e246e36ab2e85e2706a6d8f73c22ee2c14269965",
+    "app/src/main/java/com/playertwo/ideas/data/ReadinessReport.java": "418c351a670a211df004d277c1d5ec1a95b121870069d65e6f188e4f9ec8dd53",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java": "b2cff80e33d2b85cf545be20822edec8ab39f61ed3115a19d7c2c5405b6a3cc1",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java": "8bfeec2d926c6a9e03b26dc3bb8223eed9ba3fe017274ea06225367fa7ed7c49",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java": "a22064f1fc03b7db2487e63af74d353c35e69a95a9d8236eef4f860cd17c1c5c",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json": "d0c8347f1960f1f5a85ca72268c53b0872e123b9d53fe2e16a66416c77e79ad4"
+  },
+  "limitations": [
+    "F08 is exposed through offline provider-neutral Room/repository APIs; no F08 UI is added.",
+    "G08 remains NOT_RUN and requires independent audit plus explicit Product Authority action.",
+    "Instrumented execution requires an attached Android emulator/device; the implementation itself compiles and unit tests pass."
+  ]
+}

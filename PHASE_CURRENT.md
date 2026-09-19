@@ -4,19 +4,19 @@
 
 ## Fase ativa
 
-**F07 — Hipótese mínima, MVP Cutter e requisitos**
+**F08 — Roadmap básico e readiness do núcleo**
 
-**Subetapas:** F07.01–F07.06 auditadas com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
+**Subetapas:** F08.01–F08.05 implementadas; aguardando auditoria independente.
 
 ## Trabalho autorizado agora
 
-- aguardar decisão explícita da Product Authority sobre G07;
+- executar auditoria independente de F08;
 - corrigir somente findings se uma nova auditoria for solicitada;
 - preservar decisões humanas, histórico, offline e D01–D09.
 
 ## Não autorizado
 
-- iniciar F08 ou registrar `G07` antes de autorização explícita da Product Authority;
+- iniciar F09 ou registrar `G08` antes de auditoria PASS e autorização explícita;
 - transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
 - iniciar F11–F20 enquanto `G10 != PASS`.
@@ -30,18 +30,18 @@
 - G04: `PASS`;
 - G05: `PASS`;
 - G06: `PASS`;
-- G07: `NOT_RUN`;
+- G07: `PASS`;
+- G08: `NOT_RUN`;
 - G10: `NOT_RUN`.
 
-## Critérios F07
+## Critérios F08
 
-1. Ficha de problema, hipótese, teste barato, métrica e limiar.
-2. Features MUST/SHOULD/COULD/LATER/REJECTED com justificativas.
-3. Fluxo ponta a ponta mínimo e non-goals explícitos.
-4. REQ/NFR com IDs estáveis, origem e acceptance.
-5. Jornadas, estados e erros relevantes.
-6. Prévia, aprovação de lote, cobertura e duplicação.
+1. Phase/RoadmapItem com objetivo, entrega, verify, ordem e dependências.
+2. Edição manual e reordenação sem referências quebradas.
+3. Separação MVP/pós-MVP e pré-requisitos visíveis.
+4. Checks determinísticos de órfãos, cobertura, referências, ciclos e revisões.
+5. Readiness por dimensão; gate não executado continua pendente.
 
 ## Próxima ação
 
-F07 auditada com PASS pelo Auditor (Codex). Próximo passo: decisão explícita da Product Authority; não iniciar F08 nem registrar `G07 = PASS` sem essa decisão.
+G07 foi autorizado pela Product Authority após PASS independente de F07. F08.01–F08.05 foram implementadas e aguardam auditoria; não iniciar F09 nem registrar `G08`.

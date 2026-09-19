@@ -16,8 +16,9 @@ import java.io.File;
     ProjectIntakeEntity.class, InterviewSessionEntity.class, InterviewGapEntity.class,
     DecisionRevisionEntity.class, DecisionHistoryEntity.class,
     HypothesisEntity.class, ScopeItemEntity.class, RequirementEntity.class,
-    JourneyEntity.class, FlowStepEntity.class, PlanningBatchEntity.class
-}, version = 5, exportSchema = true)
+    JourneyEntity.class, FlowStepEntity.class, PlanningBatchEntity.class,
+    PhaseEntity.class, RoadmapItemEntity.class, ReadinessSnapshotEntity.class
+}, version = 6, exportSchema = true)
 public abstract class IdeaDatabase extends RoomDatabase {
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
@@ -67,6 +68,16 @@ public abstract class IdeaDatabase extends RoomDatabase {
             db.execSQL("CREATE INDEX IF NOT EXISTS index_planning_batches_projectId ON planning_batches(projectId)");
         }
     };
+    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS roadmap_phases (projectId TEXT NOT NULL, phaseId TEXT NOT NULL, title TEXT NOT NULL, objective TEXT NOT NULL, track TEXT NOT NULL, priority INTEGER NOT NULL, revision INTEGER NOT NULL, status TEXT NOT NULL, sourceRef TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, phaseId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_roadmap_phases_projectId ON roadmap_phases(projectId)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS roadmap_items (projectId TEXT NOT NULL, itemId TEXT NOT NULL, phaseId TEXT NOT NULL, title TEXT NOT NULL, objective TEXT NOT NULL, delivery TEXT NOT NULL, verify TEXT NOT NULL, track TEXT NOT NULL, priority TEXT NOT NULL, dependencies TEXT NOT NULL, orderIndex INTEGER NOT NULL, revision INTEGER NOT NULL, status TEXT NOT NULL, sourceRef TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, itemId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_roadmap_items_projectId ON roadmap_items(projectId)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS roadmap_readiness (projectId TEXT NOT NULL, snapshotId TEXT NOT NULL, overallStatus TEXT NOT NULL, pendingDimensions TEXT NOT NULL, actionablePending TEXT NOT NULL, createdAt INTEGER NOT NULL, PRIMARY KEY(projectId, snapshotId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_roadmap_readiness_projectId ON roadmap_readiness(projectId)");
+        }
+    };
     public abstract ProjectDao projects();
     public abstract DraftDao drafts();
     public abstract EventDao events();
@@ -82,6 +93,9 @@ public abstract class IdeaDatabase extends RoomDatabase {
     public abstract JourneyDao journeys();
     public abstract FlowStepDao flowSteps();
     public abstract PlanningBatchDao planningBatches();
+    public abstract PhaseDao phases();
+    public abstract RoadmapItemDao roadmapItems();
+    public abstract ReadinessDao readiness();
     public static IdeaDatabase open(Context context) {
         File file = context.getDatabasePath("idea.db");
         if (file.exists()) {
@@ -94,6 +108,6 @@ public abstract class IdeaDatabase extends RoomDatabase {
             }
         }
         return Room.databaseBuilder(context.getApplicationContext(), IdeaDatabase.class, "idea.db")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5).build();
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6).build();
     }
 }

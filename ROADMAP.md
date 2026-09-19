@@ -7,19 +7,16 @@ O Gold Standard é a camada de contrato e verificação do próprio repositório
 autorização da fase. `scripts/check.py` é a entrada reproduzível de validação.
 Fixtures, manifesto e evidência Gold não constituem uma nova fase de produto.
 F01/F01.08, `G00 = PASS`, `G01 = NOT_RUN`, `G10 = NOT_RUN` e D01–D09 `LOCKED`
-permanecem inalterados; F02, F08–F20 e o Runner não são iniciados por esta
+permanecem inalterados; F02, F09–F20 e o Runner não são iniciados por esta
 camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
-**Estado de execução (18 de setembro de 2026):** F06.01–F06.07 foram reauditadas
-com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = NOT_RUN` e F07 foi auditada com PASS
-no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`. Esta marcação descreve auditoria; não registra
-auditoria, gate ou aprovação de produto.
+**Estado de execução (19 de setembro de 2026):** F06.01–F06.07 e F07.01–F07.06 foram auditadas com PASS. `G05 = PASS`, `G06 = PASS` e `G07 = PASS` foi explicitamente autorizado pela Product Authority após a auditoria F07. F08.01–F08.05 estão implementadas e aguardam auditoria independente; `G08 = NOT_RUN` e F09+ não foram iniciadas.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
 
-Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. A implementação Android está restrita às fases autorizadas até F07; F08+ ainda não foram iniciadas. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
+Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. A implementação Android está autorizada até F08; F09+ aguardam os gates correspondentes. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
 
 Leitura sugerida para validar a direção: [visão Core/Factory](#14-idea-core-idea-factory-e-fronteira-de-valor), [versões e marcos](#2-versões-e-marcos-de-entrega), [parâmetros](#3-parâmetros-de-funcionamento-propostos), [fases e subetapas](#6-fases-e-subetapas-de-construção), [protocolo de execução](#102-protocolo-builder--auditor--product-authority), [referências GitHub](#13-referências-github-usadas-na-concepção) e [decisões fundamentais](#12-decisões-fundamentais-aprovadas). O documento mantém 21 fases F00–F20; subetapas e checks podem crescer conforme contratos forem aprovados, sem alterar silenciosamente o escopo.
 
@@ -516,7 +513,7 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis. Responsável: E; apoio P/Q. Depende: F06. Reuso: REF-03 e REF-04. Esforço: 5–8 dias-pessoa.
 
 **Status atual:** auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
-`G07 = NOT_RUN`; não iniciar F08 antes de autorização explícita da Product Authority.
+`G07 = PASS`; F08 está autorizada e implementada, aguardando auditoria independente. Não iniciar F09 nem registrar `G08` antes do próximo gate.
 
 **Padrões externos aplicados:** REF-03 inspira separação entre validação e planejamento; REF-04 fornece REQ/acceptance/rastreabilidade; REF-06 inspira clarificação/readiness. Não usar score cosmético de confiança.
 

@@ -6,7 +6,7 @@
 
 **Estado atual:** F06.01–F06.07 reauditadas com PASS. `G05 = PASS`;
 `G06 = PASS`; F07 auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
-`G07 = NOT_RUN`; aguardar decisão explícita da Product Authority.
+`G07 = PASS`; F08.01–F08.05 implementadas e aguardando auditoria independente.
 
 ## Regras rápidas
 
@@ -215,7 +215,7 @@ Product Authority.
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis.
 
-**Status:** auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; `G07 = NOT_RUN`.
+**Status:** auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; `G07 = PASS` autorizado pela Product Authority.
 
 - [x] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
   - Verificar: Dados não medidos ficam NOT_TESTED
@@ -234,25 +234,25 @@ Product Authority.
 - [ ] Todas as subetapas acima concluídas
 - [ ] Verificações executadas
 - [x] Auditoria proporcional concluída
-- [ ] `G07 = PASS` — escopo, hipótese/teste e acceptance aprováveis; zero MUST órfão.
+- [x] `G07 = PASS` — escopo, hipótese/teste e acceptance aprováveis; zero MUST órfão.
 
-### [ ] F08 — Roadmap básico e readiness do núcleo
+### [x] F08 — Roadmap básico e readiness do núcleo
 
 **Resultado:** converter o corte em fases e subetapas verificáveis.
 
-- [ ] **F08.01 — Modelo Phase/RoadmapItem com objetivos, refs e ordem/dependências**
+- [x] **F08.01 — Modelo Phase/RoadmapItem com objetivos, refs e ordem/dependências**
   - Verificar: Cada subetapa tem entrega e verify
-- [ ] **F08.02 — Geração e edição manual de fases, subetapas e prioridades**
+- [x] **F08.02 — Geração e edição manual de fases, subetapas e prioridades**
   - Verificar: Reordenar não rompe referências e informa dependência violada
-- [ ] **F08.03 — Separar MVP/pós-MVP e mostrar pré-requisitos**
+- [x] **F08.03 — Separar MVP/pós-MVP e mostrar pré-requisitos**
   - Verificar: Etapa MVP não depende de entrega pós-MVP oculta
-- [ ] **F08.04 — Checks: IDs, órfãos, cobertura, referências, loops e revisões antigas**
+- [x] **F08.04 — Checks: IDs, órfãos, cobertura, referências, loops e revisões antigas**
   - Verificar: Fixtures inválidos falham com IDs/localização exatos
-- [ ] **F08.05 — Painel de readiness por dimensão e pendências acionáveis**
+- [x] **F08.05 — Painel de readiness por dimensão e pendências acionáveis**
   - Verificar: Gate não executado aparece como pendente
 
 **G08**
-- [ ] Todas as subetapas acima concluídas
+- [x] Todas as subetapas acima concluídas
 - [ ] Verificações executadas
 - [ ] Auditoria proporcional concluída
 - [ ] `G08 = PASS` — cada MUST aparece em pelo menos um item do roadmap e cada item tem verificação ou justificativa de infraestrutura.
