@@ -6,18 +6,17 @@
 
 **F07 — Hipótese mínima, MVP Cutter e requisitos**
 
-**Subetapas:** F07.01–F07.06 implementadas pelo Builder, aguardando auditoria independente.
+**Subetapas:** F07.01–F07.06 auditadas com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
 
 ## Trabalho autorizado agora
 
-- auditar F07.01–F07.06 e corrigir somente findings;
-- executar até três rodadas Builder↔Auditor, parando no primeiro PASS;
-- após três FAIL, parar e escalar sem registrar G07;
+- aguardar decisão explícita da Product Authority sobre G07;
+- corrigir somente findings se uma nova auditoria for solicitada;
 - preservar decisões humanas, histórico, offline e D01–D09.
 
 ## Não autorizado
 
-- iniciar F08 ou registrar `G07` antes da auditoria independente;
+- iniciar F08 ou registrar `G07` antes de autorização explícita da Product Authority;
 - transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
 - iniciar F11–F20 enquanto `G10 != PASS`.
@@ -45,4 +44,4 @@
 
 ## Próxima ação
 
-F07 implementada pelo Builder. Próximo passo: auditoria independente pelo Auditor (Codex). Máximo de três rodadas; não iniciar F08 nem registrar `G07 = PASS` sem PASS do Auditor e ação da Product Authority.
+F07 auditada com PASS pelo Auditor (Codex). Próximo passo: decisão explícita da Product Authority; não iniciar F08 nem registrar `G07 = PASS` sem essa decisão.

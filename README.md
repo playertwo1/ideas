@@ -13,7 +13,7 @@ A fronteira do produto é clara: **o Idea termina no handoff**. Execução cont�
 ## Estado atual
 
 F06.01–F06.07 foram reauditadas com PASS. `G05 = PASS`, `G06 = PASS`, `G07 =
-NOT_RUN` e F07 está implementada, aguardando auditoria independente. Nenhuma destas marcações equivale
+NOT_RUN` e F07 foi auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`. Nenhuma destas marcações equivale
 a aprovação automática; a autorização de avanço permanece com a Product
 Authority.
 

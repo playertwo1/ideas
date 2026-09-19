@@ -5,9 +5,8 @@
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
 **Estado atual:** F06.01–F06.07 reauditadas com PASS. `G05 = PASS`;
-`G06 = PASS`; F07 implementada e aguardando auditoria independente. O ciclo de F07 permite
-no máximo três rodadas Builder↔Auditor: para no primeiro PASS ou escala após três
-FAIL.
+`G06 = PASS`; F07 auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
+`G07 = NOT_RUN`; aguardar decisão explícita da Product Authority.
 
 ## Regras rápidas
 
@@ -216,7 +215,7 @@ Product Authority.
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis.
 
-**Status:** implementada, aguardando auditoria independente; `G07 = NOT_RUN`.
+**Status:** auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; `G07 = NOT_RUN`.
 
 - [x] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
   - Verificar: Dados não medidos ficam NOT_TESTED
@@ -234,7 +233,7 @@ Product Authority.
 **G07**
 - [ ] Todas as subetapas acima concluídas
 - [ ] Verificações executadas
-- [ ] Auditoria proporcional concluída
+- [x] Auditoria proporcional concluída
 - [ ] `G07 = PASS` — escopo, hipótese/teste e acceptance aprováveis; zero MUST órfão.
 
 ### [ ] F08 — Roadmap básico e readiness do núcleo
