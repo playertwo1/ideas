@@ -9,29 +9,31 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /** Deterministic, offline roadmap and readiness operations for F08. */
 public final class RoadmapRepository {
     private static final Set<String> TRACKS = new HashSet<>(java.util.Arrays.asList("MVP", "POST_MVP"));
     private static final Set<String> PRIORITIES = new HashSet<>(java.util.Arrays.asList("MUST", "SHOULD", "COULD", "LATER", "REJECTED"));
+    private static final Pattern STABLE_ID = Pattern.compile("^[A-Z][A-Z0-9_]*(?:-[A-Z0-9_]+)*$");
     private final IdeaDatabase database;
 
     public RoadmapRepository(IdeaDatabase database) { if (database == null) throw new IllegalArgumentException("database required"); this.database = database; }
 
     public void addPhase(String projectId, String phaseId, String title, String objective, String track, int priority) {
-        String p = required(projectId, "projectId"), id = required(phaseId, "phaseId");
+        String p = required(projectId, "projectId"), id = stableId(phaseId, "phaseId");
         String t = required(title, "title"), o = required(objective, "objective"), tr = normalizedTrack(track);
-        database.runInTransaction(() -> { requireProject(p); database.phases().insert(new PhaseEntity(p, id, t, o, tr, priority, 1, "PROPOSED", "manual", System.currentTimeMillis())); });
+        database.runInTransaction(() -> { requireProject(p); if (database.phases().find(p, id) != null) throw new IllegalArgumentException("duplicate phase id: " + id); database.phases().insert(new PhaseEntity(p, id, t, o, tr, priority, 1, "PROPOSED", "manual", System.currentTimeMillis())); });
     }
 
     public void addItem(String projectId, String itemId, String phaseId, String title, String objective,
                         String delivery, String verify, String track, String priority, String dependencies, int orderIndex) {
-        String p = required(projectId, "projectId"), id = required(itemId, "itemId"), ph = required(phaseId, "phaseId");
+        String p = required(projectId, "projectId"), id = stableId(itemId, "itemId"), ph = stableId(phaseId, "phaseId");
         String tr = normalizedTrack(track), pr = normalizedPriority(priority);
         required(title, "title"); required(objective, "objective"); required(delivery, "delivery"); required(verify, "verify");
         String deps = dependencies == null ? "" : dependencies.trim();
         if (deps.contains(":")) throw new IllegalArgumentException("foreign dependency not allowed: " + deps);
-        database.runInTransaction(() -> { requireProject(p); database.roadmapItems().insert(new RoadmapItemEntity(p, id, ph, title.trim(), objective.trim(), delivery.trim(), verify.trim(), tr, pr, deps, orderIndex, 1, "PROPOSED", "manual", System.currentTimeMillis())); });
+        database.runInTransaction(() -> { requireProject(p); if (database.roadmapItems().find(p, id) != null) throw new IllegalArgumentException("duplicate roadmap item id: " + id); database.roadmapItems().insert(new RoadmapItemEntity(p, id, ph, title.trim(), objective.trim(), delivery.trim(), verify.trim(), tr, pr, deps, orderIndex, 1, "PROPOSED", "manual", System.currentTimeMillis())); });
     }
 
     public List<PhaseEntity> phases(String projectId) { return database.phases().forProject(required(projectId, "projectId")); }
@@ -61,6 +63,12 @@ public final class RoadmapRepository {
         Set<String> expected = new HashSet<>(); for (RoadmapItemEntity item : current) expected.add(item.itemId);
         Set<String> supplied = new HashSet<>(orderedItemIds);
         if (supplied.size() != orderedItemIds.size() || !expected.equals(supplied)) throw new IllegalArgumentException("order references unknown or duplicate item");
+        Map<String, Integer> positions = new HashMap<>(); for (int index = 0; index < orderedItemIds.size(); index++) positions.put(orderedItemIds.get(index), index);
+        for (RoadmapItemEntity item : current) for (String dependency : split(item.dependencies)) {
+            Integer dependencyPosition = positions.get(dependency);
+            if (dependencyPosition == null) throw new IllegalArgumentException("order references missing dependency: " + item.itemId + "->" + dependency);
+            if (dependencyPosition > positions.get(item.itemId)) throw new IllegalArgumentException("dependency order invalid: " + item.itemId + "->" + dependency);
+        }
         database.runInTransaction(() -> { int index = 0; for (String id : orderedItemIds) database.roadmapItems().updateOrder(p, id, index++, System.currentTimeMillis()); });
     }
 
@@ -110,6 +118,7 @@ public final class RoadmapRepository {
     private String join(List<String> values) { return String.join("|", values); }
     private String normalizedTrack(String value) { String v = required(value, "track").toUpperCase(Locale.ROOT); if (!TRACKS.contains(v)) throw new IllegalArgumentException("invalid track: " + value); return v; }
     private String normalizedPriority(String value) { String v = required(value, "priority").toUpperCase(Locale.ROOT); if (!PRIORITIES.contains(v)) throw new IllegalArgumentException("invalid priority: " + value); return v; }
+    private String stableId(String value, String name) { String v = required(value, name).toUpperCase(Locale.ROOT); if (!STABLE_ID.matcher(v).matches()) throw new IllegalArgumentException("invalid " + name + ": " + value); return v; }
     private void requireProject(String projectId) { if (database.projects().find(projectId) == null) throw new IllegalArgumentException("unknown projectId: " + projectId); }
     private String required(String value, String name) { if (value == null || value.trim().isEmpty()) throw new IllegalArgumentException(name + " required"); return value.trim(); }
 }

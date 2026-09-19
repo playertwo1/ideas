@@ -87,4 +87,28 @@ public class F08RoadmapInstrumentedTest {
         assertEquals(snapshot.snapshotId, db.readiness().latest("P1").snapshotId);
         assertNull(db.readiness().latest("P2"));
     }
+
+    @Test public void malformedStableIdsAreRejectedBeforeWrite() {
+        try {
+            repository.addPhase("P1", "bad id", "MVP", "objetivo", "MVP", 1);
+            fail("malformed phase id accepted");
+        } catch (IllegalArgumentException expected) { }
+        assertTrue(repository.phases("P1").isEmpty());
+        try {
+            repository.addItem("P1", "bad/id", "PH-1", "item", "obj", "entrega", "verify", "MVP", "SHOULD", "", 0);
+            fail("malformed roadmap item id accepted");
+        } catch (IllegalArgumentException expected) { }
+        assertTrue(repository.items("P1").isEmpty());
+    }
+
+    @Test public void reorderRejectsDependencyAfterDependent() {
+        repository.addPhase("P1", "PH-1", "MVP", "objetivo", "MVP", 1);
+        repository.addItem("P1", "ITEM-B", "PH-1", "base", "obj", "entrega", "verify", "MVP", "MUST", "", 0);
+        repository.addItem("P1", "ITEM-A", "PH-1", "dependente", "obj", "entrega", "verify", "MVP", "MUST", "ITEM-B", 1);
+        try {
+            repository.reorder("P1", Arrays.asList("ITEM-A", "ITEM-B"));
+            fail("dependent item placed before dependency");
+        } catch (IllegalArgumentException expected) { }
+        assertEquals("ITEM-B", repository.items("P1").get(0).itemId);
+    }
 }

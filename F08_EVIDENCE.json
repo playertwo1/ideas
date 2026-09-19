@@ -18,7 +18,7 @@
     {"command": ".\\gradlew.bat assembleDebug --no-daemon", "exit_code": 0},
     {"command": ".\\gradlew.bat test --no-daemon", "exit_code": 0},
     {"command": ".\\gradlew.bat lint --no-daemon", "exit_code": 0},
-    {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 0, "tests": 52, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 0, "tests": 54, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
@@ -44,9 +44,9 @@
     "app/src/main/java/com/playertwo/ideas/data/ReadinessSnapshotEntity.java": "405ab8924383e4b97d550ee35044c6f055dba19bee189d68d55d16926bd31136",
     "app/src/main/java/com/playertwo/ideas/data/ReadinessDao.java": "ad987519c9a8f6d2378d3a55e246e36ab2e85e2706a6d8f73c22ee2c14269965",
     "app/src/main/java/com/playertwo/ideas/data/ReadinessReport.java": "418c351a670a211df004d277c1d5ec1a95b121870069d65e6f188e4f9ec8dd53",
-    "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java": "b2cff80e33d2b85cf545be20822edec8ab39f61ed3115a19d7c2c5405b6a3cc1",
+    "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java": "79c91911ea6383e30fe77df7700214d45792f7ebb0b82110c75b8c2e74d45e90",
     "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java": "8bfeec2d926c6a9e03b26dc3bb8223eed9ba3fe017274ea06225367fa7ed7c49",
-    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java": "a22064f1fc03b7db2487e63af74d353c35e69a95a9d8236eef4f860cd17c1c5c",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java": "919ab0331b1e592f609d47061e9fa0c5c450d1c2a1dcedf13ebebbe337176432",
     "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json": "d0c8347f1960f1f5a85ca72268c53b0872e123b9d53fe2e16a66416c77e79ad4"
   },
   "limitations": [
