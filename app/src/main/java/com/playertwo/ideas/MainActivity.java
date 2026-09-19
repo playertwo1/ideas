@@ -15,6 +15,8 @@ import com.playertwo.ideas.data.ProjectIntakeRepository;
 import com.playertwo.ideas.data.ProjectInterpretationService;
 import com.playertwo.ideas.data.ProjectEntity;
 import com.playertwo.ideas.data.ProjectRepository;
+import com.playertwo.ideas.data.ReadinessReport;
+import com.playertwo.ideas.data.RoadmapRepository;
 import com.playertwo.ideas.domain.ai.CancellationToken;
 import com.playertwo.ideas.domain.ai.FakeAiProvider;
 import java.util.UUID;
@@ -52,7 +54,10 @@ public final class MainActivity extends Activity {
             if (database.projects().find(projectId) != null) intake.ensureFromLegacy(projectId);
             DraftEntity draft = database.drafts().find(projectId);
             ProjectIntakeEntity snapshot = intake.find(projectId);
-            runOnUiThread(() -> bind(projectId, snapshot, draft));
+            ReadinessReport readiness = null;
+            if (database.projects().find(projectId) != null) readiness = new RoadmapRepository(database).readiness(projectId);
+            ReadinessReport finalReadiness = readiness;
+            runOnUiThread(() -> bind(projectId, snapshot, draft, finalReadiness));
             Log.i("Idea", "home_opened");
         } catch (RuntimeException error) {
             Log.e("Idea", "home_open_failed");
@@ -60,7 +65,7 @@ public final class MainActivity extends Activity {
         }
     }
 
-    private void bind(String projectId, ProjectIntakeEntity snapshot, DraftEntity draft) {
+    private void bind(String projectId, ProjectIntakeEntity snapshot, DraftEntity draft, ReadinessReport readiness) {
         EditText title = findViewById(R.id.title_editor);
         EditText limits = findViewById(R.id.limits_editor);
         TextView interpretation = findViewById(R.id.interpretation_view);
@@ -79,6 +84,7 @@ public final class MainActivity extends Activity {
             next.setText("Próxima ação: informar a ideia");
         } else render(snapshot, interpretation, type, depth, progress, next);
         status.setText("Salvo"); editor.setEnabled(true);
+        if (readiness != null) renderReadiness(readiness);
         editor.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -133,6 +139,21 @@ public final class MainActivity extends Activity {
                 runOnUiThread(() -> render(updated, interpretation, type, depth, progress, next));
             } catch (RuntimeException error) { runOnUiThread(() -> status.setText("Não foi possível rejeitar")); }
         }));
+    }
+
+    private void renderReadiness(ReadinessReport report) {
+        TextView readinessStatus = findViewById(R.id.readiness_status);
+        TextView readinessPending = findViewById(R.id.readiness_pending);
+        TextView readinessAction = findViewById(R.id.readiness_action);
+        try {
+            readinessStatus.setText("Readiness: " + report.overallStatus);
+            readinessPending.setText("Dimensões pendentes: " + String.join(", ", report.pendingDimensions) + " (pendente)");
+            readinessAction.setText("Ação: " + String.join(", ", report.actionablePending));
+        } catch (RuntimeException error) {
+            readinessStatus.setText("Readiness: BLOCKED");
+            readinessPending.setText("Dimensões pendentes: não foi possível calcular (pendente)");
+            readinessAction.setText("Ação: revisar o estado persistido");
+        }
     }
 
     private static void render(ProjectIntakeEntity value, TextView interpretation, TextView type,

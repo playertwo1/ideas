@@ -1,0 +1,6 @@
+{
+  "case": "invalid-id",
+  "phaseId": "bad id",
+  "itemId": "bad/id",
+  "expected": "reject-before-write"
+}

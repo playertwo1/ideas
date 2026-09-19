@@ -1,0 +1,6 @@
+{
+  "case": "invalid-order",
+  "orderedItemIds": ["ITEM-A", "ITEM-B"],
+  "dependency": "ITEM-A->ITEM-B",
+  "expected": "dependency order invalid"
+}

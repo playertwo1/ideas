@@ -2,7 +2,10 @@ package com.playertwo.ideas.data;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
+import java.io.InputStream;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
@@ -110,5 +113,14 @@ public class F08RoadmapInstrumentedTest {
             fail("dependent item placed before dependency");
         } catch (IllegalArgumentException expected) { }
         assertEquals("ITEM-B", repository.items("P1").get(0).itemId);
+    }
+
+    @Test public void invalidF08FixturesAreVersionedAndReadable() throws Exception {
+        String[] fixtures = {"f08-invalid/invalid-id.json", "f08-invalid/missing-dependency.json", "f08-invalid/invalid-order.json"};
+        for (String fixture : fixtures) {
+            try (InputStream stream = InstrumentationRegistry.getInstrumentation().getContext().getAssets().open(fixture)) {
+                assertTrue("fixture empty: " + fixture, stream.read() >= 0);
+            }
+        }
     }
 }

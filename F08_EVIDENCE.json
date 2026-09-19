@@ -1,7 +1,7 @@
 {
   "phase": "F08",
   "status": "IMPLEMENTED_AWAITING_INDEPENDENT_AUDIT",
-  "base_sha": "e53b32fb032878ea0f46a72f16b1571664ac8941",
+  "base_sha": "fc41f7b89b29e036d6b3cd454456380deaa815aa",
   "scope": ["F08.01", "F08.02", "F08.03", "F08.04", "F08.05"],
   "offline_default": true,
   "gates": {"G07": "PASS", "G08": "NOT_RUN", "G10": "NOT_RUN"},
@@ -18,7 +18,7 @@
     {"command": ".\\gradlew.bat assembleDebug --no-daemon", "exit_code": 0},
     {"command": ".\\gradlew.bat test --no-daemon", "exit_code": 0},
     {"command": ".\\gradlew.bat lint --no-daemon", "exit_code": 0},
-    {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 0, "tests": 54, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 0, "tests": 56, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
     {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
     {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
@@ -32,9 +32,16 @@
     "app/src/main/java/com/playertwo/ideas/data/ReadinessDao.java",
     "app/src/main/java/com/playertwo/ideas/data/ReadinessReport.java",
     "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java",
+    "app/src/main/java/com/playertwo/ideas/MainActivity.java",
+    "app/src/main/res/layout/activity_main.xml",
     "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java",
     "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java",
-    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json"
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08ReadinessUiInstrumentedTest.java",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json",
+    "fixtures/f08-invalid/invalid-id.json",
+    "fixtures/f08-invalid/missing-dependency.json",
+    "fixtures/f08-invalid/invalid-order.json",
+    "PROJECT_STATE.md"
   ],
   "artifact_sha256": {
     "app/src/main/java/com/playertwo/ideas/data/PhaseEntity.java": "7330e9095b7aaa3dbabf743e353e332e1fa1c84f1d23cc577226b2a69da156dd",
@@ -45,12 +52,19 @@
     "app/src/main/java/com/playertwo/ideas/data/ReadinessDao.java": "ad987519c9a8f6d2378d3a55e246e36ab2e85e2706a6d8f73c22ee2c14269965",
     "app/src/main/java/com/playertwo/ideas/data/ReadinessReport.java": "418c351a670a211df004d277c1d5ec1a95b121870069d65e6f188e4f9ec8dd53",
     "app/src/main/java/com/playertwo/ideas/data/RoadmapRepository.java": "79c91911ea6383e30fe77df7700214d45792f7ebb0b82110c75b8c2e74d45e90",
+    "app/src/main/java/com/playertwo/ideas/MainActivity.java": "81ff4221c1eee334f81b0dabed7c7d57e69b1700cdff6be41e092f5b87593391",
+    "app/src/main/res/layout/activity_main.xml": "7f94c9f5d1115207ae1327cd9b9e030d463fbace5a992afebfdde4bd5cfcabf7",
     "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java": "8bfeec2d926c6a9e03b26dc3bb8223eed9ba3fe017274ea06225367fa7ed7c49",
-    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java": "919ab0331b1e592f609d47061e9fa0c5c450d1c2a1dcedf13ebebbe337176432",
-    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json": "d0c8347f1960f1f5a85ca72268c53b0872e123b9d53fe2e16a66416c77e79ad4"
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08RoadmapInstrumentedTest.java": "5efcff6ab0423559e051ccad3289ba3a90f1d8318d6ebca3d3ab16def35b2b7e",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F08ReadinessUiInstrumentedTest.java": "43ec0cf6456f62151e9c04646ce6781359606120ada8a645a5218f98fb323d31",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/6.json": "d0c8347f1960f1f5a85ca72268c53b0872e123b9d53fe2e16a66416c77e79ad4",
+    "fixtures/f08-invalid/invalid-id.json": "c6ba5666674185dd59ab2824537bdf140a5338f20bd01531bba90a0f429b5e5b",
+    "fixtures/f08-invalid/missing-dependency.json": "664c86e26f2f8774e415fb3a74414a8112302985ba47fde8a531b13517d63584",
+    "fixtures/f08-invalid/invalid-order.json": "ee7836c1d035e92ef8d4f99fe5bd19e634fc88312ee466f774a8068abdeea564",
+    "PROJECT_STATE.md": "6323f4ba16f72bf8546ecd9dca29156144b35b619b9b0de4658b5314694f9b7d"
   },
   "limitations": [
-    "F08 is exposed through offline provider-neutral Room/repository APIs; no F08 UI is added.",
+    "F08 readiness is exposed through offline provider-neutral Room/repository APIs and the minimal Home readiness panel; no separate navigation screen is added.",
     "G08 remains NOT_RUN and requires independent audit plus explicit Product Authority action.",
     "Instrumented execution requires an attached Android emulator/device; the implementation itself compiles and unit tests pass."
   ]

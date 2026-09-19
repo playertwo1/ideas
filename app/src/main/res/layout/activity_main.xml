@@ -27,6 +27,12 @@
         android:layout_height="wrap_content" android:text="Progresso: 0%" />
     <TextView android:id="@+id/next_action_view" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="Próxima ação: Iniciar captura" />
+    <TextView android:id="@+id/readiness_status" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Readiness: PENDING" />
+    <TextView android:id="@+id/readiness_pending" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Dimensões pendentes: G08_NOT_RUN (pendente)" />
+    <TextView android:id="@+id/readiness_action" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Ação: executar G08 após auditoria independente" />
     <TextView android:id="@+id/save_status" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="Carregando" />
 </LinearLayout>

@@ -18,6 +18,7 @@
 - **G05:** PASS — autorizado pela Product Authority em 18/09/2026; F06 liberada
 - **G06:** PASS — registrado pela Product Authority após reauditoria independente de F06
 - **G07:** PASS — autorizado pela Product Authority após auditoria independente de F07
+- **G08:** NOT_RUN — F08 aguarda auditoria independente
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
