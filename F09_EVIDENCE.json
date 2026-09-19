@@ -37,7 +37,7 @@
   "artifact_sha256": {
     "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "d42e4c5ed31fd5823e97262303a6f6ed76eddd4cb55e07ec74ccc2d8062f65dd",
     "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "f9f2ef3ddaf0acbf04b97edb7c5172eac6bf53a3f2cd6eed95a2041144151c78",
-    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "0991899c417c3b0c2882929092375b87e2b5cf165080645f5ff3bfd49a23e90d",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "d72e1835a9dcbd0b1bd80c17827c2b398ee9ec4f2d0657a5cd5f2999ab8fe386",
     "fixtures/f09/f09-01-snapshot.json": "2219ffdb2685e82d6b7dcee6b4269e25d3ba7e434dade9c6775d135e4e1a66c5",
     "fixtures/f09/f09-01-orphan-item.json": "f07621caecf77fcfd16c7c3d631494f0e25ec9625143c83df354e72e7a056867",
     "README.md": "e964aa4bfb61a8e0f4ddd71c72bd175b720b3d9882fafcf02285c54696442d73",
