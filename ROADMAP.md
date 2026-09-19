@@ -13,8 +13,8 @@ camada.
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
 **Estado de execução (18 de setembro de 2026):** F06.01–F06.07 foram reauditadas
-com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = NOT_RUN` e F07 está autorizada para
-implementação. Esta marcação descreve autorização; não registra
+com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = NOT_RUN` e F07 está implementada,
+aguardando auditoria independente. Esta marcação descreve implementação; não registra
 auditoria, gate ou aprovação de produto.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
@@ -515,7 +515,7 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis. Responsável: E; apoio P/Q. Depende: F06. Reuso: REF-03 e REF-04. Esforço: 5–8 dias-pessoa.
 
-**Status atual:** autorizada, aguardando implementação. `G07 = NOT_RUN`; não
+**Status atual:** implementada, aguardando auditoria independente. `G07 = NOT_RUN`; não
 iniciar F08 antes de auditoria independente e autorização explícita da Product
 Authority.
 

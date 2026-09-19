@@ -7,9 +7,9 @@
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M2 — MVP 0.1 / Idea Core
 - **Fase:** F07 — Hipótese mínima, MVP Cutter e requisitos
-- **Subetapa atual:** F07.01–F07.06 — autorizadas, aguardando implementação
+- **Subetapa atual:** F07.01–F07.06 — implementadas, aguardando auditoria independente
 - **Última concluída:** F06.01–F06.07 — auditoria independente PASS no SHA `905660e77c2f0b05ac1ef37f60fa332a341add6d`
-- **Próxima após a atual:** implementar F07.01–F07.06; não iniciar F08 antes de `G07 = PASS`
+- **Próxima após a atual:** auditar F07.01–F07.06; não iniciar F08 antes de `G07 = PASS`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G02:** PASS — registrado após auditoria independente de F02
@@ -42,18 +42,19 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 ## Evidência
 
 - Evidência F00: `M0_VALIDATION_EVIDENCE.md`
+- Evidência F07: `F07_EVIDENCE.json`
 - Pacote de auditoria: `G00_AUDIT_PACKET.md`
 - Validador reproduzível: `scripts/validate_contract.py`
 - Política de contexto: `CONTEXT_POLICY.md`
 
 ## Bloqueios
 
-F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 foram reauditadas independentemente com PASS no SHA `905660e77c2f0b05ac1ef37f60fa332a341add6d`.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 foram reauditadas independentemente com PASS no SHA `905660e77c2f0b05ac1ef37f60fa332a341add6d`. F07.01–F07.06 implementadas aguardando auditoria independente.
 
 ## Próxima ação
 
-Implementar exclusivamente F07.01–F07.06. Fazer no máximo três rodadas Builder↔Auditor; parar no primeiro PASS ou escalar após três FAIL. Não iniciar F08 nem registrar `G07 = PASS` antes da auditoria correspondente.
+F07.01–F07.06 implementadas pelo Builder. Próximo passo: auditoria independente pelo Auditor (Codex). Fazer no máximo três rodadas Builder↔Auditor; parar no primeiro PASS ou escalar após três FAIL. Não iniciar F08 nem registrar `G07 = PASS` antes da auditoria correspondente e autorização da Product Authority.
 
 ## Regra de avanço
 
-F07.01–F07.06 estão autorizadas e aguardam implementação. `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F07.01–F07.06 implementadas aguardando auditoria independente. `G07 = NOT_RUN`; `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.

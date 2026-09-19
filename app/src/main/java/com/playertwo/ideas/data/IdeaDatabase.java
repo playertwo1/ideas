@@ -11,7 +11,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
-@Database(entities = {ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class, ProjectIntakeEntity.class, InterviewSessionEntity.class, InterviewGapEntity.class, DecisionRevisionEntity.class, DecisionHistoryEntity.class}, version = 4, exportSchema = true)
+@Database(entities = {
+    ProjectEntity.class, ProjectEventEntity.class, DraftEntity.class, ProjectRevisionEntity.class,
+    ProjectIntakeEntity.class, InterviewSessionEntity.class, InterviewGapEntity.class,
+    DecisionRevisionEntity.class, DecisionHistoryEntity.class,
+    HypothesisEntity.class, ScopeItemEntity.class, RequirementEntity.class,
+    JourneyEntity.class, FlowStepEntity.class, PlanningBatchEntity.class
+}, version = 5, exportSchema = true)
 public abstract class IdeaDatabase extends RoomDatabase {
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
@@ -46,6 +52,21 @@ public abstract class IdeaDatabase extends RoomDatabase {
             db.execSQL("CREATE INDEX IF NOT EXISTS index_decision_history_projectId ON decision_history(projectId)");
         }
     };
+    public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS hypotheses (projectId TEXT NOT NULL PRIMARY KEY, problem TEXT NOT NULL, audience TEXT NOT NULL, statement TEXT NOT NULL, minimumTest TEXT NOT NULL, metric TEXT NOT NULL, threshold TEXT NOT NULL, evidenceStatus TEXT NOT NULL, status TEXT NOT NULL, updatedAt INTEGER NOT NULL, FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS scope_items (projectId TEXT NOT NULL, itemId TEXT NOT NULL, priority TEXT NOT NULL, title TEXT NOT NULL, rationale TEXT NOT NULL, dependencies TEXT NOT NULL, isNonGoal INTEGER NOT NULL, status TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, itemId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS requirements (projectId TEXT NOT NULL, reqId TEXT NOT NULL, type TEXT NOT NULL, scopeItemId TEXT NOT NULL, origin TEXT NOT NULL, rationale TEXT NOT NULL, acceptance TEXT NOT NULL, status TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, reqId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS journeys (projectId TEXT NOT NULL, journeyId TEXT NOT NULL, title TEXT NOT NULL, states TEXT NOT NULL, materialErrors TEXT NOT NULL, linkedReqId TEXT, status TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, journeyId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS flow_steps (projectId TEXT NOT NULL, stepOrder INTEGER NOT NULL, stateName TEXT NOT NULL, action TEXT NOT NULL, expectedResult TEXT NOT NULL, failureCondition TEXT, failureHandling TEXT, status TEXT NOT NULL, updatedAt INTEGER NOT NULL, PRIMARY KEY(projectId, stepOrder), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS planning_batches (projectId TEXT NOT NULL, batchId TEXT NOT NULL, status TEXT NOT NULL, author TEXT NOT NULL, createdAt INTEGER NOT NULL, PRIMARY KEY(projectId, batchId), FOREIGN KEY(projectId) REFERENCES projects(projectId) ON UPDATE NO ACTION ON DELETE CASCADE)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_scope_items_projectId ON scope_items(projectId)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_requirements_projectId ON requirements(projectId)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_journeys_projectId ON journeys(projectId)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_flow_steps_projectId ON flow_steps(projectId)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_planning_batches_projectId ON planning_batches(projectId)");
+        }
+    };
     public abstract ProjectDao projects();
     public abstract DraftDao drafts();
     public abstract EventDao events();
@@ -55,6 +76,12 @@ public abstract class IdeaDatabase extends RoomDatabase {
     public abstract InterviewGapDao interviewGaps();
     public abstract DecisionRevisionDao decisionRevisions();
     public abstract DecisionHistoryDao decisionHistory();
+    public abstract HypothesisDao hypotheses();
+    public abstract ScopeItemDao scopeItems();
+    public abstract RequirementDao requirements();
+    public abstract JourneyDao journeys();
+    public abstract FlowStepDao flowSteps();
+    public abstract PlanningBatchDao planningBatches();
     public static IdeaDatabase open(Context context) {
         File file = context.getDatabasePath("idea.db");
         if (file.exists()) {
@@ -67,6 +94,6 @@ public abstract class IdeaDatabase extends RoomDatabase {
             }
         }
         return Room.databaseBuilder(context.getApplicationContext(), IdeaDatabase.class, "idea.db")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4).build();
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5).build();
     }
 }

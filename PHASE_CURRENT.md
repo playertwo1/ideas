@@ -6,11 +6,11 @@
 
 **F07 — Hipótese mínima, MVP Cutter e requisitos**
 
-**Subetapas:** F07.01–F07.06 autorizadas, aguardando implementação.
+**Subetapas:** F07.01–F07.06 implementadas pelo Builder, aguardando auditoria independente.
 
 ## Trabalho autorizado agora
 
-- implementar F07.01–F07.06;
+- auditar F07.01–F07.06 e corrigir somente findings;
 - executar até três rodadas Builder↔Auditor, parando no primeiro PASS;
 - após três FAIL, parar e escalar sem registrar G07;
 - preservar decisões humanas, histórico, offline e D01–D09.
@@ -45,4 +45,4 @@
 
 ## Próxima ação
 
-Implementação de F07 seguida de auditoria independente. Máximo de três rodadas; não iniciar F08 nem registrar `G07 = PASS` sem PASS do Auditor e ação da Product Authority.
+F07 implementada pelo Builder. Próximo passo: auditoria independente pelo Auditor (Codex). Máximo de três rodadas; não iniciar F08 nem registrar `G07 = PASS` sem PASS do Auditor e ação da Product Authority.

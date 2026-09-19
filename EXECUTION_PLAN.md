@@ -5,7 +5,7 @@
 **Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
 
 **Estado atual:** F06.01–F06.07 reauditadas com PASS. `G05 = PASS`;
-`G06 = PASS`; F07 autorizada e aguardando implementação. O ciclo de F07 permite
+`G06 = PASS`; F07 implementada e aguardando auditoria independente. O ciclo de F07 permite
 no máximo três rodadas Builder↔Auditor: para no primeiro PASS ou escala após três
 FAIL.
 
@@ -212,23 +212,23 @@ Product Authority.
 - [ ] Auditoria proporcional concluída
 - [ ] `G06 = PASS` — nenhuma decisão muda sem rastreabilidade; fixture com contradição fica visível.
 
-### [ ] F07 — Hipótese mínima, MVP Cutter e requisitos
+### [x] F07 — Hipótese mínima, MVP Cutter e requisitos
 
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis.
 
-**Status:** autorizada, aguardando implementação; `G07 = NOT_RUN`.
+**Status:** implementada, aguardando auditoria independente; `G07 = NOT_RUN`.
 
-- [ ] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
+- [x] **F07.01 — Ficha simples de problema, hipótese, teste barato, métrica e limiar**
   - Verificar: Dados não medidos ficam NOT_TESTED
-- [ ] **F07.02 — Features MUST/SHOULD/COULD/LATER/REJECTED, justificativas e dependências**
+- [x] **F07.02 — Features MUST/SHOULD/COULD/LATER/REJECTED, justificativas e dependências**
   - Verificar: MUST não depende silenciosamente de item fora do corte
-- [ ] **F07.03 — Definir fluxo ponta a ponta mínimo e non-goals**
+- [x] **F07.03 — Definir fluxo ponta a ponta mínimo e non-goals**
   - Verificar: Existe demonstração que testa a hipótese sem pós-MVP
-- [ ] **F07.04 — REQ/NFR com IDs estáveis, origem e acceptance editável**
+- [x] **F07.04 — REQ/NFR com IDs estáveis, origem e acceptance editável**
   - Verificar: 100% dos MUST ligados a REQ/NFR; critérios não vazios
-- [ ] **F07.05 — Jornadas, estados e erros relevantes ao escopo**
+- [x] **F07.05 — Jornadas, estados e erros relevantes ao escopo**
   - Verificar: Caminho de falha material aparece no requisito correspondente
-- [ ] **F07.06 — Prévia e aprovação de lote; checks de cobertura e duplicação**
+- [x] **F07.06 — Prévia e aprovação de lote; checks de cobertura e duplicação**
   - Verificar: Regeneração preserva IDs aceitos e marca potenciais duplicatas
 
 **G07**

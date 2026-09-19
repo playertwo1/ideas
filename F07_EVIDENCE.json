@@ -1,0 +1,73 @@
+{
+  "phase": "F07",
+  "status": "IMPLEMENTED_AWAITING_AUDIT",
+  "scope": ["F07.01", "F07.02", "F07.03", "F07.04", "F07.05", "F07.06"],
+  "base_sha": "f53b7acfb4899a44822b23a44eeacaecd942e820",
+  "offline_default": true,
+  "scenarios": {
+    "hypothesis": "Problem, audience, hypothesis, cheap test, metric and threshold are persisted per project; evidence defaults to NOT_TESTED.",
+    "scope_cut": "MUST, SHOULD, COULD, LATER, REJECTED and NON_GOAL are explicit; dependencies outside the project/cut produce coverage errors.",
+    "flow": "Ordered end-to-end FlowStep records persist states, actions, expected results and material failure handling.",
+    "traceability": "REQ/NFR IDs are stable and unique; every requirement points to an existing scope item and every material journey failure points to a requirement.",
+    "preview": "Preview reports missing hypothesis, orphan MUST items, unlinked failures, dependency coverage errors and duplicate warnings before acceptance.",
+    "human_acceptance": "Batches remain PROPOSED until an explicit HUMAN actor accepts; AI, SYSTEM, BOT, AUTOMATION, AI_AGENT and unknown actors are rejected.",
+    "regeneration": "Accepted IDs remain in later previews while new changes remain proposed; duplicate IDs are rejected atomically.",
+    "isolation": "All repositories and database queries are scoped by projectId; P1 data is not returned for P2."
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 43, "failures": 0, "device": "Pixel_10_Pro_XL (AVD), Android 17"},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0, "tests": 19},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "artifacts": [
+    "app/src/main/java/com/playertwo/ideas/data/HypothesisEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/HypothesisDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/ScopeItemEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/ScopeItemDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/RequirementEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/RequirementDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/JourneyEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/JourneyDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/FlowStepEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/FlowStepDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningBatchEntity.java",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningBatchDao.java",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningPreview.java",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningRepository.java",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F07PlanningInstrumentedTest.java",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/5.json",
+    "docs/superpowers/plans/2026-09-18-f07-planning-design.md"
+  ],
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/data/HypothesisEntity.java": "579c4aad11f07ef95b8a1c3e24f257c84f0650e47389bb916216e40a62107510",
+    "app/src/main/java/com/playertwo/ideas/data/HypothesisDao.java": "df09c28c24ff83bda4842e29c7c934c0c0cdaf489d26a0dc7d1cb737c3cb0eea",
+    "app/src/main/java/com/playertwo/ideas/data/ScopeItemEntity.java": "479239faee1c1c2b1ad99a6a6faa5fc8f39f152bfcd4e2f16053d8d63c639c29",
+    "app/src/main/java/com/playertwo/ideas/data/ScopeItemDao.java": "86c6ef58e0cb3952e077de2622b670867a5d02677ec9751ab2fab5a6c8ebc346",
+    "app/src/main/java/com/playertwo/ideas/data/RequirementEntity.java": "f8c1a67f7495a540fec4aa0b944cc50e47352ad68533af9cbaa3469d61a58607",
+    "app/src/main/java/com/playertwo/ideas/data/RequirementDao.java": "dee6eb093a73d3061ad3edb20a3bda6210519345942592b83d371321dda1bc20",
+    "app/src/main/java/com/playertwo/ideas/data/JourneyEntity.java": "560addc8e238fcb8a518ce49369e6139f27106da84a2375bd33d8f0567820b36",
+    "app/src/main/java/com/playertwo/ideas/data/JourneyDao.java": "a2065f6e796109fd6f9375b76436755f8027a582e4f73c1c94d2d7a038730daa",
+    "app/src/main/java/com/playertwo/ideas/data/FlowStepEntity.java": "757b414d76c17fa797f9394685f99475fdad1b368f06684e676a8b2c871a9ff5",
+    "app/src/main/java/com/playertwo/ideas/data/FlowStepDao.java": "b930ba09781bad542325c7cb6050978221671164c7f96f8c3f54dec711044e26",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningBatchEntity.java": "d40da5dfbf97b3e65761578fef644328184c86154ea8d57ca38b95767fa51ddb",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningBatchDao.java": "615ee334038d6b3da93afc2396716957f7e89f871046e1c000862474dfadb2ca",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningPreview.java": "0573c1d852fa8d46ebd3cb3b0508d9bd98d5a0162b52b99bf08d79fa45514553",
+    "app/src/main/java/com/playertwo/ideas/data/PlanningRepository.java": "832d597d9e33a10cbd4752521412b06723378e8762e4bd808e1d1198415cf9ba",
+    "app/src/main/java/com/playertwo/ideas/data/IdeaDatabase.java": "9de095f35a7490eeca0aba1106e1f6fbaed563b64b291dc55e9cf73124b96206",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F07PlanningInstrumentedTest.java": "67df5fc3b9ad994e050f8d691eb6fcddffdb5b237613b0207559067857164b7a",
+    "app/schemas/com.playertwo.ideas.data.IdeaDatabase/5.json": "85339898329b8a1e13ca4c955ebd8230eb504644c17450e1333472bbd0307ee0",
+    "docs/superpowers/plans/2026-09-18-f07-planning-design.md": "d3de0b1f04aee6b224d0625404ccdef14be16e9aba16e99b4cd3202cd3de25b5"
+  },
+  "gates": {"G06": "PASS", "G07": "NOT_RUN", "G10": "NOT_RUN"},
+  "not_started": ["F08", "G07"],
+  "limitations": [
+    "F07 is exposed through offline provider-neutral Room/repository APIs; no F07 UI is added.",
+    "No research, remote AI or synchronization is included; those remain outside F07.",
+    "G07 requires independent audit and explicit Product Authority action."
+  ]
+}
