@@ -12,7 +12,7 @@ camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
 
-**Estado de execução (19 de setembro de 2026):** F06.01–F06.07 e F07.01–F07.06 foram auditadas com PASS. `G05 = PASS`, `G06 = PASS` e `G07 = PASS` foi explicitamente autorizado pela Product Authority após a auditoria F07. F08.01–F08.05 estão implementadas e aguardam auditoria independente; `G08 = NOT_RUN` e F09+ não foram iniciadas.
+**Estado de execução (19 de setembro de 2026):** F06.01–F06.07, F07.01–F07.06 e F08.01–F08.05 foram auditadas com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = PASS` e `G08 = PASS` foram explicitamente autorizados pela Product Authority. F09.01 está implementada e aguarda auditoria independente; F09.02+ e F10+ não foram iniciadas.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
 
@@ -513,7 +513,7 @@ O responsável principal aparece por fase; cada subetapa herda esse responsável
 **Resultado:** escopo pequeno ligado a uma hipótese e a critérios verificáveis. Responsável: E; apoio P/Q. Depende: F06. Reuso: REF-03 e REF-04. Esforço: 5–8 dias-pessoa.
 
 **Status atual:** auditada com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`.
-`G07 = PASS`; F08 está autorizada e implementada, aguardando auditoria independente. Não iniciar F09 nem registrar `G08` antes do próximo gate.
+`G08 = PASS`; F09.01 está autorizada e implementada, aguardando auditoria independente. Não iniciar F09.02+ nem registrar `G09` antes do próximo gate.
 
 **Padrões externos aplicados:** REF-03 inspira separação entre validação e planejamento; REF-04 fornece REQ/acceptance/rastreabilidade; REF-06 inspira clarificação/readiness. Não usar score cosmético de confiança.
 

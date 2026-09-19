@@ -4,19 +4,19 @@
 
 ## Fase ativa
 
-**F08 — Roadmap básico e readiness do núcleo**
+**F09 — Exportação Markdown e restauração**
 
-**Subetapas:** F08.01–F08.05 implementadas; aguardando auditoria independente.
+**Subetapas:** F09.01 implementada; aguardando auditoria independente.
 
 ## Trabalho autorizado agora
 
-- executar auditoria independente de F08;
+- executar auditoria independente de F09.01;
 - corrigir somente findings se uma nova auditoria for solicitada;
 - preservar decisões humanas, histórico, offline e D01–D09.
 
 ## Não autorizado
 
-- iniciar F09 ou registrar `G08` antes de auditoria PASS e autorização explícita;
+- iniciar F09.02+ ou registrar `G09` antes de auditoria PASS e autorização explícita;
 - transformar sugestão de IA em decisão ou lock automático;
 - alterar D01–D09;
 - iniciar F11–F20 enquanto `G10 != PASS`.
@@ -31,17 +31,16 @@
 - G05: `PASS`;
 - G06: `PASS`;
 - G07: `PASS`;
-- G08: `NOT_RUN`;
+- G08: `PASS`;
+- G09: `NOT_RUN`;
 - G10: `NOT_RUN`.
 
-## Critérios F08
+## Critérios F09.01
 
-1. Phase/RoadmapItem com objetivo, entrega, verify, ordem e dependências.
-2. Edição manual e reordenação sem referências quebradas.
-3. Separação MVP/pós-MVP e pré-requisitos visíveis.
-4. Checks determinísticos de órfãos, cobertura, referências, ciclos e revisões.
-5. Readiness por dimensão; gate não executado continua pendente.
+1. Snapshot aceito renderiza Markdown canônico offline.
+2. Entradas iguais produzem bytes iguais, preservando Unicode e relações.
+3. Dados de outro `projectId` são rejeitados.
 
 ## Próxima ação
 
-G07 foi autorizado pela Product Authority após PASS independente de F07. F08.01–F08.05 foram implementadas e aguardam auditoria; não iniciar F09 nem registrar `G08`.
+G08 foi autorizado pela Product Authority após PASS independente de F08 no SHA `dfecf412d58168370efeb5035985d1318e94f321`. F09.01 está implementada e aguarda auditoria; não iniciar F09.02+ nem registrar `G09`.

@@ -1,0 +1,50 @@
+{
+  "phase": "F09",
+  "status": "IMPLEMENTED_AWAITING_INDEPENDENT_AUDIT",
+  "base_sha": "dfecf412d58168370efeb5035985d1318e94f321",
+  "scope": ["F09.01"],
+  "offline_default": true,
+  "gates": {"G08": "PASS", "G09": "NOT_RUN", "G10": "NOT_RUN"},
+  "not_started": ["F09.02", "F09.03", "F09.04", "F09.05", "F09.06", "F10", "F11-F20"],
+  "scenarios": {
+    "determinism": "The same accepted snapshot, project, phases and roadmap items render byte-identical Markdown.",
+    "snapshot": "Only interpretationAccepted snapshots are rendered; original fields and originalHash are preserved.",
+    "unicode_multiline": "Unicode and multiline text are retained in canonical fenced blocks with normalized line endings.",
+    "relationships": "Phase and item IDs, phaseId, dependencies, orderIndex, status and projectId are rendered.",
+    "isolation": "Foreign project entities are rejected before rendering and no foreign content is emitted."
+  },
+  "checks": [
+    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
+    {"command": ".\\gradlew.bat test", "exit_code": 0},
+    {"command": ".\\gradlew.bat lint", "exit_code": 0},
+    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 57, "failures": 0},
+    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
+    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "artifacts": [
+    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java",
+    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java",
+    "fixtures/f09/f09-01-snapshot.json",
+    "README.md",
+    "ROADMAP.md",
+    "PROJECT_STATE.md",
+    "PHASE_CURRENT.md"
+  ],
+  "artifact_sha256": {
+    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "aa59015aef84c74f7cb9c4ea85ad4ce0e9195ab56f4b973ef15be06c6455ec25",
+    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "89fec94fae727ee6b790a3bf1b6a967ba7dcb53fb3659962420b46f22b740eed",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "396df194c6e630952206ed074b33aed0dea2a4da87e4485f7100e0250af23103",
+    "fixtures/f09/f09-01-snapshot.json": "2219ffdb2685e82d6b7dcee6b4269e25d3ba7e434dade9c6775d135e4e1a66c5",
+    "README.md": "e964aa4bfb61a8e0f4ddd71c72bd175b720b3d9882fafcf02285c54696442d73",
+    "ROADMAP.md": "8418c2c394cd339eed5377103dbd0664eede3583fa6ad704a3514011084ef37e",
+    "PROJECT_STATE.md": "7e93408ff95423728a92c599a874b86313d24a2289b23bdc740fbde640dbaedf",
+    "PHASE_CURRENT.md": "f14ec4d20109b142c21a3939b58384b63fbe88806f80e665ef0c18aed017b837"
+  },
+  "limitations": [
+    "F09.01 renders canonical Markdown only; manifest, ZIP, preview, sharing and restoration remain F09.02-F09.06.",
+    "Instrumented execution requires an attached Android emulator/device.",
+    "No provider, network, synchronization or secret is used."
+  ]
+}

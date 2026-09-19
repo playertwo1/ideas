@@ -12,7 +12,7 @@ A fronteira do produto é clara: **o Idea termina no handoff**. Execução cont�
 
 ## Estado atual
 
-F06.01–F06.07 e F07.01–F07.06 foram auditadas com PASS. `G05 = PASS`, `G06 = PASS` e `G07 = PASS` foi autorizado explicitamente pela Product Authority após a auditoria F07. F08.01–F08.05 estão implementadas e aguardam auditoria; `G08 = NOT_RUN` e F09 não foi iniciada. Nenhuma aprovação é automática.
+F06.01–F06.07, F07.01–F07.06 e F08.01–F08.05 foram auditadas com PASS. `G05 = PASS`, `G06 = PASS`, `G07 = PASS` e `G08 = PASS` foram autorizados explicitamente pela Product Authority. F09.01 está implementada e aguarda auditoria; F09.02+ e F10 não foram iniciadas. Nenhuma aprovação é automática.
 
 ## Arquitetura de produto
 

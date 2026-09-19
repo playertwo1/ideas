@@ -1,0 +1,19 @@
+{
+  "projectId": "P1",
+  "projectTitle": "Projeto café",
+  "projectStatus": "ACTIVE",
+  "snapshotStatus": "ACCEPTED",
+  "originalHash": "hash-1",
+  "originalTitle": "Título",
+  "originalIdea": "linha 1\nlinha 2",
+  "originalLimits": "Sem Firebase",
+  "interpretation": "Interpretação ✓",
+  "projectType": "APP",
+  "restrictions": "offline",
+  "depthMode": "STANDARD",
+  "suggestionReason": "motivo",
+  "phases": [
+    {"phaseId": "PH-1", "title": "Fase 1", "track": "MVP", "priority": 1},
+    {"phaseId": "PH-1", "itemId": "ITEM-1", "status": "PROPOSED", "orderIndex": 0}
+  ]
+}

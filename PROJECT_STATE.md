@@ -6,10 +6,10 @@
 - **Roadmap vigente:** v0.6
 - **Release alvo:** MVP 0.1 / Idea Core
 - **Milestone:** M2 — MVP 0.1 / Idea Core
-- **Fase:** F08 — Roadmap básico e readiness do núcleo
-- **Subetapa atual:** F08.01–F08.05 — implementadas, aguardando auditoria independente
-- **Última concluída:** F07.01–F07.06 — auditoria independente PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; `G07 = PASS` autorizado pela Product Authority
-- **Próxima após a atual:** auditoria independente de F08; não iniciar F09 nem registrar `G08`
+- **Fase:** F09 — Exportação Markdown e restauração
+- **Subetapa atual:** F09.01 — implementada, aguardando auditoria independente
+- **Última concluída:** F08.01–F08.05 — auditoria independente PASS no SHA `dfecf412d58168370efeb5035985d1318e94f321`; `G08 = PASS` autorizado pela Product Authority
+- **Próxima após a atual:** auditoria independente de F09.01; não iniciar F09.02+ nem registrar `G09`
 - **G00:** PASS — auditoria independente e registro autorizado pela Product Authority em 14/09/2026
 - **G01:** PASS — registrado pela Product Authority após auditoria independente em 18/09/2026
 - **G02:** PASS — registrado após auditoria independente de F02
@@ -18,7 +18,8 @@
 - **G05:** PASS — autorizado pela Product Authority em 18/09/2026; F06 liberada
 - **G06:** PASS — registrado pela Product Authority após reauditoria independente de F06
 - **G07:** PASS — autorizado pela Product Authority após auditoria independente de F07
-- **G08:** NOT_RUN — F08 aguarda auditoria independente
+- **G08:** PASS — autorizado pela Product Authority após auditoria independente de F08
+- **G09:** NOT_RUN
 - **G10:** NOT_RUN
 - **Factory desbloqueada:** NÃO
 - **D01–D09:** LOCKED em 13/09/2026
@@ -50,12 +51,12 @@ A baseline de eficiência de contexto foi materializada nesta branch em `M0_CONT
 
 ## Bloqueios
 
-F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 foram reauditadas independentemente com PASS no SHA `905660e77c2f0b05ac1ef37f60fa332a341add6d`. F07.01–F07.06 foram auditadas independentemente com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; F08.01–F08.05 foram implementadas e aguardam auditoria.
+F03.01–F03.06 foram auditadas independentemente com PASS. F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e aguardam reauditoria. F05.01–F05.05 foram auditadas independentemente com PASS. F06.01–F06.07 foram reauditadas independentemente com PASS no SHA `905660e77c2f0b05ac1ef37f60fa332a341add6d`. F07.01–F07.06 foram auditadas independentemente com PASS no SHA `0c7c3f201aec8ddd77d9418a199e5570ca8bb375`; F08.01–F08.05 foram auditadas com PASS; F09.01 está implementada e aguarda auditoria.
 
 ## Próxima ação
 
-F07.01–F07.06 foram auditadas com PASS pelo Auditor (Codex) e `G07 = PASS` foi explicitamente autorizado pela Product Authority. F08.01–F08.05 estão implementadas e aguardam auditoria; não iniciar F09 nem registrar `G08`.
+F08.01–F08.05 foram auditadas com PASS pelo Auditor (Codex) e `G08 = PASS` foi explicitamente autorizado pela Product Authority. F09.01 está implementada e aguarda auditoria; não iniciar F09.02+ nem registrar `G09`.
 
 ## Regra de avanço
 
-F08.01–F08.05 implementadas aguardando auditoria; `G08 = NOT_RUN`; `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
+F09.01 implementada aguardando auditoria; `G09 = NOT_RUN`; `G10 = NOT_RUN` mantém a Idea Factory/F11–F20 bloqueada.
