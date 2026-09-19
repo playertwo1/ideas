@@ -121,13 +121,18 @@ public final class PlanningRepository {
         required(title, "title");
         required(states, "states");
         String errors = materialErrors == null ? "" : materialErrors.trim();
+        String linkedRequirement = linkedReqId == null ? null : linkedReqId.trim();
         long now = System.currentTimeMillis();
         database.runInTransaction(() -> {
             requireProject(id);
+            if (linkedRequirement != null && !linkedRequirement.isEmpty()
+                    && database.requirements().find(id, linkedRequirement) == null) {
+                throw new IllegalArgumentException("journey requirement not found in project: " + linkedRequirement);
+            }
             if (database.journeys().find(id, journeyId) != null) {
                 throw new IllegalStateException("journey already exists: " + journeyId);
             }
-            database.journeys().insert(new JourneyEntity(id, journeyId, title, states, errors, linkedReqId, "PROPOSED", now));
+            database.journeys().insert(new JourneyEntity(id, journeyId, title, states, errors, linkedRequirement, "PROPOSED", now));
         });
     }
 
@@ -277,6 +282,11 @@ public final class PlanningRepository {
         database.runInTransaction(() -> {
             PlanningBatchEntity b = database.planningBatches().find(id, batchId);
             if (b == null) throw new IllegalArgumentException("batch not found: " + batchId);
+            if (!"PROPOSED".equals(b.status)) throw new IllegalStateException("batch is not proposed: " + batchId);
+            PlanningPreview validation = preview(id);
+            if (!batchId.equals(validation.batchId) || !validation.isReady) {
+                throw new IllegalStateException("batch preview is not ready: " + batchId);
+            }
             long now = System.currentTimeMillis();
             database.planningBatches().updateStatus(id, batchId, "ACCEPTED");
             database.scopeItems().acceptProposed(id, "ACCEPTED", now);

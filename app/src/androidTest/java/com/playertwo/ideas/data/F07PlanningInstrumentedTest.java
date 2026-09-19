@@ -53,8 +53,11 @@ public class F07PlanningInstrumentedTest {
     }
 
     @Test public void previewIsProposedAndHumanBatchAcceptanceIsExplicit() {
+        repository.saveHypothesis("P1", "dor", "equipe", "reduzir retrabalho", "teste manual", "tempo", "< 10 min");
         repository.addScopeItem("P1", "S-001", "MUST", "capturar", "rationale", "", false);
+        repository.addRequirement("P1", "REQ-001", "REQ", "S-001", "origem", "rationale", "aceite");
         PlanningPreview first = repository.preview("P1");
+        assertTrue(first.isReady);
         assertEquals("PROPOSED", repository.batch("P1", first.batchId).status);
         try { repository.acceptBatch("P1", first.batchId, "AI"); fail("AI accepted batch"); }
         catch (IllegalStateException expected) { }
@@ -62,15 +65,41 @@ public class F07PlanningInstrumentedTest {
         assertEquals("ACCEPTED", repository.batch("P1", first.batchId).status);
     }
 
+    @Test public void humanCannotAcceptPreviewWithCoverageErrors() {
+        repository.addScopeItem("P1", "S-100", "MUST", "sem requisito", "rationale", "", false);
+        PlanningPreview invalid = repository.preview("P1");
+        assertFalse(invalid.isReady);
+        try {
+            repository.acceptBatch("P1", invalid.batchId, "HUMAN");
+            fail("invalid preview accepted");
+        } catch (IllegalStateException expected) { }
+        assertEquals("PROPOSED", repository.batch("P1", invalid.batchId).status);
+    }
+
+    @Test public void journeyRejectsUnknownOrForeignRequirementWithoutMutation() {
+        repository.addScopeItem("P2", "S-200", "MUST", "vizinho", "rationale", "", false);
+        repository.addRequirement("P2", "REQ-200", "REQ", "S-200", "origem", "rationale", "aceite");
+        try {
+            repository.addJourney("P1", "J-foreign", "jornada", "INICIO>FIM", "falha", "REQ-200");
+            fail("foreign requirement accepted");
+        } catch (IllegalArgumentException expected) { }
+        try {
+            repository.addJourney("P1", "J-missing", "jornada", "INICIO>FIM", "falha", "REQ-404");
+            fail("unknown requirement accepted");
+        } catch (IllegalArgumentException expected) { }
+        assertTrue(repository.journeys("P1").isEmpty());
+    }
+
     @Test public void regenerationPreservesStableAcceptedIdsAndDetectsDuplicates() {
+        repository.saveHypothesis("P1", "dor", "equipe", "reduzir retrabalho", "teste manual", "tempo", "< 10 min");
         repository.addScopeItem("P1", "S-001", "MUST", "capturar", "rationale", "", false);
+        repository.addRequirement("P1", "REQ-001", "REQ", "S-001", "origem", "rationale", "aceite");
         PlanningPreview first = repository.preview("P1");
         repository.acceptBatch("P1", first.batchId, "HUMAN");
         repository.addScopeItem("P1", "S-002", "SHOULD", "revisar", "rationale", "", false);
         PlanningPreview regenerated = repository.preview("P1");
         assertTrue(regenerated.itemIds.contains("S-001"));
         assertTrue(regenerated.itemIds.contains("S-002"));
-        repository.addRequirement("P1", "REQ-001", "REQ", "S-001", "origem", "rationale", "aceite");
         try {
             repository.addRequirement("P1", "REQ-001", "REQ", "S-001", "origem", "rationale", "aceite");
             fail("duplicate requirement accepted");

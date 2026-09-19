@@ -7,7 +7,7 @@ O Gold Standard é a camada de contrato e verificação do próprio repositório
 autorização da fase. `scripts/check.py` é a entrada reproduzível de validação.
 Fixtures, manifesto e evidência Gold não constituem uma nova fase de produto.
 F01/F01.08, `G00 = PASS`, `G01 = NOT_RUN`, `G10 = NOT_RUN` e D01–D09 `LOCKED`
-permanecem inalterados; F02, F11–F20 e o Runner não são iniciados por esta
+permanecem inalterados; F02, F08–F20 e o Runner não são iniciados por esta
 camada.
 
 Versão canônica vigente: 0.6. Data: 13 de setembro de 2026.
@@ -19,7 +19,7 @@ auditoria, gate ou aprovação de produto.
 
 Este documento organiza a construção do aplicativo que transforma ideias incompletas em pacotes de especificação coerentes e verificáveis. A recomendação é entregar primeiro um núcleo Android local-first com entrevista, decisões, requisitos, recorte de MVP, roadmap e exportação. Pesquisa automática, compilação de contexto, revisão independente e bootstrap entram em incrementos posteriores.
 
-Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. A implementação Android está restrita às fases autorizadas até F06; F07+ ainda não foram iniciadas. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
+Este roadmap é o contrato canônico vigente do projeto. D01–D09 estão aprovadas/`LOCKED`; demais parâmetros marcados como propostos continuam sujeitos à validação da fase correspondente e não viram decisão humana por inferência. A implementação Android está restrita às fases autorizadas até F07; F08+ ainda não foram iniciadas. `Idea_MVP_Master_Spec_Roadmap_v2_Pesquisa.docx` é fonte histórica/original de pesquisa, não autoridade operacional. Os oito projetos de referência estão consolidados em `REFERENCE_MATRIX.md`; licença/proveniência para eventual reuso de código permanece pendente até existir um componente concreto a reutilizar. Esta revisão também formaliza a separação **Idea Core / Idea Factory**, o gate obrigatório de valor em G10, o protocolo **Antigravity = Builder / Codex = Auditor**, Progressive Commitment, `rationale` rastreável e referências GitHub explícitas e o princípio de portabilidade futura Android → Desktop/Web sem ampliar o escopo do MVP 0.1.
 
 Leitura sugerida para validar a direção: [visão Core/Factory](#14-idea-core-idea-factory-e-fronteira-de-valor), [versões e marcos](#2-versões-e-marcos-de-entrega), [parâmetros](#3-parâmetros-de-funcionamento-propostos), [fases e subetapas](#6-fases-e-subetapas-de-construção), [protocolo de execução](#102-protocolo-builder--auditor--product-authority), [referências GitHub](#13-referências-github-usadas-na-concepção) e [decisões fundamentais](#12-decisões-fundamentais-aprovadas). O documento mantém 21 fases F00–F20; subetapas e checks podem crescer conforme contratos forem aprovados, sem alterar silenciosamente o escopo.
 
