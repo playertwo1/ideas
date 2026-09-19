@@ -5,6 +5,10 @@ dependências e gates. O estado operacional está em `PROJECT_STATE.md`, a
 autorização atual em `PHASE_CURRENT.md` e o checklist executável em
 `EXECUTION_PLAN.md`.
 
+O roadmap histórico foi arquivado em
+[`docs/archive/ROADMAP_V0.6_LEGACY.md`](docs/archive/ROADMAP_V0.6_LEGACY.md) e
+serve apenas como referência documental; não autoriza trabalho atual.
+
 ## 1. Resultado e fronteira
 
 O Idea transforma uma ideia incompleta em um pacote de especificação coerente,
