@@ -23,6 +23,19 @@
     {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
     {"command": "git diff --check", "exit_code": 0}
   ],
+  "local_recheck": {
+    "status": "PARTIAL_ENVIRONMENT_BLOCK",
+    "reason": "SDK local disponível via ANDROID_HOME; test, lint e assembleDebug passaram. connectedDebugAndroidTest foi bloqueado por não haver dispositivo ou emulador conectado.",
+    "checks": [
+      {"command": ".\\gradlew.bat test --no-daemon", "exit_code": 0},
+      {"command": ".\\gradlew.bat lint --no-daemon", "exit_code": 0},
+      {"command": ".\\gradlew.bat assembleDebug --no-daemon", "exit_code": 0},
+      {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 1, "reason": "No connected devices"},
+      {"command": "python scripts/check.py", "exit_code": 0},
+      {"command": "python -m unittest discover -s scripts -p \"test_*.py\"", "exit_code": 0},
+      {"command": "git diff --check", "exit_code": 0}
+    ]
+  },
   "artifacts": [
     "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java",
     "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java",
@@ -36,12 +49,12 @@
   ],
   "artifact_sha256": {
     "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "d42e4c5ed31fd5823e97262303a6f6ed76eddd4cb55e07ec74ccc2d8062f65dd",
-    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "f9f2ef3ddaf0acbf04b97edb7c5172eac6bf53a3f2cd6eed95a2041144151c78",
+    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "95fe878a56dde2289f0ba291f1607cc5c1b46201bc557d2584228281d6c4d999",
     "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "d72e1835a9dcbd0b1bd80c17827c2b398ee9ec4f2d0657a5cd5f2999ab8fe386",
     "fixtures/f09/f09-01-snapshot.json": "2219ffdb2685e82d6b7dcee6b4269e25d3ba7e434dade9c6775d135e4e1a66c5",
     "fixtures/f09/f09-01-orphan-item.json": "f07621caecf77fcfd16c7c3d631494f0e25ec9625143c83df354e72e7a056867",
-    "README.md": "e964aa4bfb61a8e0f4ddd71c72bd175b720b3d9882fafcf02285c54696442d73",
-    "ROADMAP.md": "8418c2c394cd339eed5377103dbd0664eede3583fa6ad704a3514011084ef37e",
+    "README.md": "8006035c79e3a25ecc84dad28820c8b4e1c24ed6c4188bbb22286db209ed1634",
+    "ROADMAP.md": "5b62e4577a4990302dc92bfb406159be845e145e73f7738ae3c1514af7752958",
     "PROJECT_STATE.md": "7e93408ff95423728a92c599a874b86313d24a2289b23bdc740fbde640dbaedf",
     "PHASE_CURRENT.md": "f14ec4d20109b142c21a3939b58384b63fbe88806f80e665ef0c18aed017b837"
   },

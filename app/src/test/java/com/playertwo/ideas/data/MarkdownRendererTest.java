@@ -43,6 +43,7 @@ public class MarkdownRendererTest {
             false, 60, "Aceitar ou rejeitar sugestão", 10L);
         try {
             MarkdownRenderer.render(project, unaccepted, Collections.emptyList(), Collections.emptyList());
+            fail("unaccepted snapshot was rendered");
         } catch (IllegalArgumentException expected) {
             assertTrue(expected.getMessage().contains("accepted"));
         }
@@ -52,6 +53,7 @@ public class MarkdownRendererTest {
             true, 80, "Aguardando próxima fase", 10L);
         try {
             MarkdownRenderer.render(project, foreign, Collections.emptyList(), Collections.emptyList());
+            fail("foreign project snapshot was rendered");
         } catch (IllegalArgumentException expected) {
             assertTrue(expected.getMessage().contains("projectId"));
         }
