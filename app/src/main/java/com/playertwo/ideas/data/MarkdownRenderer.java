@@ -19,8 +19,16 @@ public final class MarkdownRenderer {
         List<PhaseEntity> safePhases = copyPhases(project.projectId, phases);
         List<RoadmapItemEntity> safeItems = copyItems(project.projectId, items);
         Set<String> phaseIds = new HashSet<>();
-        for (PhaseEntity phase : safePhases) phaseIds.add(phase.phaseId);
+        Set<String> seenPhaseIds = new HashSet<>();
+        for (PhaseEntity phase : safePhases) {
+            if (!seenPhaseIds.add(phase.phaseId))
+                throw new IllegalArgumentException("duplicate phaseId: " + phase.phaseId);
+            phaseIds.add(phase.phaseId);
+        }
+        Set<String> seenItemIds = new HashSet<>();
         for (RoadmapItemEntity item : safeItems) {
+            if (!seenItemIds.add(item.itemId))
+                throw new IllegalArgumentException("duplicate itemId: " + item.itemId);
             if (!phaseIds.contains(item.phaseId))
                 throw new IllegalArgumentException("phaseId missing: " + item.phaseId);
         }

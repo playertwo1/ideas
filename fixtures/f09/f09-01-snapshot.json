@@ -13,7 +13,9 @@
   "depthMode": "STANDARD",
   "suggestionReason": "motivo",
   "phases": [
-    {"phaseId": "PH-1", "title": "Fase 1", "track": "MVP", "priority": 1},
-    {"phaseId": "PH-1", "itemId": "ITEM-1", "status": "PROPOSED", "orderIndex": 0}
+    {"phaseId": "PH-1", "title": "Fase 1", "objective": "Objetivo", "track": "MVP", "priority": 1, "revision": 1, "status": "PROPOSED", "sourceRef": "manual"}
+  ],
+  "items": [
+    {"itemId": "ITEM-1", "phaseId": "PH-1", "title": "Captura", "objective": "Capturar", "delivery": "Tela", "verify": "Teste", "track": "MVP", "priority": "MUST", "dependencies": "", "orderIndex": 0, "revision": 1, "status": "PROPOSED", "sourceRef": "manual"}
   ]
 }

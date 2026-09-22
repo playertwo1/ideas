@@ -2,8 +2,10 @@ package com.playertwo.ideas.data;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -77,5 +79,71 @@ public class MarkdownRendererTest {
             assertTrue(expected.getMessage().contains("phaseId"));
             assertTrue(expected.getMessage().contains("PH-MISSING"));
         }
+    }
+
+    @Test public void rendererRejectsDuplicatePhaseId() {
+        ProjectEntity project = new ProjectEntity("P1", "Projeto", "ACTIVE", 10L);
+        ProjectIntakeEntity snapshot = new ProjectIntakeEntity(
+            "P1", "Título", "ideia", "", "hash", "sugestão", "APP", "", "LIGHT", "motivo",
+            true, 80, "Aguardando próxima fase", 10L);
+        PhaseEntity phase1 = new PhaseEntity("P1", "PH-1", "Fase 1", "Objetivo", "MVP", 1,
+            1, "PROPOSED", "manual", 10L);
+        PhaseEntity phase2 = new PhaseEntity("P1", "PH-1", "Fase 2", "Objetivo", "MVP", 2,
+            1, "PROPOSED", "manual", 10L);
+        try {
+            MarkdownRenderer.render(project, snapshot, Arrays.asList(phase1, phase2), Collections.emptyList());
+            fail("duplicate phaseId was accepted");
+        } catch (IllegalArgumentException expected) {
+            assertTrue(expected.getMessage().contains("duplicate phaseId"));
+        }
+    }
+
+    @Test public void rendererRejectsDuplicateItemId() {
+        ProjectEntity project = new ProjectEntity("P1", "Projeto", "ACTIVE", 10L);
+        ProjectIntakeEntity snapshot = new ProjectIntakeEntity(
+            "P1", "Título", "ideia", "", "hash", "sugestão", "APP", "", "LIGHT", "motivo",
+            true, 80, "Aguardando próxima fase", 10L);
+        PhaseEntity phase = new PhaseEntity("P1", "PH-1", "Fase", "Objetivo", "MVP", 1,
+            1, "PROPOSED", "manual", 10L);
+        RoadmapItemEntity item1 = new RoadmapItemEntity("P1", "ITEM-1", "PH-1", "Item 1",
+            "Objetivo", "Entrega", "Verificação", "MVP", "MUST", "", 0, 1,
+            "PROPOSED", "manual", 10L);
+        RoadmapItemEntity item2 = new RoadmapItemEntity("P1", "ITEM-1", "PH-1", "Item 2",
+            "Objetivo", "Entrega", "Verificação", "MVP", "MUST", "", 1, 1,
+            "PROPOSED", "manual", 10L);
+        try {
+            MarkdownRenderer.render(project, snapshot, Collections.singletonList(phase),
+                Arrays.asList(item1, item2));
+            fail("duplicate itemId was accepted");
+        } catch (IllegalArgumentException expected) {
+            assertTrue(expected.getMessage().contains("duplicate itemId"));
+        }
+    }
+
+    @Test public void rendererIsDeterministicDespiteInputOrder() {
+        ProjectEntity project = new ProjectEntity("P1", "Projeto", "ACTIVE", 10L);
+        ProjectIntakeEntity snapshot = new ProjectIntakeEntity(
+            "P1", "Título", "ideia", "", "hash", "sugestão", "APP", "", "LIGHT", "motivo",
+            true, 80, "Aguardando próxima fase", 10L);
+        PhaseEntity phase1 = new PhaseEntity("P1", "PH-1", "Fase 1", "Objetivo", "MVP", 1,
+            1, "PROPOSED", "manual", 10L);
+        PhaseEntity phase2 = new PhaseEntity("P1", "PH-2", "Fase 2", "Objetivo", "MVP", 2,
+            1, "PROPOSED", "manual", 10L);
+        RoadmapItemEntity item1 = new RoadmapItemEntity("P1", "ITEM-1", "PH-1", "Item 1",
+            "Objetivo", "Entrega", "Verificação", "MVP", "MUST", "", 0, 1,
+            "PROPOSED", "manual", 10L);
+        RoadmapItemEntity item2 = new RoadmapItemEntity("P1", "ITEM-2", "PH-2", "Item 2",
+            "Objetivo", "Entrega", "Verificação", "MVP", "MUST", "", 0, 1,
+            "PROPOSED", "manual", 10L);
+
+        List<PhaseEntity> phasesList1 = Arrays.asList(phase1, phase2);
+        List<RoadmapItemEntity> itemsList1 = Arrays.asList(item1, item2);
+        String first = MarkdownRenderer.render(project, snapshot, phasesList1, itemsList1);
+
+        List<PhaseEntity> phasesList2 = Arrays.asList(phase2, phase1);
+        List<RoadmapItemEntity> itemsList2 = Arrays.asList(item2, item1);
+        String second = MarkdownRenderer.render(project, snapshot, phasesList2, itemsList2);
+
+        assertEquals("output must be byte-identical despite input order", first, second);
     }
 }
