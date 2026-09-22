@@ -4,23 +4,62 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class F09RendererInstrumentedTest {
-    @Test public void f09SnapshotFixtureIsPackagedForExternalVerification() throws Exception {
-        try (InputStream stream = InstrumentationRegistry.getInstrumentation().getContext()
-            .getAssets().open("f09/f09-01-snapshot.json")) {
-            assertTrue(stream.read() >= 0);
+    @Test public void f09SnapshotFixtureRendersToCanonicalMarkdown() throws Exception {
+        String snapshotJson = readAsset("f09/f09-01-snapshot.json");
+        String expectedMarkdown = readAsset("f09/f09-01-snapshot.md");
+        JSONObject snapshot = new JSONObject(snapshotJson);
+
+        String projectId = snapshot.getString("projectId");
+        ProjectEntity project = new ProjectEntity(projectId, snapshot.getString("projectTitle"),
+            snapshot.getString("projectStatus"), 1L);
+        ProjectIntakeEntity intake = new ProjectIntakeEntity(projectId,
+            snapshot.getString("originalTitle"), snapshot.getString("originalIdea"),
+            snapshot.getString("originalLimits"), snapshot.getString("originalHash"),
+            snapshot.getString("interpretation"), snapshot.getString("projectType"),
+            snapshot.getString("restrictions"), snapshot.getString("depthMode"),
+            snapshot.getString("suggestionReason"), true, 80, "ACCEPTED", 1L);
+
+        List<PhaseEntity> phases = new ArrayList<>();
+        JSONArray phasesArray = snapshot.getJSONArray("phases");
+        for (int i = 0; i < phasesArray.length(); i++) {
+            JSONObject p = phasesArray.getJSONObject(i);
+            PhaseEntity phase = new PhaseEntity(projectId, p.getString("phaseId"),
+                p.getString("title"), p.getString("objective"), p.getString("track"),
+                p.getInt("priority"), p.getInt("revision"), p.getString("status"),
+                p.getString("sourceRef"), 1L);
+            phases.add(phase);
         }
+
+        List<RoadmapItemEntity> items = new ArrayList<>();
+        JSONArray itemsArray = snapshot.getJSONArray("items");
+        for (int i = 0; i < itemsArray.length(); i++) {
+            JSONObject it = itemsArray.getJSONObject(i);
+            RoadmapItemEntity item = new RoadmapItemEntity(projectId, it.getString("itemId"),
+                it.getString("phaseId"), it.getString("title"), it.getString("objective"),
+                it.getString("delivery"), it.getString("verify"), it.getString("track"),
+                it.getString("priority"), it.getString("dependencies"), it.getInt("orderIndex"),
+                it.getInt("revision"), it.getString("status"), it.getString("sourceRef"), 1L);
+            items.add(item);
+        }
+
+        String rendered = MarkdownRenderer.render(project, intake, phases, items);
+        assertEquals("fixture must render to canonical golden markdown", expectedMarkdown, rendered);
     }
 
     @Test public void orphanFixtureIsRejectedByRealRenderer() throws Exception {

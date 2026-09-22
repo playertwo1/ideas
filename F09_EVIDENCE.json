@@ -2,10 +2,24 @@
   "phase": "F09",
   "status": "IMPLEMENTED_AWAITING_INDEPENDENT_AUDIT",
   "base_sha": "dfecf412d58168370efeb5035985d1318e94f321",
-  "scope": ["F09.01"],
+  "scope": [
+    "F09.01"
+  ],
   "offline_default": true,
-  "gates": {"G08": "PASS", "G09": "NOT_RUN", "G10": "NOT_RUN"},
-  "not_started": ["F09.02", "F09.03", "F09.04", "F09.05", "F09.06", "F10", "F11-F20"],
+  "gates": {
+    "G08": "PASS",
+    "G09": "NOT_RUN",
+    "G10": "NOT_RUN"
+  },
+  "not_started": [
+    "F09.02",
+    "F09.03",
+    "F09.04",
+    "F09.05",
+    "F09.06",
+    "F10",
+    "F11-F20"
+  ],
   "scenarios": {
     "determinism": "The same accepted snapshot, project, phases and roadmap items render byte-identical Markdown.",
     "snapshot": "Only interpretationAccepted snapshots are rendered; original fields and originalHash are preserved.",
@@ -15,25 +29,70 @@
     "orphan_validation": "An item whose phaseId is absent is rejected before rendering instead of being dropped."
   },
   "checks": [
-    {"command": ".\\gradlew.bat assembleDebug", "exit_code": 0},
-    {"command": ".\\gradlew.bat test", "exit_code": 0},
-    {"command": ".\\gradlew.bat lint", "exit_code": 0},
-    {"command": ".\\gradlew.bat connectedDebugAndroidTest", "exit_code": 0, "tests": 58, "failures": 0},
-    {"command": "python scripts/validate_standard.py --self-check", "exit_code": 0},
-    {"command": "python -m unittest discover -s scripts -q", "exit_code": 0},
-    {"command": "git diff --check", "exit_code": 0}
+    {
+      "command": ".\\gradlew.bat assembleDebug",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\gradlew.bat test",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\gradlew.bat lint",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\gradlew.bat connectedDebugAndroidTest",
+      "exit_code": 0,
+      "tests": 58,
+      "failures": 0
+    },
+    {
+      "command": "python3 scripts/check.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s scripts -q",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
   ],
   "local_recheck": {
     "status": "PARTIAL_ENVIRONMENT_BLOCK",
-    "reason": "SDK local disponível via ANDROID_HOME; test, lint e assembleDebug passaram. connectedDebugAndroidTest foi bloqueado por não haver dispositivo ou emulador conectado.",
+    "reason": "SDK local dispon\u00edvel via ANDROID_HOME; test, lint e assembleDebug passaram. connectedDebugAndroidTest foi bloqueado por n\u00e3o haver dispositivo ou emulador conectado.",
     "checks": [
-      {"command": ".\\gradlew.bat test --no-daemon", "exit_code": 0},
-      {"command": ".\\gradlew.bat lint --no-daemon", "exit_code": 0},
-      {"command": ".\\gradlew.bat assembleDebug --no-daemon", "exit_code": 0},
-      {"command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon", "exit_code": 1, "reason": "No connected devices"},
-      {"command": "python scripts/check.py", "exit_code": 0},
-      {"command": "python -m unittest discover -s scripts -p \"test_*.py\"", "exit_code": 0},
-      {"command": "git diff --check", "exit_code": 0}
+      {
+        "command": ".\\gradlew.bat test --no-daemon",
+        "exit_code": 0
+      },
+      {
+        "command": ".\\gradlew.bat lint --no-daemon",
+        "exit_code": 0
+      },
+      {
+        "command": ".\\gradlew.bat assembleDebug --no-daemon",
+        "exit_code": 0
+      },
+      {
+        "command": ".\\gradlew.bat connectedDebugAndroidTest --no-daemon",
+        "exit_code": 1,
+        "reason": "No connected devices"
+      },
+      {
+        "command": "python scripts/check.py",
+        "exit_code": 0
+      },
+      {
+        "command": "python -m unittest discover -s scripts -p \"test_*.py\"",
+        "exit_code": 0
+      },
+      {
+        "command": "git diff --check",
+        "exit_code": 0
+      }
     ]
   },
   "artifacts": [
@@ -48,15 +107,16 @@
     "PHASE_CURRENT.md"
   ],
   "artifact_sha256": {
-    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "d42e4c5ed31fd5823e97262303a6f6ed76eddd4cb55e07ec74ccc2d8062f65dd",
-    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "95fe878a56dde2289f0ba291f1607cc5c1b46201bc557d2584228281d6c4d999",
-    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "d72e1835a9dcbd0b1bd80c17827c2b398ee9ec4f2d0657a5cd5f2999ab8fe386",
-    "fixtures/f09/f09-01-snapshot.json": "2219ffdb2685e82d6b7dcee6b4269e25d3ba7e434dade9c6775d135e4e1a66c5",
+    "app/src/main/java/com/playertwo/ideas/data/MarkdownRenderer.java": "6a4ad68d0c472f61b014850f38a7e5519a139f095d36427cbb09a2d7bbe4ac8a",
+    "app/src/test/java/com/playertwo/ideas/data/MarkdownRendererTest.java": "91125e6507cbed0a38385894e86df2d201d6c57b6edfcddc0c2d9c3012ad19f9",
+    "app/src/androidTest/java/com/playertwo/ideas/data/F09RendererInstrumentedTest.java": "fd7ae0d92e9da971357d3b2662b228292fdc6370d4cd564edc67c3c9b113693b",
+    "fixtures/f09/f09-01-snapshot.json": "89eda4115a242f179753603ef25fb4604206f37ba3fa39cb49f649f778fa1ec3",
     "fixtures/f09/f09-01-orphan-item.json": "f07621caecf77fcfd16c7c3d631494f0e25ec9625143c83df354e72e7a056867",
     "README.md": "8006035c79e3a25ecc84dad28820c8b4e1c24ed6c4188bbb22286db209ed1634",
     "ROADMAP.md": "5b62e4577a4990302dc92bfb406159be845e145e73f7738ae3c1514af7752958",
     "PROJECT_STATE.md": "7e93408ff95423728a92c599a874b86313d24a2289b23bdc740fbde640dbaedf",
-    "PHASE_CURRENT.md": "f14ec4d20109b142c21a3939b58384b63fbe88806f80e665ef0c18aed017b837"
+    "PHASE_CURRENT.md": "f14ec4d20109b142c21a3939b58384b63fbe88806f80e665ef0c18aed017b837",
+    "fixtures/f09/f09-01-snapshot.md": "42c208013a540a2b9b7032d40f78eb67201f29f8f5076f667dffdf91153fd3ff"
   },
   "limitations": [
     "F09.01 renders canonical Markdown only; manifest, ZIP, preview, sharing and restoration remain F09.02-F09.06.",

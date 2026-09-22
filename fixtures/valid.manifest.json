@@ -10,12 +10,18 @@
   "files": [
     {
       "path": "project.json",
-      "sha256": "ac1794c959d1ec6169cebc786d3800a1e56d37364e1de757f93d43cd9dafd3f4"
+      "sha256": "d80fdb29f08d1bb5ad861caebe330a9c44aa27c782c70db9402c71123f2c11bb"
     }
   ],
-  "capabilities": ["CORE"],
+  "capabilities": [
+    "CORE"
+  ],
   "gateResults": [
-    {"id": "GATE-CORE", "status": "NOT_RUN", "rationale": "Contract fixture."}
+    {
+      "id": "GATE-CORE",
+      "status": "NOT_RUN",
+      "rationale": "Contract fixture."
+    }
   ],
   "knownLimitations": []
 }
