@@ -54,11 +54,18 @@ implementadas.
 Leia primeiro:
 
 ```text
-AGENTS.md → PROJECT_STATE.md → PHASE_CURRENT.md → pedido atual
+AGENTS.md → STATE.md → PHASE_CURRENT.md → pedido atual
 ```
 
 Abra `ROADMAP.md`, `EXECUTION_PLAN.md`, `WATCHDOG.md`, `AUDIT.md` e contratos
 somente quando a tarefa exigir.
+
+## Como rodar
+
+```bash
+./gradlew assembleDebug        # APK debug (Windows: gradlew.bat)
+python scripts/android_check.py   # assembleDebug + test + lint
+```
 
 ## Verificação
 
@@ -74,19 +81,23 @@ pela aparência da documentação.
 
 ## Documentos de referência
 
-- `AGENTS.md` — contexto mínimo e regras universais;
-- `PROJECT_STATE.md` — fonte única do estado operacional;
+- `PROJECT.md` — problema, MVP e fora de escopo (resumo do contrato de produto);
+- `AGENTS.md` — contexto mínimo e regras universais (`CLAUDE.md` só importa este);
+- `STATE.md` — fonte única do estado operacional;
 - `PHASE_CURRENT.md` — autorização e limites da fase atual;
 - `ROADMAP.md` — contrato canônico de produto e evolução;
 - `EXECUTION_PLAN.md` — checklist detalhado derivado do roadmap;
 - `PROJECT_STANDARD.md` — modos, autoria, estados e autoridade;
 - `VALIDATION_CONTRACT.md` — parse, schema e semântica;
 - `CONTEXT_POLICY.md` e `AI_CONTEXT_INDEX.md` — contexto progressivo;
-- `WATCHDOG.md` e `AUDIT.md` — proteção e revisão.
+- `WATCHDOG.md` e `AUDIT.md` — proteção e revisão;
+- `CHANGELOG.md` — histórico por fase;
+- `docs/fases/` — artefatos e evidências das fases F01–F09;
+- `docs/archive/` — histórico (não editar).
 
 ## Estado atual
 
 F06.01–F06.07, F07.01–F07.06 e F08.01–F08.05 foram auditadas com PASS; `G05`,
 `G06`, `G07` e `G08` foram autorizados. F09.01 está implementada e aguarda
 auditoria independente. F09.02+, F10+ e a Idea Factory permanecem fora da
-execução autorizada. Consulte `PROJECT_STATE.md` antes de qualquer avanço.
+execução autorizada. Consulte `STATE.md` antes de qualquer avanço.

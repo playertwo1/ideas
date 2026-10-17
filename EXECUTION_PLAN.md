@@ -2,11 +2,11 @@
 
 > **Papel deste arquivo:** checklist operacional derivado do `ROADMAP.md` v0.6. Ele não cria regras novas. Em caso de conflito, o `ROADMAP.md` vence.
 
-**Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `PROJECT_STATE.md` usando `PHASE_CURRENT.md`.
+**Uso diário:** marque apenas trabalho realmente concluído e verificado. O agente executa a fase indicada em `STATE.md` usando `PHASE_CURRENT.md`.
 
 **Estado atual:** F00–F08 estão concluídas conforme os gates `G00`–`G08`
 registrados. F04.02–F04.07 permanecem implementadas e aguardam reauditoria,
-conforme `PROJECT_STATE.md`. F09.01 está implementada e aguardando auditoria
+conforme `STATE.md`. F09.01 está implementada e aguardando auditoria
 independente; F09.02+, F10 e F11–F20 não foram iniciadas. `G09 = NOT_RUN` e
 `G10 = NOT_RUN`.
 
@@ -17,7 +17,7 @@ independente; F09.02+, F10 e F11–F20 não foram iniciadas. `G09 = NOT_RUN` e
 - Antigravity = Builder; Codex = Auditor; usuário = Product Authority.
 - Autonomia proporcional: executar o já autorizado e escalar apenas decisão nova, risco novo ou mudança material de escopo.
 - **G10 é obrigatório:** F11–F20 não entram em implementação enquanto G10 não for `PASS`.
-- Atualizar `PROJECT_STATE.md` após cada subetapa/gate concluído.
+- Atualizar `STATE.md` após cada subetapa/gate concluído.
 
 ---
 
@@ -57,28 +57,28 @@ independente; F09.02+, F10 e F11–F20 não foram iniciadas. `G09 = NOT_RUN` e
 **Resultado:** fluxo navegável revisável e fronteiras técnicas do próprio app.
 
 - [x] **F01.01 — Mapear Home, Nova ideia, Projeto, Entrevista, Decisões, Escopo, Spec, Roadmap e Exportação**
-  - Artefato: `F01_01_SCREEN_MAP.md`
+  - Artefato: `docs/fases/F01_01_SCREEN_MAP.md`
   - Verificar: Cada tela tem objetivo, entradas, saídas, ação principal e transições
 - [x] **F01.02 — Desenhar wireframes do fluxo principal e estados vazio/erro/offline/interrompido**
-  - Artefato: `F01_02_WIREFRAMES.md`
+  - Artefato: `docs/fases/F01_02_WIREFRAMES.md`
   - Verificar: Usuário encontra retomar, editar e exportar sem explicação técnica
 - [x] **F01.03 — Definir navegação, salvar/voltar e recuperação de rascunho**
-  - Artefato: `F01_03_NAVIGATION_AND_DRAFTS.md`
+  - Artefato: `docs/fases/F01_03_NAVIGATION_AND_DRAFTS.md`
   - Verificar: Navegar não descarta entrada sem aviso
 - [x] **F01.04 — Registrar arquitetura, módulos propostos e portas de IA/export/persistência**
-  - Artefato: `F01_04_ARCHITECTURE.md`
+  - Artefato: `docs/fases/F01_04_ARCHITECTURE.md`
   - Verificar: Domínio não depende de Android nem SDK remoto
 - [x] **F01.05 — Fixar aparelhos de teste, minSdk e toolchain compatível pela documentação vigente**
-  - Artefato: `F01_05_TARGET_ENVIRONMENT.md`
+  - Artefato: `docs/fases/F01_05_TARGET_ENVIRONMENT.md`
   - Verificar: Ambiente e comandos do build de exemplo são reproduzíveis; execução aguarda fase que autorize Android
 - [x] **F01.06 — Desenhar autorização de LOCK e troca de decisão com impacto**
-  - Artefato: `F01_06_LOCK_AUTHORITY_PROTOTYPE.md`
+  - Artefato: `docs/fases/F01_06_LOCK_AUTHORITY_PROTOTYPE.md`
   - Verificar: Protótipo distingue sugestão, hipótese aceita e decisão fechada
 - [x] **F01.07 — Registrar ADR de portabilidade: Core independente de Android; interfaces para persistência, arquivos, IA e segurança**
-  - Artefato: `F01_07_PORTABILITY_ADR.md`
+  - Artefato: `docs/fases/F01_07_PORTABILITY_ADR.md`
   - Verificar: Teste/inspeção arquitetural confirma que regras centrais não importam APIs Android
 - [x] **F01.08 — Definir `project.json`/`manifest.json` como contrato portátil e política de compatibilidade de schema**
-  - Artefato: `F01_08_PORTABLE_CONTRACT.md`
+  - Artefato: `docs/fases/F01_08_PORTABLE_CONTRACT.md`
   - Verificar: Fixture exportada pode ser interpretada sem depender de classes de UI/Room
 
 **G01**
@@ -144,7 +144,7 @@ independente; F09.02+, F10 e F11–F20 não foram iniciadas. `G09 = NOT_RUN` e
 **Resultado:** uma geração estruturada pode falhar, cancelar e ser retomada sem corromper projeto.
 
 **Status:** F04.01 foi auditada com PASS; F04.02–F04.07 estão implementadas e
-aguardam reauditoria, conforme `PROJECT_STATE.md`.
+aguardam reauditoria, conforme `STATE.md`.
 
 - [x] **F04.01 — Implementar porta AiProvider e fake determinístico**
   - Verificar: Casos de uso funcionam sem rede ou chave

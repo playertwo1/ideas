@@ -71,7 +71,7 @@
 ### Task 5: Evidence and phase state
 
 **Files:**
-- Create: `F07_EVIDENCE.json`
+- Create: `F07_EVIDENCE.json` (hoje em `docs/fases/`)
 - Modify: `PROJECT_STATE.md`, `PHASE_CURRENT.md`
 
 - [ ] Record scenarios, commands, test counts, artifact SHA-256 digests and limitations.
