@@ -7,10 +7,15 @@ Contrato mínimo universal do projeto.
 Leia somente:
 
 1. `AGENTS.md`;
-2. `PROJECT_STATE.md`;
+2. `STATE.md`;
 3. o pedido vigente da Product Authority.
 
-Use `AI_CONTEXT_INDEX.md` e `context-manifest.json` para localizar contexto adicional. Leia `PHASE_CURRENT.md` antes de alterar arquivos da fase ativa. Abra `WATCHDOG.md`, `AUDIT.md` ou outras referências somente quando a tarefa exigir.
+Use `AI_CONTEXT_INDEX.md` e `context-manifest.json` para localizar contexto adicional. Visão em `PROJECT.md`; artefatos e evidências das fases em `docs/fases/`. Leia `PHASE_CURRENT.md` antes de alterar arquivos da fase ativa. Abra `WATCHDOG.md`, `AUDIT.md` ou outras referências somente quando a tarefa exigir.
+
+## Comandos
+
+- Verificar documentação/contratos e testes: `python scripts/check.py` (requer `requirements-dev.txt`).
+- Android: `python scripts/android_check.py` (`assembleDebug`, `test`, `lint` via Gradle Wrapper).
 
 ## Papéis e autoridade
 

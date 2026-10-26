@@ -6,7 +6,7 @@
 
 Carregue sempre:
 1. `AGENTS.md`
-2. `PROJECT_STATE.md`
+2. `STATE.md`
 3. pedido vigente da Product Authority
 
 Depois escolha apenas a rota correspondente à tarefa.
@@ -17,7 +17,7 @@ Depois escolha apenas a rota correspondente à tarefa.
 Use quando a pergunta for: onde estamos, qual próximo passo, qual gate ou bloqueio?
 
 **REQUIRED**
-- `PROJECT_STATE.md`
+- `STATE.md`
 
 **CONDITIONAL**
 - `PHASE_CURRENT.md` — se precisar de autorização/limites da fase
@@ -29,7 +29,7 @@ Mudança textual/local sem alterar regra canônica.
 
 **REQUIRED**
 - arquivo alvo
-- `PROJECT_STATE.md`
+- `STATE.md`
 
 **CONDITIONAL**
 - `PHASE_CURRENT.md` — se o texto depender da fase ativa
@@ -45,7 +45,7 @@ Auditoria de saída da F00.
 
 **REQUIRED**
 - `G00_AUDIT_PACKET.md`
-- `PROJECT_STATE.md`
+- `STATE.md`
 - `AUDIT.md`
 
 **CONDITIONAL por finding**
@@ -90,7 +90,7 @@ Mudança material exige Product Authority.
 Mudança em autorização, papéis, gate ou avanço de fase.
 
 **REQUIRED**
-- `PROJECT_STATE.md`
+- `STATE.md`
 - `PHASE_CURRENT.md`
 - `M0_GOVERNANCE.md`
 
@@ -131,7 +131,7 @@ Somente quando F01/G00 autorizarem trabalho correspondente.
 Antes de Android existir, esta rota NÃO autoriza implementação.
 
 **REQUIRED quando autorizada**
-- `PROJECT_STATE.md`
+- `STATE.md`
 - `PHASE_CURRENT.md`
 - artefatos F01/F02 correspondentes
 - módulo/arquivo diretamente afetado
@@ -175,7 +175,7 @@ Se a rota não fornecer contexto suficiente:
 ## Regra anti-repetição
 
 Uma informação dinâmica deve ter uma casa canônica:
-- estado atual → `PROJECT_STATE.md`
+- estado atual → `STATE.md`
 - autorização da fase → `PHASE_CURRENT.md`
 - checklist completo → `EXECUTION_PLAN.md`
 - regra canônica/decisão → `ROADMAP.md`

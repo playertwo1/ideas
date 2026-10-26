@@ -5,7 +5,7 @@
   "bootstrap": {
     "required": [
       "AGENTS.md",
-      "PROJECT_STATE.md"
+      "STATE.md"
     ],
     "include_user_request": true,
     "target_max_bytes": 12000
@@ -22,15 +22,15 @@
   ],
   "routes": {
     "STATE_OR_RESUME": {
-      "required": ["PROJECT_STATE.md"],
+      "required": ["STATE.md"],
       "conditional": ["PHASE_CURRENT.md", "EXECUTION_PLAN.md", "ROADMAP.md#specific-section"]
     },
     "DOC_ONLY": {
-      "required": ["TARGET_FILE", "PROJECT_STATE.md"],
+      "required": ["TARGET_FILE", "STATE.md"],
       "conditional": ["PHASE_CURRENT.md", "CANONICAL_SOURCE_FOR_TARGET"]
     },
     "G00_AUDIT": {
-      "required": ["G00_AUDIT_PACKET.md", "PROJECT_STATE.md", "AUDIT.md"],
+      "required": ["G00_AUDIT_PACKET.md", "STATE.md", "AUDIT.md"],
       "conditional": [
         "M0_PRODUCT_CONTRACT.md",
         "M0_DECISION_BASELINE.md",
@@ -53,7 +53,7 @@
       "conditional": ["M0_GOVERNANCE.md", "ARTIFACT_CATALOG.md", "ROADMAP.md#specific-section"]
     },
     "GOVERNANCE_OR_GATE": {
-      "required": ["PROJECT_STATE.md", "PHASE_CURRENT.md", "M0_GOVERNANCE.md"],
+      "required": ["STATE.md", "PHASE_CURRENT.md", "M0_GOVERNANCE.md"],
       "conditional": ["AUDIT.md", "EXECUTION_PLAN.md", "ROADMAP.md#specific-section"]
     },
     "CONTEXT_EFFICIENCY": {
@@ -66,7 +66,7 @@
     },
     "ANDROID_FUTURE": {
       "required": [
-        "PROJECT_STATE.md",
+        "STATE.md",
         "PHASE_CURRENT.md",
         "F01_F02_RELEVANT_ARTIFACTS",
         "DIRECTLY_AFFECTED_MODULE_OR_FILE"

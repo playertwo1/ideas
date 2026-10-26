@@ -36,7 +36,7 @@ Estes artefatos organizam como agentes trabalham **no repositório do Idea**. N�
 | Artefato | Estado | Função |
 |---|---|---|
 | `AGENTS.md` | REQUIRED | contrato universal mínimo para agentes |
-| `PROJECT_STATE.md` | REQUIRED | única fonte de status operacional dinâmico |
+| `STATE.md` | REQUIRED | única fonte de status operacional dinâmico |
 | `PHASE_CURRENT.md` | REQUIRED quando executar/avaliar fase | autorização e limites da fase ativa |
 | `CONTEXT_POLICY.md` | REQUIRED para política de contexto | orçamento, leitura progressiva, delta/fingerprint e métricas |
 | `AI_CONTEXT_INDEX.md` | REQUIRED para roteamento de contexto | seleciona contexto por tipo de tarefa |

@@ -1,7 +1,7 @@
 # Roadmap — Idea MVP e evolução
 
 Este é o contrato canônico de produto. Ele define fronteira, decisões, fases,
-dependências e gates. O estado operacional está em `PROJECT_STATE.md`, a
+dependências e gates. O estado operacional está em `STATE.md`, a
 autorização atual em `PHASE_CURRENT.md` e o checklist executável em
 `EXECUTION_PLAN.md`.
 
@@ -58,20 +58,38 @@ Em 19/09/2026:
 - Idea Factory/F11–F20 bloqueada;
 - D01–D09 `LOCKED`.
 
-`PROJECT_STATE.md` é a fonte do estado real. Este resumo não autoriza avanço.
+`STATE.md` é a fonte do estado real. Este resumo não autoriza avanço.
 
 ## 4. Marcos e dependências
 
-| Marco | Fases | Resultado | Gate |
-|---|---|---|---|
-| M0 — Contrato | F00–F01 | padrão, corte e arquitetura revisáveis | G00 |
-| M1 — Offline | F02–F03 | app instalável, persistência e recuperação | G02/G03 |
-| M2 — MVP 0.1 | F04–F10 | Core completo e piloto | G10 Go/No-Go |
-| M3 — Factory inicial | F11–F13 | pesquisa, validação e blueprints | G11–G13 |
-| M4 — Decomposição | F14–F16 | tarefas, contexto e guardrails | G14–G16 |
-| M5 — Consistência | F17–F18 | revisão e mudança com impacto | G17/G18 |
-| M6 — Bootstrap | F19 | pacote inicial reproduzível | G19 |
-| M7 — 1.0 | F20 | Projeto Vivo e handoff real | G20 |
+| Marco | Fases | Resultado | Estado | Gate |
+|---|---|---|---|---|
+| M0 — Contrato | F00–F01 | padrão, corte e arquitetura revisáveis | DONE | G00 (PASS) |
+| M1 — Offline | F02–F03 | app instalável, persistência e recuperação | DONE | G02/G03 (PASS) |
+| M2 — MVP 0.1 | F04–F10 | Core completo e piloto | IN_PROGRESS | G10 Go/No-Go |
+| M3 — Factory inicial | F11–F13 | pesquisa, validação e blueprints | BACKLOG | G11–G13 |
+| M4 — Decomposição | F14–F16 | tarefas, contexto e guardrails | BACKLOG | G14–G16 |
+| M5 — Consistência | F17–F18 | revisão e mudança com impacto | BACKLOG | G17/G18 |
+| M6 — Bootstrap | F19 | pacote inicial reproduzível | BACKLOG | G19 |
+| M7 — 1.0 | F20 | Projeto Vivo e handoff real | BACKLOG | G20 |
+
+Estados: `BACKLOG` · `READY` · `IN_PROGRESS` · `BLOCKED` · `REVIEW` · `DONE` (só com gate registrado pela Product Authority).
+
+### Marco ativo — M2 — MVP 0.1 / Idea Core
+
+**Objetivo de produto:** Core completo, do intake ao pacote exportável, validado em piloto. · **Quem valida:** Product Authority, após auditoria independente (Codex).
+
+| ID | Tarefa | Prioridade | Depende de | Estado | Evidência exigida |
+|---|---|---|---|---|---|
+| F04 | contrato IA, fake, provider, credencial e falhas | P0 | F03 | DONE | `docs/fases/F04_EVIDENCE.json` + G04 PASS |
+| F05 | captura, snapshot original e interpretação | P0 | F03/F04 | DONE | `docs/fases/F05_EVIDENCE.json` + G05 PASS |
+| F06 | entrevista adaptativa e decisões versionadas | P0 | F05 | DONE | `docs/fases/F06_EVIDENCE.json` + G06 PASS |
+| F07 | hipótese, MVP Cutter e requisitos | P0 | F06 | DONE | `docs/fases/F07_EVIDENCE.json` + G07 PASS |
+| F08 | fases, dependências e readiness | P0 | F07 | DONE | `docs/fases/F08_EVIDENCE.json` + G08 PASS |
+| F09 | Markdown/JSON/ZIP, hashes e restauração | P0 | F08 | REVIEW (F09.01) | round-trip preserva IDs e relações + auditoria + G09 |
+| F10 | piloto e estabilização do MVP 0.1 | P1 | F09 | BACKLOG | pacote útil, compreensível e confiável + G10 |
+
+**Gate de saída:** `G10 = PASS` registrado pela Product Authority. · **Riscos:** F09.02+ não iniciadas; G09 depende de auditoria independente.
 
 Dependência principal:
 
@@ -186,6 +204,6 @@ substitui o registro da Product Authority.
 
 ## 11. Próxima ação
 
-Seguir `PROJECT_STATE.md` e `PHASE_CURRENT.md`: F09.01 está implementada e
+Seguir `STATE.md` e `PHASE_CURRENT.md`: F09.01 está implementada e
 aguarda auditoria independente. Não iniciar F09.02+, não registrar `G09` e não
 iniciar F11–F20 enquanto `G10 != PASS`.

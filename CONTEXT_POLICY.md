@@ -19,7 +19,7 @@ Contexto mínimo para saber onde estamos e o que está autorizado.
 
 Por padrão:
 - `AGENTS.md`
-- `PROJECT_STATE.md`
+- `STATE.md`
 - pedido vigente da Product Authority
 
 ### L1 — Task Context
@@ -119,7 +119,7 @@ Builder e Auditor devem ter isolamento suficiente para que a auditoria continue 
 
 O Auditor começa por:
 - `AGENTS.md`;
-- `PROJECT_STATE.md`;
+- `STATE.md`;
 - audit packet/gate atual;
 - diff/evidência da mudança.
 
